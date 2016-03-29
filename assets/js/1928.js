@@ -123,6 +123,16 @@ $("document").ready(function(){
 		});
 	};
 	
+	function jumpTo(v, fn){
+		var offset = ($container.width()*v);
+		$lastOffset = offset;
+		$offset = v;
+		$slider.css({left: offset+"px"});
+		$mapclip.css({left: offset+"px"});
+		$mapinner.css({left: (offset*-1)+"px"});
+		if (typeof fn === "function") fn();
+	};
+	
 	$("#goto-2015").click(function(evt){
 		evt.preventDefault();
 		slideTo(0);
