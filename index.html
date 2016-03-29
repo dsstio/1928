@@ -7,123 +7,63 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
+	<link rel="stylesheet" href="assets/fonts/icomoon/icomoon.css" />
+	<link rel="stylesheet" href="assets/css/leaflet.css" />
+	<link rel="stylesheet" href="assets/css/1928.css" />
 
-	<script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-	<style type="text/css">
-		html, body, .map, #wrapper {
-			width: 100%;
-			height: 100%;
-			margin: 0;
-			padding: 0;
-		}
-		#wrapper {
-			position: relative;
-		}
-		#map1, #map2, #mapWrapper, #mapOverlay {
-			position: absolute;
-			top: 0px;
-			left: 0px;
-		}
-		#map1 {
-			z-index: 50;
-		}
-		#mapWrapper {
-			border-radius: 1000px;
-			overflow: hidden;
-			z-index: 100;
-			box-shadow: 0 0 30px 5px rgba(0,0,0,1);
-			pointer-events: none;
-		}
-		#mapOverlay {
-			border-radius: 1000px;
-			z-index: 150;
-			pointer-events: none;
-			text-align: center;
-			padding: 0px;
-		}
-			#mapOverlay div {
-				font-weight: bold;
-				position: relative;
-				padding: 0px 5px 3px 5px;
-				font-size: 50px;
-				opacity: 1.0;
-				top: -70px;
-			}
-	</style>
-
-	<script>
-
-		$(function () {
-			var borderWidth = 0;
-			var layerOptions = {
-				minZoom: 5,
-				maxZoom: 18,
-				errorTileUrl: 'data:image/gif;base64,R0lGODlhAAEAAYAAAAAAAP///yH5BAAAAAAALAAAAAAAAQABAAL/jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8aNXxw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOn0KNarUqVSrWr2KNavWrVy7ev0KNqzYsWTLmj2LNq3atWzbHisAADs='
-			}
-
-			var map1 = L.map('map1').setView([52.5,13.4], 15);
-			var map2 = L.map('map2', {zoomControl:false, attributionControl:false}).setView([52.5,13.4], 15);
-
-			var layer1 = L.tileLayer('https://maps.dsst.io/berlin_dop20_2015/{z}/{x}/{y}.jpg', layerOptions).addTo(map1);
-			var layer2 = L.tileLayer('https://maps.dsst.io/berlin_dop20_1928/{z}/{x}/{y}.jpg', layerOptions).addTo(map2);
-
-			var faded = false;
-
-			map1.on('move', function (evnt) {
-				map2.setView(map1.getCenter(), map1.getZoom(), {animate:false})
-				if (!faded) {
-					$('#mapOverlay').animate({opacity:0.3}, 1000);
-					faded = true;
-				}
-			})
-
-			resize();
-			$(window).resize(resize);
-
-			function resize() {
-				var width = $('#map1').width();
-				var height = $('#map1').height();
-				var diameter = Math.sqrt(width*height)/2;
-				$('#map2').css({
-					width:width,
-					height:height,
-					top: -(height-diameter)/2-borderWidth,
-					left:-(width -diameter)/2-borderWidth
-				});
-				$('#mapWrapper').css({
-					width:diameter,
-					height:diameter,
-					top: (height-diameter)/2,
-					left:(width -diameter)/2
-				});
-				$('#mapOverlay').css({
-					width:diameter,
-					height:diameter,
-					top: (height-diameter)/2,
-					left:(width -diameter)/2
-				});
-				map2.invalidateSize();
-			}
-		})
-
-	</script>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/leaflet.js"></script>
+	<script src="assets/js/1928.js"></script>
 </head>
 <body>
-	<div id="wrapper">
-		<div id="map1" class="map"></div>
-		<div id="mapWrapper">
-			<div id="map2" class="map"></div>
+	<div id="container" class="dont-show-content show-intro" data-element="intro">
+		<div id="intro">
+			<h1>Berlin</h1>
+			<p>1928 und 2015</p>
+			<a href="javascript:;" id="button-start">Starten</a>
 		</div>
-		<div id="mapOverlay">
-			<div style="color: #fff; text-shadow: 0 0 5px #000;">2015</div>
-			<div style="color: #000; text-shadow: 0 0 5px #fff;">1928</div>
+		<div id="map-base"></div>
+		<div class="content" id="content-1928">
+			<h2>Blub</h2>
+			<div class="content-text">
+				<p>
+					Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis. 
+				</p>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.
+				</p>
+			</div>
+			<p>
+				<a href="javascript:;" id="goto-back" class="goto goto-left"><i class="icon-left"></i> Zurück</a>
+				<a href="javascript:;" id="goto-2015" class="goto goto-right">2015 <i class="icon-right"></i></a>
+			</p>
 		</div>
+		<div id="map-clip">
+			<div id="map-clip-inner">
+				<div id="map-overlay"></div>
+				<div class="content" id="content-2015">
+					<h2>Blafasel</h2>
+					<div class="content-text">
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.
+						</p>
+						<p>
+							Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis. 
+						</p>
+					</div>
+					<p>
+						<a href="javascript:;" id="goto-1928" class="goto goto-left"><i class="icon-left"></i> 1928</a>
+						<a href="javascript:;" id="goto-next" class="goto goto-right">Weiter <i class="icon-right"></i></a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="control-slider">&lt;&gt;</div>
+		<div id="credit">
+			<a href="http://www.tagesspiegel.de/" id="tsp">Der Tagesspiegel</a>
+			<a href="https://datasciencestories.org/" id="dsst">Data Science &amp; Stories</a>
+		</div>
+		<!-- div id="debug"></div -->
 	</div>
 </body>
 </html>

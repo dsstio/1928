@@ -1,0 +1,113 @@
+[{
+	"coords": [52.5204,13.3722],
+	"zoom": 16,
+	"content": [{
+		"headline": "Der Platz der Republik",
+		"text": [
+			"Schon 1928 hieß der Platz vor dem Reichstag <em>Platz der Republik</em>, auch wenn es zu dieser Zeit die Weimarer Republik war, deren Parlament in Anlehnung an den Reichstag des Deutschen Kaiserreichst ebenfalls Reichstag genannt wurde.",
+			"Gegenüber des Reichstags, auf der Karte links, befand sich die Kroll-Oper, dazwischen bis 1938 das Bismarck-Denkmal, welches heute am großen Stern zu finden ist."
+		]
+	},{
+		"headline": "Der Platz der Republik",
+		"text": [
+			"Heute sieht der Spreebogen ganz anders aus. Bismarck und Oper sind weg, Bundeskanzleramt und Elisabeth-Lüders-Haus sind dazugekommen und der Reichstag hat nach einem Nazi-Brandanschlag, einem Weltkrieg und Deutscher Teilung eine neue Kuppel.",
+			"Die umstehende Bebauung wurde abgetragen und durch eine neoklassizistische Flaniermeile ersetzt."
+		]
+	}]
+},{
+	"coords": [52.4975, 13.4355],
+	"zoom": 16,
+	"content": [{
+		"headline": "Görlitzer Bahnhof",
+		"text": [
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
+		]
+	},{
+		"headline": "Görlitzer Park",
+		"text": [
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
+		]
+	}]
+},{
+	"coords": [52.5207, 13.4092],
+	"zoom": 17,
+	"content": [{
+		"headline": "Marienviertel mit Marienkirche",
+		"text": [
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
+		]
+	},{
+		"headline": "Berliner Fernsehturm",
+		"text": [
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
+		]
+	}]
+},{
+	"coords": [52.4748, 13.4029],
+	"zoom": 14,
+	"content": [{
+		"headline": "Paradeplatz der Berliner Garnison",
+		"text": [
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
+		]
+	},{
+		"headline": "Tempelhofer Park",
+		"text": [
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
+		]
+	}]
+},{
+	"coords": [52.4972, 13.2400],
+	"zoom": 16,
+	"content": [{
+		"headline": "Der Grunewald",
+		"text": [
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
+		]
+	},{
+		"headline": "Der Teufelsberg",
+		"text": [
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
+		]
+	}]
+},{
+	"coords": [52.5060, 13.4371],
+	"zoom": 17,
+	"content": [{
+		"headline": "Brommybrücke",
+		"text": [
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
+		]
+	},{
+		"headline": "Reste der Brommybrücke und East Side Gallery",
+		"text": [
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
+		]
+	}]
+},{
+	"coords": [52.5466, 13.5597],
+	"zoom": 15,
+	"content": [{
+		"headline": "Marzahn",
+		"text": [
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
+		]
+	},{
+		"headline": "Marzahn",
+		"text": [
+			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
+		]
+	}]
+}]
