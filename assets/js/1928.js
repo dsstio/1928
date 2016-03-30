@@ -10,26 +10,18 @@ $("document").ready(function(){
 	var map_base = L.map('map-base', {
 		attributionControl: false,
 		zoomAnimation: false,
-//		scrollWheelZoom: false,
 		zoomControl: false
 	}).setView([52.49,13.372], 12);
 
 	var map_overlay = L.map('map-overlay', {
 		attributionControl: false,
-		zoomContol: false,
 		zoomAnimation: false,
-//		scrollWheelZoom: false
+		zoomControl: false
 	}).setView([52.49,13.372], 12);
 
 	// add zoom control to basemap
 	new L.Control.Zoom({ position: 'topright' }).addTo(map_base);
 	new L.Control.Zoom({ position: 'topright' }).addTo(map_overlay);
-
-	// set active area
-	/* does not work properly
-	map_base.setActiveArea('activearea');
-	map_overlay.setActiveArea('activearea');
-	*/
 
 	L.tileLayer('https://maps.dsst.io/berlin_dop20_1928/{z}/{x}/{y}.jpg', {
 		minZoom: 5,
@@ -46,7 +38,6 @@ $("document").ready(function(){
 	// synchronize maps
 	map_base.on('move', function (evnt) {
 		map_overlay.setView(map_base.getCenter(), map_base.getZoom(), {animate: false});
-		debug();
 	});
 
 	map_overlay.on('move', function (evnt) {
@@ -60,7 +51,6 @@ $("document").ready(function(){
 		var point = map_base.project(center);
 		point.x += ($container.width()/4);
 		var offset = map_base.unproject(point);
-
 		$('#debug').html('"coords": ['+offset.lat.toFixed(4)+', '+offset.lng.toFixed(4)+'],<br>"zoom:": '+zoom+',\n');
 	};
 		
@@ -71,14 +61,19 @@ $("document").ready(function(){
 	var $offset = 0.5;
 	var $lastOffset = ($container.width()/2);
 	
+	var dragstart = 0;
+	var dragging = false;
 	$('body').on('mousedown', '#control-slider', function(e) {
 		var bias = ($lastOffset-e.pageX);
+		dragstart = Date.now();
+		dragging = true;
 
 		var $t = $(this);
 		$(this).addClass('draggable').parents().on('mousemove', function(e) {
+			if (!dragging) return;
 			var offset = (e.pageX);
-			$lastOffset = offset;
 			var biasedoffset = Math.min(Math.max(0, offset+bias), $container.width());
+			$lastOffset = biasedoffset;
 			$offset = biasedoffset/$container.width();
 			$slider.css({left: biasedoffset+"px"});
 			$mapclip.css({left: biasedoffset+"px"});
@@ -91,7 +86,23 @@ $("document").ready(function(){
 		});
 		e.preventDefault();
 	}).on('mouseup', function() {
+		dragging = false;
 		$('.draggable').removeClass('draggable');
+	});
+	
+	$('body').on("click", function(){
+		dragging = false;
+	});
+
+	$('#control-slider').click(function(evt){
+		evt.preventDefault();
+		if ((Date.now()-dragstart) > 500) return; // this is a drag
+		// this is confusing either way
+		if (evt.offsetX >= 0 && evt.offsetX <= 40) return slideTo(0.5);
+		if ($offset === 1) return slideTo(0);
+		if ($offset === 0) return slideTo(1);
+		if (evt.offsetX < 0) return slideTo(1);
+		if (evt.offsetX > 40) return slideTo(0);
 	});
 
 	$(window).resize(function(){
@@ -164,12 +175,26 @@ $("document").ready(function(){
 	});
 	
 	function offsetCenter(p, z){
+		if ($container.hasClass("small")) return map_base.setView(p, z-1);
 		var point = map_base.project(new L.latLng(p[0], p[1]).clone(), z);
 		point.x -= ($container.width()/4);
 		point = map_base.unproject(point, z);
 		map_base.setView(point, z);
 	};
-	
+
+	/* explore */
+	$("#button-explore").click(function(evt){
+		evt.preventDefault();
+
+		// show content
+		$('#intro').fadeOut('fast', function(){
+			$container.removeClass("show-intro").addClass("show-explore").removeClass("show-content");
+		});
+		
+		// set mode
+		$container.attr("data-element", "explore");
+	});
+		
 	/* storyline */
 	$("#button-start").click(function(evt){
 		evt.preventDefault();
@@ -197,7 +222,10 @@ $("document").ready(function(){
 		var index = parseInt($container.attr("data-element"),10)+1;
 		if (isNaN(index)) return;
 		if (index >= story.length) {
-			// FIXME: show playground
+			// show explore
+			$container.removeClass("show-content").addClass("show-explore");
+			$container.attr("data-element", "explore");
+			slideTo(0.5);
 			return;
 		}
 		
@@ -210,7 +238,8 @@ $("document").ready(function(){
 		story[index].content[0].text.forEach(function(text){
 			$("#content-1928 .content-text").append($('<p>').html(text));
 		});
-		
+		$("#content-1928 .content-text")[0].scrollTop = 0;
+				
 		// show 1928 map
 		slideTo(1, function(){
 
@@ -220,6 +249,7 @@ $("document").ready(function(){
 			story[index].content[1].text.forEach(function(text){
 				$("#content-2015 .content-text").append($('<p>').html(text));
 			});
+			$("#content-2015 .content-text")[0].scrollTop = 0;
 			
 			$container.attr("data-element", index);
 			
@@ -254,6 +284,7 @@ $("document").ready(function(){
 		story[index].content[1].text.forEach(function(text){
 			$("#content-2015 .content-text").append($('<p>').html(text));
 		});
+		$("#content-2015 .content-text")[0].scrollTop = 0;
 		
 		// show 2015 map
 		slideTo(0, function(){
@@ -264,6 +295,7 @@ $("document").ready(function(){
 			story[index].content[0].text.forEach(function(text){
 				$("#content-1928 .content-text").append($('<p>').html(text));
 			});
+			$("#content-1928 .content-text")[0].scrollTop = 0;
 			
 			$container.attr("data-element", index);
 			

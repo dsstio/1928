@@ -63,6 +63,7 @@ body {
 				display: none;
 			}
 			
+			.ready #button-explore,
 			.ready #button-start {
 				display: inline-block;
 				border-radius: 1em;
@@ -74,37 +75,35 @@ body {
 				-moz-transition: background-color, box-shadow 200ms ease-out;
 				-o-transition: background-color, box-shadow 200ms ease-out;
 				transition: background-color, box-shadow 200ms ease-out;
-				font-size: 5vh;
+				font-size: 4vh;
 				font-weight: 300;
-				margin-top: .5em;
+				margin-top: .7em;
+				margin-left: .5em;
 				box-shadow: 0 0 30px rgba(0,0,0,0.5);
 				text-shadow: 0 0 30px rgba(0,0,0,0.5);
 			}
-			
+
+				#button-explore:hover,
 				#button-start:hover {
 					background-color: #d00;
 					box-shadow: 0 0 30px rgba(0,0,0,0.75);
 				}
-	
-		/* does not work
-		.activearea {
-			position: absolute; 
-			top: 0; 
-			left: 0; 
-			right: 0; 
-			bottom: 0;;
-			pointer-events: none;
-			background-color: rgba(255,0,0,0.5);
-			z-index: 500;
-		}
-	
-			.show-content .activearea {
-				display: block;
-				left: auto;
-				width: 50%;
-			}
-		*/
-	
+
+				#button-explore i,
+				#button-start i {
+					font-size: .85em;
+				}
+				
+				@media (max-width: 500px) { 
+					#intro h1 {
+						font-size: 5em;
+						margin-top: 20px;
+					}
+					#intro p {
+						font-size: 2.5em;
+					}
+				}
+
 		.content {
 			display: block;
 			opacity: 0;
@@ -133,13 +132,46 @@ body {
 				-o-transition: opacity 300ms ease;
 				transition: opacity 300ms ease;
 			}
+			
+			.show-explore .content {
+				display: none;
+			}
 
 			.small .content {
 				top: auto;
-				width: auto;
-				height: 300px;
-				padding: 15px;
+				width: 100%;
+				padding: 10px 0px 70px;
+				background-color: rgba(0,0,0,0.5);
 			}
+			
+				.small .content h2 {
+					margin: 10px 20px;
+					padding: 0;
+				}
+				
+				.small .content .content-text {
+					display: block;
+					position: relative;
+					margin: 0;
+					padding: 0px 20px;
+					overflow-x: hidden;
+					overflow-y: auto;
+					max-height: 150px;
+				}
+
+					.small .content .content-text p {
+						margin: 0 0 10px;
+						padding: 0;
+						font-size: .85em;
+					}
+			
+				.small .content p.nav {
+					display: block;
+					position: absolute;
+					left: 10px;
+					right: 10px;
+					bottom: 15px;
+				}
 
 			.content h2 {
 				color: #fff;
@@ -302,6 +334,7 @@ body {
 				background-color: #c00;
 				border-top-left-radius: 7px;
 				border-bottom-left-radius: 7px;
+				cursor: pointer;
 			}
 
 			#control-slider::after {
@@ -322,6 +355,7 @@ body {
 				background-color: #c00;
 				border-top-right-radius: 7px;
 				border-bottom-right-radius: 7px;
+				cursor: pointer;
 			}
 		
 		#credit {
@@ -330,26 +364,31 @@ body {
 			right: 0;
 			bottom: 0;
 			z-index: 3;
-			height: 40px;
 			padding: 10px;
-			/* background-color: rgba(0,0,0,0.5); */
-			border-top-left-radius: 10px;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			pointer-events: none;
 		}
-		
+
 			.small #credit {
+				background-color: rgba(0,0,0,0.8);
+				padding: 0;
+				margin: 0;
+				left: 0;
+			}
+		
+			.small #credit * {
 				display: none;
 			}
 			
 			#credit a {
-				display: block;
+				display: inline-block;
 				float: left;
 				position: relative;
-				-webkit-touch-callout: none;
-				-webkit-user-select: none;
-				-khtml-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;
 				text-decoration: none;
 			}
 		
@@ -359,9 +398,41 @@ body {
 				width: 180px;
 				background: url(../images/tagesspiegel.svg) center center no-repeat;
 				background-size: contain;
-				margin-right: 20px;
+				margin: 0 20px;
+				padding: 0;
+			}
+
+			#source {
+				width: 140px;
+				height: 32px;
+				padding: 0;
+				color: #fff;
+				font-size: .8em;
+				line-height: 16px;
+				text-shadow: 0 0 3px #000, 0 0 5px #000, 0 0 10px #000;
+				padding: 4px 0;
+				text-align: right;
+				font-weight: 300;
+				-webkit-touch-callout: auto;
+				-webkit-user-select: auto;
+				-khtml-user-select: auto;
+				-moz-user-select: auto;
+				-ms-user-select: auto;
+				user-select: auto;
+				pointer-events: auto;
 			}
 			
+				.small #source {
+					display: block !important;
+					text-align: center !important;
+					width: 100%;
+					font-size: .7em;
+					height: auto;
+					padding: 3px 0;
+					color: #aaa;
+					
+				}
+					
 			#dsst {
 				width: 100px;
 				height: 32px;
