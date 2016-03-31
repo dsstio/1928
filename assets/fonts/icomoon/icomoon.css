@@ -25,30 +25,44 @@
 }
 
 .icon-location:before {
-	content: "\e90f";
+    content: "\e90f";
+}
+.icon-locate:before {
+    content: "\e900";
 }
 .icon-compass:before {
-	content: "\e900";
+    content: "\e905";
+}
+.icon-map:before {
+    content: "\e906";
+}
+.icon-explore:before {
+    content: "\e907";
 }
 .icon-search:before {
-	content: "\e901";
+    content: "\e901";
+}
+.icon-enlarge:before {
+    content: "\e908";
+}
+.icon-shrink:before {
+    content: "\e90b";
 }
 .icon-right:before {
-	content: "\e902";
+    content: "\e902";
 }
 .icon-left:before {
-	content: "\e903";
+    content: "\e903";
 }
 .icon-share:before {
-	content: "\e904";
+    content: "\e904";
 }
 .icon-google-plus:before {
-	content: "\e92c";
+    content: "\e909";
 }
 .icon-facebook:before {
-	content: "\e90c";
+    content: "\e90a";
 }
 .icon-twitter:before {
-	content: "\e92d";
+    content: "\e90d";
 }
-
