@@ -227,6 +227,13 @@ $("document").ready(function(){
 			$container.removeClass("show-intro").addClass("show-explore").removeClass("show-content");
 		});
 		
+		map_base.setView(new L.latLng(52.5162632,13.3777046), 16);
+		slideTo(0.3, function(){
+			slideTo(0.7, function(){
+				slideTo(0.5);
+			});
+		})
+		
 		// set mode
 		$container.attr("data-element", "explore");
 	});
