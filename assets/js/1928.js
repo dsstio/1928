@@ -38,9 +38,42 @@ $("document").ready(function(){
 		errorTileUrl: errorTile,
 	}).addTo(map_overlay);
 
+	
+	function leftpad (str, len, ch) {
+		str = String(str);
+		var i = -1;
+		if (!ch && ch !== 0) ch = ' ';
+		len = len - str.length;
+		while (++i < len) str = ch + str;
+		return str;
+	}
+
+	function location_encode(p,z){
+		return [
+			leftpad(Math.round((p.lat%1)*10000).toString(36),3,"_"),
+			leftpad(Math.round((p.lng%1)*10000).toString(36),3,"_"),
+			z.toString(36)
+		].join("");
+	};
+	
+	function location_decode(str){
+		if (!/^[a-z0-9_]{7}$/.test(str)) return false;
+		return {
+			lat: (13+(parseInt(str.substr(0,3).replace(/_/g,''),36)/10000)),
+			lng: (52+(parseInt(str.substr(3,3).replace(/_/g,''),36)/10000)),
+			z: parseInt(str.substr(6,1),36)
+		};
+	};
+
+	var locationhash = "";
+
 	// synchronize maps
 	map_base.on('move', function (evnt) {
+		var center = map_base.getCenter();
+		var zoom = map_base.getZoom();
 		map_overlay.setView(map_base.getCenter(), map_base.getZoom(), {animate: false});
+		// set hash for sharing
+		locationhash = location_encode(center, zoom)
 	});
 
 	map_overlay.on('move', function (evnt) {
