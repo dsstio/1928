@@ -7,17 +7,20 @@ $("document").ready(function(){
 
 	var errorTile = 'data:image/gif;base64,R0lGODlhAAEAAYAAAAAAAP///yH5BAAAAAAALAAAAAAAAQABAAL/jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8aNXxw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOn0KNarUqVSrWr2KNavWrVy7ev0KNqzYsWTLmj2LNq3atWzbHisAADs=';
 
-	var map_base = L.map('map-base', {
-		attributionControl: false,
-		zoomAnimation: false,
-		zoomControl: false
-	}).setView([52.49,13.372], 12);
+	var bounds = L.latLngBounds(L.latLng(52.33812, 13.0884),L.latLng(52.675499, 13.76134));
 
-	var map_overlay = L.map('map-overlay', {
+	var map_opts = {
 		attributionControl: false,
 		zoomAnimation: false,
-		zoomControl: false
-	}).setView([52.49,13.372], 12);
+		zoomControl: false,
+		maxBounds: bounds,
+		minZoom: 12,
+		maxZoom: 18
+	};
+
+	// create maps
+	var map_base = L.map('map-base', map_opts).setView([52.49,13.372], 12);
+	var map_overlay = L.map('map-overlay', map_opts).setView([52.49,13.372], 12);
 
 	// add zoom control to basemap
 	new L.Control.Zoom({ position: 'topright' }).addTo(map_base);
