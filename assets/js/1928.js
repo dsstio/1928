@@ -191,17 +191,8 @@ $("document").ready(function(){
 		// show content
 		$('#intro').fadeOut('fast', function(){
 			$container.removeClass("show-intro").addClass("show-explore").removeClass("show-content");
+			gotoExplore();
 		});
-		
-		map_base.setView(new L.latLng(52.5162632,13.3777046), 16);
-		slider.slideTo(0.3, function(){
-			slider.slideTo(0.7, function(){
-				slider.slideTo(0.5);
-			});
-		})
-		
-		// set mode
-		$container.attr("data-element", "explore");
 	});
 		
 	/* storyline */
@@ -232,9 +223,7 @@ $("document").ready(function(){
 		if (isNaN(index)) return;
 		if (index >= story.length) {
 			// show explore
-			$container.removeClass("show-content").addClass("show-explore");
-			$container.attr("data-element", "explore");
-			slider.slideTo(0.5);
+			gotoExplore();
 			return;
 		}
 		
@@ -284,10 +273,12 @@ $("document").ready(function(){
 	});
 
 	$('#goto-exp1, #goto-exp2').click(gotoExplore);
+
+	function gotoExplore() {
 		$container.removeClass('show-content').addClass('show-explore');
 		$container.attr('data-element', 'explore');
 		slider.slideTo(0.5);
-	});
+	}
 
 	function setContent($el, content) {
 		$el.find('h2').text(content.headline);
@@ -296,7 +287,6 @@ $("document").ready(function(){
 			$el.find('.content-text').append($('<p>').html(text));
 		});
 		$el.find('.content-text')[0].scrollTop = 0;
-
 	}
 
 });
