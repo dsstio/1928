@@ -480,15 +480,4 @@ body {
 				text-transform: uppercase;
 				text-shadow: 0 0 3px #000, 0 0 5px #000, 0 0 10px #000;
 			}
-			
-		#debug {
-			display: block;
-			position: absolute;
-			z-index: 1000;
-			left: 0;
-			bottom: 0;
-			padding: 1em;
-			background-color: #f00;
-			color: #fff;
-		}
 
