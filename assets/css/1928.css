@@ -327,13 +327,28 @@ body {
 		}
 
 		.marker-text {
+			display: none;
 			color: #fff;
-			width: 16px;
-			height: 16px;
 			background: #c00;
 			border-radius: 16px;
 			box-shadow: 0px 0px 8px rgba(0,0,0,1);
+			font-size: 23px;
+			text-align: center;
+			line-height: 36px;
+			opacity: 0.2;
+			-webkit-appearance: none;
+			-webkit-transition: opacity 200ms ease-out;
+			   -moz-transition: opacity 200ms ease-out;
+			     -o-transition: opacity 200ms ease-out;
+			        transition: opacity 200ms ease-out;
 		}
+
+			.show-explore .marker-text {
+				display: block;
+			}
+			.marker-text.hover {
+				opacity: 1.0;
+			}
 			
 		#control-slider {
 			display: block;

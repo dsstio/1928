@@ -161,12 +161,27 @@ $("document").ready(function(){
 
 		$container.addClass('ready');
 
-		var iconRed  = L.divIcon({ iconSize:[16,16], iconAnchor:[8,8], html:'?', className:'marker-text red'})
-		var iconGrey = L.divIcon({ iconSize:[16,16], iconAnchor:[8,8], html:'?', className:'marker-text grey'})
-
-		data.forEach(function (story) {
-			story.markerB = L.marker(story.coords, {icon:iconGrey}).addTo(map_base);
-			story.markerO = L.marker(story.coords, {icon:iconRed }).addTo(map_overlay);
+		data.forEach(function (story, index) {
+			var iconInfo = L.divIcon({ iconSize:[32,32], iconAnchor:[16,16], html:'<i class="icon-info"></i>', className:'marker-text marker'+index})
+			
+			story.marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_base);
+			story.marker2 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_overlay);
+			
+			story.marker1.on('click', markerClick);
+			story.marker1.on('mouseover', function () {
+				$(story.marker1._icon).addClass('hover');
+				$(story.marker2._icon).addClass('hover');
+			})
+			story.marker1.on('mouseout', function () {
+				$(story.marker1._icon).removeClass('hover');
+				$(story.marker2._icon).removeClass('hover');
+			})
+			
+			function markerClick() {
+				setContent($('#content-1928'), story.content[0]);
+				setContent($('#content-2015'), story.content[1]);
+				$container.addClass('show-content').addClass('small');
+			}
 		})
 	});
 	
