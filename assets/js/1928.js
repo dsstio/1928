@@ -283,7 +283,7 @@ $("document").ready(function(){
 		});
 	});
 
-	$('#goto-exit').click(function(evt) {
+	$('#goto-exp1, #goto-exp2').click(gotoExplore);
 		$container.removeClass('show-content').addClass('show-explore');
 		$container.attr('data-element', 'explore');
 		slider.slideTo(0.5);
