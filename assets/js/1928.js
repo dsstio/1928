@@ -155,15 +155,23 @@ $("document").ready(function(){
 	});
 	
 	/* content */
-	var story = [];
-	$.getJSON("assets/data/data.json", function(data){
-		story = data;
+	var stories = [];
+	$.getJSON('assets/data/data.json', function(data) {
+		stories = data;
 		
 		// prepare content
-		setContent($('#content-1928'), story[0].content[0]);
-		setContent($('#content-2015'), story[0].content[1]);
+		setContent($('#content-1928'), stories[0].content[0]);
+		setContent($('#content-2015'), stories[0].content[1]);
 
-		$container.addClass("ready");
+		$container.addClass('ready');
+
+		var iconRed  = L.divIcon({ iconSize:[16,16], iconAnchor:[8,8], html:'?', className:'marker-text red'})
+		var iconGrey = L.divIcon({ iconSize:[16,16], iconAnchor:[8,8], html:'?', className:'marker-text grey'})
+
+		data.forEach(function (story) {
+			story.markerB = L.marker(story.coords, {icon:iconGrey}).addTo(map_base);
+			story.markerO = L.marker(story.coords, {icon:iconRed }).addTo(map_overlay);
+		})
 	});
 	
 	function offsetCenter(p, z){
@@ -189,11 +197,11 @@ $("document").ready(function(){
 	$("#button-start").click(function(evt){
 		evt.preventDefault();
 
-		// is story loaded?
-		if (story.length === 0) return;
+		// is stories loaded?
+		if (stories.length === 0) return;
 
 		// go to center of first element
-		offsetCenter(story[0].coords, story[0].zoom);
+		offsetCenter(stories[0].coords, stories[0].zoom);
 
 		// set slider to 1928
 		slider.slideTo(1);
@@ -211,21 +219,21 @@ $("document").ready(function(){
 	$("#goto-next").click(function(evt){
 		var index = parseInt($container.attr("data-element"),10)+1;
 		if (isNaN(index)) return;
-		if (index >= story.length) {
+		if (index >= stories.length) {
 			// show explore
 			gotoExplore();
 			return;
 		}
 		
 		// position map
-		offsetCenter(story[index].coords, story[index].zoom);
+		offsetCenter(stories[index].coords, stories[index].zoom);
 		
 		// set 1928 text
-		setContent($('#content-1928'), story[index].content[0]);
+		setContent($('#content-1928'), stories[index].content[0]);
 				
 		// show 1928 map
 		slider.slideTo(1, function() {
-			setContent($('#content-2015'), story[index].content[1]);
+			setContent($('#content-2015'), stories[index].content[1]);
 			$container.attr("data-element", index);
 		});
 		
@@ -250,14 +258,14 @@ $("document").ready(function(){
 		}
 		
 		// position map
-		offsetCenter(story[index].coords, story[index].zoom);
+		offsetCenter(stories[index].coords, stories[index].zoom);
 		
 		// set 2015 text
-		setContent($('#content-2015'), story[index].content[1]);
+		setContent($('#content-2015'), stories[index].content[1]);
 		
 		// show 2015 map
 		slider.slideTo(0, function() {
-			setContent($('#content-1928'), story[index].content[0]);
+			setContent($('#content-1928'), stories[index].content[0]);
 			$container.attr("data-element", index);
 		});
 	});
