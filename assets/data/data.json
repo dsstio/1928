@@ -1,113 +1,141 @@
 [{
-	"coords": [52.5204,13.3722],
+	"coords": [52.5213,13.3713],
 	"zoom": 16,
 	"content": [{
-		"headline": "Der Platz der Republik",
+		"headline": "Spreebogen",
 		"text": [
-			"Schon 1928 hieß der Platz vor dem Reichstag <em>Platz der Republik</em>, auch wenn es zu dieser Zeit die Weimarer Republik war, deren Parlament in Anlehnung an den Reichstag des Deutschen Kaiserreiches ebenfalls Reichstag genannt wurde.",
-			"Gegenüber des Reichstags, auf der Karte links, befand sich die Kroll-Oper, dazwischen bis 1938 das Bismarck-Denkmal, welches heute am großen Stern zu finden ist."
+			"Der Spreebogen mit dem nördlich sich anschließenden Humboldthafen trotzten jedem Wandel der Stadt. Links des Hafens begannen Reisende Richtung Hannover ihre Zugfahrt im Lehrter Bahnhof, vor den sich nördlich der Querriegel des Lehrter Stadtbahnhofs der S-Bahn schob. Die Ansagen dort hörte man noch im sternförmigen Zellengefängnis an der Invalidenstraße. Dem Reichstag gegenüber lag die Krolloper, mit der Siegessäule als Mittelpunkt des Platzes der Republik."
 		]
 	},{
-		"headline": "Der Platz der Republik",
+		"headline": "Spreebogen",
 		"text": [
-			"Heute sieht der Spreebogen ganz anders aus. Bismarck und Oper sind weg, Bundeskanzleramt und Elisabeth-Lüders-Haus sind dazugekommen und der Reichstag hat nach einem Nazi-Brandanschlag, einem Weltkrieg und Deutscher Teilung eine neue Kuppel.",
-			"Die umstehende Bebauung wurde abgetragen und durch eine neoklassizistische Flaniermeile ersetzt."
+			"Der Reichstag hat die Zeitläufte überdauert, ansonsten ist kaum ein Stein auf dem anderen geblieben. Die Siegessäule: zum Großen Stern verschoben. Die Kroll-Oper: längst verschwunden, nördlich steht heute das Kanzleramt. Verglichen mit dem Lehrter Bahnhof ist der fast an selber Stelle gebaute Hauptbahnhof ziemlich in die Breite gegangen. Ans Zellengefängnis erinnern noch ein paar Restbauten, an den einst westlich des Bahnhofs gelegenen Ulap-Palast nichts mehr."
 		]
 	}]
 },{
-	"coords": [52.4975, 13.4355],
-	"zoom": 16,
-	"content": [{
-		"headline": "Görlitzer Bahnhof",
-		"text": [
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
-		]
-	},{
-		"headline": "Görlitzer Park",
-		"text": [
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
-		]
-	}]
-},{
-	"coords": [52.5207, 13.4092],
-	"zoom": 17,
-	"content": [{
-		"headline": "Marienviertel mit Marienkirche",
-		"text": [
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
-		]
-	},{
-		"headline": "Berliner Fernsehturm",
-		"text": [
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
-		]
-	}]
-},{
-	"coords": [52.4748, 13.4029],
-	"zoom": 14,
-	"content": [{
-		"headline": "Paradeplatz der Berliner Garnison",
-		"text": [
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
-		]
-	},{
-		"headline": "Tempelhofer Park",
-		"text": [
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
-		]
-	}]
-},{
-	"coords": [52.4972, 13.2400],
-	"zoom": 16,
-	"content": [{
-		"headline": "Der Grunewald",
-		"text": [
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
-		]
-	},{
-		"headline": "Der Teufelsberg",
-		"text": [
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
-		]
-	}]
-},{
-	"coords": [52.5060, 13.4371],
-	"zoom": 17,
-	"content": [{
-		"headline": "Brommybrücke",
-		"text": [
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
-		]
-	},{
-		"headline": "Reste der Brommybrücke und East Side Gallery",
-		"text": [
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
-		]
-	}]
-},{
-	"coords": [52.5466, 13.5597],
+	"coords": [52.4733, 13.4040],
 	"zoom": 15,
 	"content": [{
-		"headline": "Marzahn",
+		"headline": "Flughafen Tempelhof",
 		"text": [
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.",
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis."
+			"Als der Vorgängerbau des heutigen Flughafengebäudes 1928 fertig war, wusste man schon: Er ist viel zu klein. Der rasante Anstieg der Passagierzahlen in Berlin hatte die Bauplanung überrollt. Eine spezielle Landebahn gab es damals noch nicht, den alten Propellermaschinen genügte eine gemähte Wiese. Immerhin konnten die Piloten schon aus der Luft erkennen, dass es die richtige war: „Berlin“ stand in gut lesbaren Lettern vor der Abfertigungshalle. Der Bau des neuen Flughafens begann acht Jahre später."
 		]
 	},{
-		"headline": "Marzahn",
+		"headline": "Flughafen Tempelhof",
 		"text": [
-			"Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis.",
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat."
+			"Von oben sieht der Flughafen aus, als könnten jeden Moment Maschinen starten. Ein Irrtum: 2008 wurde Tempelhof stillgelegt, und Kreuze auf den Landebahnen signalisieren: „Hier bitte nicht!“ Nur noch zwei stillgelegte Maschinen, darunter der vor der Mitte des Gebäudehalbrunds geparkte, bei Filmaufnahmen gern genutzte „Rosinenbomber“, sind zu erkennen. Das Gebäude von 1928 befand sich an der mit Büschen bewachsenen Stelle nördlich der Landebahnen."
+		]
+	}]
+},{
+	"coords": [52.5031, 13.2730],
+	"zoom": 16,
+	"content": [{
+		"headline": "Messegelände",
+		"text": [
+			"Der Funkturm steht schon, auch die Avus verband bereits Halensee mit Nikolassee, aber die heutigen Ausstellungshallen lagen noch in ferner Zukunft. Immerhin gab es am Kaiserdamm bereits zwei Bauten: einen größeren neben der S-Bahn, 1921 zur Deutschen Automobil-Ausstellung als erste Halle eröffnet, sowie direkt daneben ihr kleineres Pendant auf dem Areal des heutigen Busbahnhofs. Beide wurde im Krieg zerstört, das „Haus der Funkindustrie“, 1924 westlich des Funkturms eröffnet, brannte bereits 1935 ab."
+		]
+	},{
+		"headline": "Messegelände",
+		"text": [
+			"Wie ein Schiffsbug weist das von Hans Poelzig entworfene, 1931 eröffnete Haus des Rundfunks an der Masurenallee nach Nordosten. Die Bauten des Messegeländes umgeben das Oval des Sommergartens, parallel zu S-Bahn-Trasse und Stadtautobahn ragt das heute als Flüchtlingsheim genutzte ICC. Als neueste Erweiterung des Areals ist das Gebäude City Cube im Südwesten dazugekommen – dort wo bis vor wenigen Jahren die Deutschlandhalle stand."
+		]
+	}]
+},{
+	"coords": [52.5017, 13.3786],
+	"zoom": 16,
+	"content": [{
+		"headline": "Anhalter Bahnhof",
+		"text": [
+			"Diesen Bahnhof hatte Kaiser Wilhelm I. persönlich eröffnet, auch Kanzler Bismarck war zugegen. Allerhöchste Herrschaften wie Zar Nikolaus II. wurden hier empfangen. Seit 1928 war er mit dem gegenüberliegenden Hotel Excelsior durch einen Fußgängertunnel verbunden. Westlich des Bahnhofs war der Landwehrkanal 1849 bei seinem Bau zu einem Hafen ausgeweitet worden, der auch 1928 noch stark genutzt war. Gleich sieben Lastkähne liegen vor Anker."
+		]
+	},{
+		"headline": "Anhalter Bahnhof",
+		"text": [
+			"Nur das Portal an der Stresemannstraße ist von dem im Krieg schwer beschädigten, 1959 abgerissenen Bahnhof übrig geblieben. Etwa zur selben Zeit wurde der kriegszerstörte Hafen zugeschüttet, heute ist dort eine Grünanlage. Auf dem ehemaligen Bahnhofsareal wird nun Sport getrieben, zudem steht dort das Betonzelt des Tempodroms. Im Gebäude am Westrand des Askanischen Platzes, nordwestlich des Bahnhofsportals, hat der Tagesspiegel seinen Sitz."
+		]
+	}]
+},{
+	"coords": [52.5147, 13.2395],
+	"zoom": 16,
+	"content": [{
+		"headline": "Olympia-Gelände",
+		"text": [
+			"Schon 1916 sollten in Berlin die Olympischen Spiele ausgetragen werden, wozu es durch den Ersten Weltkrieg nicht kam. Aber die Sportanlagen gab es teilweise bereits: 1909 war die Rennbahn Grunewald eröffnet worden, auf deren wie ein Dreieck geformter Bahn Galopprennen ausgetragen wurden. Im Innern war vier Jahre später das ovale Deutsche Stadion entstanden, das als zentrale Anlage für die Olympischen Spiele vorgesehen war. Es wurde 1934 abgerissen."
+		]
+	},{
+		"headline": "Olympia-Gelände",
+		"text": [
+			"Das für die Spiele 1936 gebaute Stadion, seit dem letzten Umbau zuschauerfreundlich überdacht, liegt an fast derselben Stelle wie das frühere Deutsche Stadion. Östlich schließt sich der Olympische Platz, nördlich das Schwimmstadion und westlich das Maifeld an, mit dem Glockenturm als markanter Begrenzung. Schräg darüber ist das Halbrund der Waldbühne zu erkennen. Der S-Bahnhof südlich des Stadions bestand bereits 1928."
+		]
+	}]
+},{
+	"coords": [52.5571, 13.2913],
+	"zoom": 15,
+	"content": [{
+		"headline": "Flughafen Tegel",
+		"text": [
+			"1928 wurde auf dem Gelände noch scharf geschossen. Das schraffierte, auf die Spitze gestellte Quadrat ist der alte Schießplatz Tegel, an den sich östlich ein Munitionslager anschloss. Hier wurde 1930 von einigen Technikpionieren, darunter dem Vater der Mondrakete Saturn V, Wernher von Braun, der Raketenflugplatz Tegel eröffnet, mit Unterstützung der Chemisch-Technischen Reichsanstalt (im Winkel zwischen nördlichen Tegeler Weg und Saatwinkler Damm)."
+		]
+	},{
+		"headline": "Flughafen Tegel",
+		"text": [
+			"Der nördliche Teil des Tegeler Wegs ist heute der Kurt-Schumacher-Damm und zugleich Trasse der Stadtautobahn. Etwa an der Stelle der alten Reichsanstalt liegt der Zentrale Festplatz. Auf dem Areal von Schieß- und Raketenflugplatz hat sich der Flughafen Tegel breitgemacht. Im Westteil des Geländes der heutigen Julius-Leber-Kaserne, mit dem Sportplatz-Oval in der Mitte, lag früher eine Polizeikaserne, auf deren Dach eine fehlgeleitete Rakete gekracht war."
+		]
+	}]
+},{
+	"coords": [52.5214, 13.4115],
+	"zoom": 17,
+	"content": [{
+		"headline": "Alexanderplatz",
+		"text": [
+			"So sah der Platz aus, als Alfred Döblin seinen Roman „Berlin Alexanderplatz“ schrieb: verglichen mit heute von bescheideneren Ausmaßen, weitaus enger bebaut. Von Nordwesten schob sich der dunkle Riegel des Kaufhauses Tietz hinein, von Südosten der des Polizeipräsidiums. Dazwischen lag eine der legendären Aschinger-Gaststätten. Zwischen dem Bahnhofsgebäude und dem Kaufhaus entstand wenig später das Berolinahaus von Peter Behrens."
+		]
+	},{
+		"headline": "Alexanderplatz",
+		"text": [
+			"Der Fernsehturm, der Galeria Kaufhof, das Park-Inn-Hotel, das Berolinahaus und das südöstlich sich anschließende Alexanderhaus werfen lange Schatten über den Platz, mit dem kreisrunden Brunnen der Volkerfreundschaft als Mittelpunkt, um den sich zahlreiche Verkaufsstände gruppieren. Die alte Platzstruktur ist durch die sozialistische Stadtplanung weitgehend aufgelöst worden, breite Straßenschneisen rahmen den zuvor eher kleinteiligen Platz ein."
+		]
+	}]
+},{
+	"coords": [52.5087, 13.4352],
+	"zoom": 16,
+	"content": [{
+		"headline": "Ostbahnhof",
+		"text": [
+			"Erst Frankfurter, dann Schlesischer, Ost-, Haupt- und nun wieder Ostbahnhof – der häufige Namenswechsel der zentralen Station nordwestlich der Oberbaumbrücke ist fast so verwirrend wie das Geflecht der Gleise, die 1928 zu dem – damals Schlesischen – Bahnhof führten, und zu dem südlich sich anschließenden Güterbahnhof samt dem leicht gerundeten Postbahnhof. Noch überquerte die Brommybrücke nordwestlich der größeren Oberbaumbrücke die Spree."
+		]
+	},{
+		"headline": "Ostbahnhof",
+		"text": [
+			"Eine Industriestadt ist Berlin schon lange nicht mehr, da kann man auf alte Güterbahnhöfe verzichten. Orte für Sportveranstaltungen und Popkonzerte sind wichtiger geworden, Riesenhallen wie die ovalförmige Mercedes-Benz-Arena beispielsweise. Von oben wirkt die Mauer der East Side Gallery noch intakt, sieht man nicht die durch Bauprojekte wie die Living Levels geschlagenen Löcher. Von der Brommybrücke ist nur jenseits der Spree ein Stummel geblieben."
+		]
+	}]
+},{
+	"coords": [52.5095, 13.3767],
+	"zoom": 17,
+	"content": [{
+		"headline": "Potsdamer Platz",
+		"text": [
+			"Bereits im ersten Drittel des 18. Jahrhunderts wurde das Achteck des Leipziger Platzes angelegt. 1928 trennten ihn zwei Torhäuser vom Potsdamer Platz, vor denen der berühmte Ampelturm gerade noch zu erkennen ist. Südlich des Platzes war der Potsdamer Bahnhof als erster in Deutschland 1838 eröffnet worden. Rechts daneben in der heutigen Stresemannstraße lockte Haus Vaterland, südlich der Leipziger Straße lag neben dem Achteck das Preußische Herrenhaus."
+		]
+	},{
+		"headline": "Potsdamer Platz",
+		"text": [
+			"Nur die achteckige Platzform, das Preußische Herrenhaus als Sitz des Bundesrats und das Weinhaus Huth an der Alten Potsdamer Straße haben sich erhalten. Der Standort der nachgebauten Ampel hat sich südwestlich verschoben und statt des Bahnhofs gibt es nun den Tilla-Durieux-Platz. Ansonsten prägen Neubauten der Nachwendejahre die wiedergeborene Mitte der Stadt, mit dem Bahntower und dem Zeltdach des Sony-Centers als Blickfang."
+		]
+	}]
+},{
+	"coords": [52.5048, 13.3351],
+	"zoom": 17,
+	"content": [{
+		"headline": "Gedächtniskirche",
+		"text": [
+			"Insgesamt 113 Meter ragte der Hauptturm der Gedächtniskirche über dem Auguste-Viktoria-Platz in den Charlottenburger Himmel. Westlich wie östlich des Platzes lagen Gebäude, die sich jeweils Romanisches Haus nannten, doch nur das jüngere, östlich der Kirche gelegene wurde wegen seines Romanischen Cafés, eines Künstler- und Literatentreffpunkts, berühmt. Filmfreunde zog es eher ins Capitol am Zoo, zwischen Kirche und Zoogelände, und den Ufa-Palast am Zoo."
+		]
+	},{
+		"headline": "Gedächtniskirche",
+		"text": [
+			"Das Grundstück des Ufa-Palasts ist Kinostandort geblieben, dort steht seit 1957 der Zoo-Palast. Von der Gedächtniskirche ist nur ein Stummel erhalten, ergänzt durch die modernen Eiermann-Bauten. Statt des Romanischen Hauses (Ost) mit seinem berühmten Café erhebt sich jetzt das Europa-Center über dem Breitscheid-Platz. Gegenüber ragen das Waldorf-Astoria und darunter das im Bau befindliche Upper West in die Höhe. Das Capitol ist dem Bikini-Haus gewichen."
 		]
 	}]
 }]
