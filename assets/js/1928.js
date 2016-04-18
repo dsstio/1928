@@ -170,12 +170,18 @@ $("document").ready(function(){
 		})
 	});
 	
-	function offsetCenter(p, z){
-		if ($container.hasClass("small")) return map_base.setView(p, z-1);
-		var point = map_base.project(new L.latLng(p[0], p[1]).clone(), z);
-		point.x -= ($container.width()/4);
-		point = map_base.unproject(point, z);
-		map_base.setView(point, z);
+	function zoomToRight(story) {
+		var zoom = story.zoom;
+		if ($container.hasClass('small')) zoom--;
+
+		var point = map_base.project(new L.latLng(story.coords[0], story.coords[1]).clone(), zoom);
+		if ($container.hasClass('small')) {
+			point.y += ($container.height()/4);
+		} else {
+			point.x -= ($container.width()/4);
+		}
+		point = map_base.unproject(point, zoom);
+		map_base.setView(point, zoom);
 	};
 
 	/* explore */
@@ -197,7 +203,7 @@ $("document").ready(function(){
 		if (stories.length === 0) return;
 
 		// go to center of first element
-		offsetCenter(stories[0].coords, stories[0].zoom);
+		zoomToRight(stories[0]);
 
 		// set slider to 1928
 		slider.slideTo(1);
@@ -222,7 +228,7 @@ $("document").ready(function(){
 		}
 		
 		// position map
-		offsetCenter(stories[index].coords, stories[index].zoom);
+		zoomToRight(stories[index]);
 		
 		// set 1928 text
 		setContent($('#content-1928'), stories[index].content[0]);
@@ -254,7 +260,7 @@ $("document").ready(function(){
 		}
 		
 		// position map
-		offsetCenter(stories[index].coords, stories[index].zoom);
+		zoomToRight(stories[index]);
 		
 		// set 2015 text
 		setContent($('#content-2015'), stories[index].content[1]);

@@ -106,7 +106,7 @@ body {
 				}
 
 		.content {
-			display: block;
+			display: none;
 			opacity: 0;
 			position: absolute;
 			left: 0;
@@ -131,10 +131,6 @@ body {
 				-moz-transition: opacity 300ms ease;
 				-o-transition: opacity 300ms ease;
 				transition: opacity 300ms ease;
-			}
-			
-			.show-explore .content {
-				display: none;
 			}
 
 			.content-wrapper {
@@ -169,6 +165,7 @@ body {
 				.small .content {
 					top: auto;
 					width: 100%;
+					min-height: 300px;
 				}
 
 				.content h2 {
@@ -212,6 +209,9 @@ body {
 						bottom: 0px;
 						width: 100%;
 					}
+						.show-explore .content .nav {
+							display: none;
+						}
 				
 						.small .content .nav {
 							position: static;
