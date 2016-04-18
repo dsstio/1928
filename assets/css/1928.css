@@ -112,8 +112,7 @@ body {
 			left: 0;
 			top: 0;
 			bottom: 0;
-			padding: 60px 5% 5%;
-			width: 40%;
+			width: 50%;
 			min-width: 300px;
 			background-color: rgba(0,0,0,0.67);
 			overflow-x: hidden;
@@ -138,23 +137,111 @@ body {
 				display: none;
 			}
 
-			.small .content {
-				top: auto;
-				width: 100%;
-				padding: 10px 0px 70px;
-				background-color: rgba(0,0,0,0.5);
+			.content-wrapper {
+				position: relative;
+				margin:  8vh auto 0 auto;
+				height: 84vh;
+				width: 90%;
+				max-width: 600px;
+				max-height: 780px;
 			}
-			
-				.small .content h2 {
-					margin: 10px 20px;
+
+				.small .content-wrapper {
+					margin: 0px;
+					width: auto;
+					height: auto;
+					max-width: none;
+					max-height: none;
+					padding: 20px 20px 40px;
+				}
+
+			.content {
+
+			}
+
+				.small .content {
+					top: auto;
+					width: 100%;
+				}
+
+				.content h2 {
+					color: #fff;
+					margin: 0;
 					padding: 0;
+					line-height: 1.2em;
+					font-weight: 300;
+					font-size: 2.5em;
+					text-shadow: 0 0 10px rgba(0,0,0,0.5);
 				}
 				
+					.small .content h2 {
+						font-size: 1.6em;
+						margin: 0px 0px 10px;
+						padding: 0;
+					}
+				
+
+				.content p {
+					color: #fff;
+					margin: 20px 0 0;
+					padding: 0;
+					line-height: 1.4em;
+					font-weight: 300;
+					font-size: 1.5em;
+					text-shadow: 0 0 10px rgba(0,0,0,0.5);
+				}
+			
+					.small .content p {
+						font-size: 1em;
+					}
+			
+					.content p.nav {
+						display: block;
+						position: absolute;
+						bottom: 0px;
+						width: 100%;
+					}
+				
+						.small .content p.nav {
+							position: static;
+							margin-top: 20px;
+						}
+
+					.content p a {
+						color: #c00;
+					}
+
+					.content p a.goto {
+						display: inline-block;
+						border-radius: 20px;
+						padding: 5px 15px 2px 15px;
+						background-color: #c00;
+						color: #fff;
+						text-decoration: none;
+						-webkit-transition: background-color, box-shadow 200ms ease-out;
+						-moz-transition: background-color, box-shadow 200ms ease-out;
+						-o-transition: background-color, box-shadow 200ms ease-out;
+						transition: background-color, box-shadow 200ms ease-out;
+					}
+					
+						.content p a.goto i {
+							font-size: .9em;
+							vertical-align: -9%;
+						}
+					
+						.content p a.goto-right {
+							float: right;
+						}
+
+						.content p a.goto:hover {
+							background-color: #d00;
+							box-shadow: 0 0 20px -10px rgba(0,0,0,0.5);
+						}
+					
 				.small .content .content-text {
 					display: block;
 					position: relative;
 					margin: 0;
-					padding: 0px 20px;
 					overflow-x: hidden;
 					overflow-y: auto;
 					max-height: 150px;
@@ -165,76 +252,6 @@ body {
 						padding: 0;
 						font-size: .85em;
 					}
-			
-				.small .content p.nav {
-					display: block;
-					position: absolute;
-					left: 10px;
-					right: 10px;
-					bottom: 15px;
-				}
-
-			.content h2 {
-				color: #fff;
-				margin: 0;
-				padding: 0;
-				line-height: 1.2em;
-				font-weight: 300;
-				font-size: 2.5em;
-				text-shadow: 0 0 10px rgba(0,0,0,0.5);
-			}
-			
-				.small .content h2 {
-					font-size: 1.6em;
-				}
-				
-
-			.content p {
-				color: #fff;
-				margin: 20px 0 0;
-				padding: 0;
-				line-height: 1.4em;
-				font-weight: 300;
-				font-size: 1.5em;
-				text-shadow: 0 0 10px rgba(0,0,0,0.5);
-			}
-			
-				.small .content p {
-					font-size: 1em;
-				}
-				
-			
-			.content p a {
-				color: #c00;
-			}
-
-			.content p a.goto {
-				display: inline-block;
-				border-radius: 20px;
-				padding: 5px 15px 2px 15px;
-				background-color: #c00;
-				color: #fff;
-				text-decoration: none;
-				-webkit-transition: background-color, box-shadow 200ms ease-out;
-				-moz-transition: background-color, box-shadow 200ms ease-out;
-				-o-transition: background-color, box-shadow 200ms ease-out;
-				transition: background-color, box-shadow 200ms ease-out;
-				margin-bottom: 15px;
-			}
-			
-				.content p a.goto i {
-					font-size: .9em;
-					vertical-align: -9%;
-				}
-			
-				.content p a.goto-right {
-					float: right;
-				}
-
-				.content p a.goto:hover {
-					background-color: #d00;
-					box-shadow: 0 0 20px -10px rgba(0,0,0,0.5);
-				}
 
 		#content-1928 {
 			z-index: 2;
@@ -316,6 +333,7 @@ body {
 			box-shadow: 0px 0px 20px rgba(0,0,0,1);
 			text-shadow: 0px 0px 3px rgba(0,0,0,0.33);
 		}
+
 			#control-slider i {
 				margin: 0px -0.2em;
 			}
