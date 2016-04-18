@@ -296,9 +296,12 @@ body {
 			bottom: 0;
 			z-index: 3;
 			overflow: hidden !important;
-			background-color: rgba(255,255,255,0.5);
 			border-left: 1px solid #c00;
+			pointer-events: none;
 		}
+			#map-clip .leaflet-control {
+				pointer-events: none;
+			}
 		
 			#map-clip-inner {
 				display: block;
@@ -317,7 +320,6 @@ body {
 				right: 0;
 				bottom: 0;
 				z-index: 5;
-				/* pointer-events: none; */
 			}
 			
 		.leaflet-control-container .leaflet-top.leaflet-right {

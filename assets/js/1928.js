@@ -77,10 +77,6 @@ $("document").ready(function(){
 		// set hash for sharing
 		locationhash = location_encode(center, zoom)
 	});
-
-	map_overlay.on('move', function (evnt) {
-		map_base.setView(map_overlay.getCenter(), map_overlay.getZoom(), {animate: false});
-	});
 	
 	var slider = (function () {
 		// draggable slider
