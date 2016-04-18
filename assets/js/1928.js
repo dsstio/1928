@@ -81,16 +81,6 @@ $("document").ready(function(){
 	map_overlay.on('move', function (evnt) {
 		map_base.setView(map_overlay.getCenter(), map_overlay.getZoom(), {animate: false});
 	});
-
-	function debug(){
-		if ($("#debug").length === 0) return;
-		var zoom = map_base.getZoom();
-		var center = map_base.getCenter();
-		var point = map_base.project(center);
-		point.x += ($container.width()/4);
-		var offset = map_base.unproject(point);
-		$('#debug').html('"coords": ['+offset.lat.toFixed(4)+', '+offset.lng.toFixed(4)+'],<br>"zoom:": '+zoom+',\n');
-	};
 	
 	var slider = (function () {
 		// draggable slider
