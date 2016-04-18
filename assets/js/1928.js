@@ -170,16 +170,8 @@ $("document").ready(function(){
 		story = data;
 		
 		// prepare content
-		$("#content-1928 h2").text(story[0].content[0].headline);
-		$("#content-2015 h2").text(story[0].content[1].headline);
-		$("#content-1928 .content-text").html("");
-		$("#content-2015 .content-text").html("");
-		story[0].content[0].text.forEach(function(text){
-			$("#content-1928 .content-text").append($('<p>').html(text));
-		});
-		story[0].content[1].text.forEach(function(text){
-			$("#content-2015 .content-text").append($('<p>').html(text));
-		});
+		setContent($('#content-1928'), story[0].content[0]);
+		setContent($('#content-2015'), story[0].content[1]);
 
 		$container.addClass("ready");
 	});
@@ -250,26 +242,12 @@ $("document").ready(function(){
 		offsetCenter(story[index].coords, story[index].zoom);
 		
 		// set 1928 text
-		$("#content-1928 h2").text(story[index].content[0].headline);
-		$("#content-1928 .content-text").html("");
-		story[index].content[0].text.forEach(function(text){
-			$("#content-1928 .content-text").append($('<p>').html(text));
-		});
-		$("#content-1928 .content-text")[0].scrollTop = 0;
+		setContent($('#content-1928'), story[index].content[0]);
 				
 		// show 1928 map
-		slider.slideTo(1, function(){
-
-			// set 2015 text
-			$("#content-2015 h2").text(story[index].content[1].headline);
-			$("#content-2015 .content-text").html("");
-			story[index].content[1].text.forEach(function(text){
-				$("#content-2015 .content-text").append($('<p>').html(text));
-			});
-			$("#content-2015 .content-text")[0].scrollTop = 0;
-			
+		slider.slideTo(1, function() {
+			setContent($('#content-2015'), story[index].content[1]);
 			$container.attr("data-element", index);
-			
 		});
 		
 	});
@@ -296,33 +274,29 @@ $("document").ready(function(){
 		offsetCenter(story[index].coords, story[index].zoom);
 		
 		// set 2015 text
-		$("#content-2015 h2").text(story[index].content[1].headline);
-		$("#content-2015 .content-text").html("");
-		story[index].content[1].text.forEach(function(text){
-			$("#content-2015 .content-text").append($('<p>').html(text));
-		});
-		$("#content-2015 .content-text")[0].scrollTop = 0;
+		setContent($('#content-2015'), story[index].content[1]);
 		
 		// show 2015 map
-		slider.slideTo(0, function(){
-
-			// set 1928 text
-			$("#content-1928 h2").text(story[index].content[0].headline);
-			$("#content-1928 .content-text").html("");
-			story[index].content[0].text.forEach(function(text){
-				$("#content-1928 .content-text").append($('<p>').html(text));
-			});
-			$("#content-1928 .content-text")[0].scrollTop = 0;
-			
+		slider.slideTo(0, function() {
+			setContent($('#content-1928'), story[index].content[0]);
 			$container.attr("data-element", index);
-			
 		});
 	});
 
-	$("#goto-exit").click(function(evt) {
-		$container.removeClass("show-content").addClass("show-explore");
-		$container.attr("data-element", "explore");
+	$('#goto-exit').click(function(evt) {
+		$container.removeClass('show-content').addClass('show-explore');
+		$container.attr('data-element', 'explore');
 		slider.slideTo(0.5);
 	});
+
+	function setContent($el, content) {
+		$el.find('h2').text(content.headline);
+		$el.find('.content-text').empty();
+		content.text.forEach(function(text){
+			$el.find('.content-text').append($('<p>').html(text));
+		});
+		$el.find('.content-text')[0].scrollTop = 0;
+
+	}
 
 });
