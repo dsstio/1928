@@ -106,7 +106,7 @@ $("document").ready(function(){
 		$('#control-slider').on('mousedown touchstart', function (e) {
 			e.preventDefault();
 			dragging = true;
-			var pointer = (e.type === 'touchmove') ? e.originalEvent.touches[0] : e;
+			var pointer = (e.type === 'touchstart') ? e.originalEvent.touches[0] : e;
 			dragOffset = $slider.offset().left - pointer.pageX + 20;
 		})
 		$(document).on('mousemove touchmove', function (e) {
