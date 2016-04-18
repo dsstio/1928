@@ -143,9 +143,9 @@ $("document").ready(function(){
 
 		function setSliderPosition(x) {
 			sliderOffset = x/$container.width();
-			$slider.css(  {left:  x});
-			$mapclip.css( {left:  x});
-			$mapinner.css({left: -x});
+			$slider.css(  {left:  x  });
+			$mapclip.css( {left:  x  });
+			$mapinner.css({left: -x-1});
 		}
 
 		return {
