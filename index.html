@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +5,8 @@
 	<meta charset="utf-8" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+	
+	<link href="https://data.tagesspiegel.de/fonts/source-sans-pro/standard.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="assets/fonts/icomoon/icomoon.css" />
 	<link rel="stylesheet" href="assets/css/leaflet.css" />
 	<link rel="stylesheet" href="assets/css/1928.css" />
@@ -29,7 +29,7 @@
 			<div class="content-text"></div>
 			<p class="nav">
 				<a href="javascript:;" id="goto-back" class="goto goto-left"><i class="icon-left"></i> Zurück</a>
-				<a href="javascript:;" id="goto-2015" class="goto goto-right">heute <i class="icon-right"></i></a>
+				<a href="javascript:;" id="goto-2015" class="goto goto-right">Weiter <i class="icon-right"></i></a>
 			</p>
 		</div>
 		<div id="map-clip">
@@ -39,13 +39,13 @@
 					<h2></h2>
 					<div class="content-text"></div>
 					<p class="nav">
-						<a href="javascript:;" id="goto-1928" class="goto goto-left"><i class="icon-left"></i> 1928</a>
+						<a href="javascript:;" id="goto-1928" class="goto goto-left"><i class="icon-left"></i> Zurück</a>
 						<a href="javascript:;" id="goto-next" class="goto goto-right">Weiter <i class="icon-right"></i></a>
 					</p>
 				</div>
 			</div>
 		</div>
-		<div id="control-slider">&lt; &gt;</div>
+		<div id="control-slider"><i class="icon-left"></i><i class="icon-right"></i></div>
 		<div id="credit">
 			<a href="http://fbinter.stadt-berlin.de/fb/berlin/service.jsp?id=k_luftbild1928@senstadt&amp;type=WMS" id="source">Karte: Geoportal Berlin / Luftbilder 1928, 2015</a>
 			<a href="http://www.tagesspiegel.de/" id="tsp">Der Tagesspiegel</a>
@@ -55,4 +55,3 @@
 	</div>
 </body>
 </html>
-

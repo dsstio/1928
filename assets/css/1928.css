@@ -2,7 +2,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	font-family: "Helvetica Neue", "Helvetica", sans-serif;
+	font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Arial, sans-serif;
 }
 
 	#container {
@@ -41,7 +41,7 @@ body {
 				font-size: 20vh;
 				font-weight: 500;
 				color: #fff;
-				text-shadow: 0 0 30px rgba(0,0,0,0.6);
+				text-shadow: 0 0 40px #000;
 				text-transform: uppercase;
 				margin: 0;
 				padding: 0;
@@ -49,10 +49,10 @@ body {
 			}
 
 			#intro p {
-				font-size: 10vh;
+				font-size: 8.5vh;
 				font-weight: 500;
 				color: #eee;
-				text-shadow: 0 0 30px rgba(0,0,0,0.6);
+				text-shadow: 0 0 40px #000;
 				text-transform: uppercase;
 				margin: 0;
 				padding: 0;
@@ -67,7 +67,8 @@ body {
 			.ready #button-start {
 				display: inline-block;
 				border-radius: 1em;
-				padding: .3em .8em;
+				font-size: 3.5vh;
+				padding: .3em .8em 0.2em .8em;
 				background-color: #c00;
 				color: #fff;
 				text-decoration: none;
@@ -75,7 +76,6 @@ body {
 				-moz-transition: background-color, box-shadow 200ms ease-out;
 				-o-transition: background-color, box-shadow 200ms ease-out;
 				transition: background-color, box-shadow 200ms ease-out;
-				font-size: 4vh;
 				font-weight: 300;
 				margin-top: .7em;
 				margin-left: .5em;
@@ -92,6 +92,7 @@ body {
 				#button-explore i,
 				#button-start i {
 					font-size: .85em;
+					vertical-align: -9%;
 				}
 				
 				@media (max-width: 500px) { 
@@ -210,7 +211,7 @@ body {
 			.content p a.goto {
 				display: inline-block;
 				border-radius: 20px;
-				padding: 5px 15px;
+				padding: 5px 15px 2px 15px;
 				background-color: #c00;
 				color: #fff;
 				text-decoration: none;
@@ -223,6 +224,7 @@ body {
 			
 				.content p a.goto i {
 					font-size: .9em;
+					vertical-align: -9%;
 				}
 			
 				.content p a.goto-right {
@@ -300,9 +302,10 @@ body {
 			background-color: #c00;
 			border-radius: 100%;
 			text-align: center;
-			line-height: 35px;
+			line-height: 44px;
+			font-size: 1em;
 			z-index: 10;
-			font-weight: 700;
+			font-weight: bold;
 			color: #fff;
 			cursor: ew-resize;
 			-webkit-user-select: none;
@@ -311,19 +314,22 @@ body {
 			-ms-user-select: none;
 			user-select: none;
 			box-shadow: 0px 0px 20px rgba(0,0,0,1);
-			text-shadow: 0 0 5px #000;
+			text-shadow: 0px 0px 3px rgba(0,0,0,0.33);
 		}
+			#control-slider i {
+				margin: 0px -0.2em;
+			}
 
 			#control-slider::before, #control-slider::after {
 				display: block;
 				position: absolute;
-				padding: 0px 10px;
+				padding: 1px 10px 0px 10px;
 				top: 8px;
 				z-index: -1;
 				color: #fff;
 				font-size: 1em;
-				text-shadow: 0 0 5px #000;
-				height: 24px;
+				font-weight: bold;
+				height: 23px;
 				line-height: 22px;
 				background-color: #c00;
 				letter-spacing: 0.1em;
@@ -338,7 +344,7 @@ body {
 				}
 
 				#control-slider::after {
-					content: "heute";
+					content: "2015";
 					text-align: left;
 					padding-left: 40px;
 					left: 0px;
@@ -398,7 +404,7 @@ body {
 				text-shadow: 0 0 3px #000, 0 0 5px #000, 0 0 10px #000;
 				padding: 4px 0;
 				text-align: right;
-				font-weight: 300;
+				font-weight: 400;
 				-webkit-touch-callout: auto;
 				-webkit-user-select: auto;
 				-khtml-user-select: auto;
