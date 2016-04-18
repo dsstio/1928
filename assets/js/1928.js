@@ -91,105 +91,77 @@ $("document").ready(function(){
 		var offset = map_base.unproject(point);
 		$('#debug').html('"coords": ['+offset.lat.toFixed(4)+', '+offset.lng.toFixed(4)+'],<br>"zoom:": '+zoom+',\n');
 	};
-		
-	// draggable shifter
-	var $slider = $("#control-slider");
-	var $mapclip = $("#map-clip");
-	var $mapinner = $("#map-clip-inner");
-	var $offset = 0.5;
-	var $lastOffset = ($container.width()/2);
 	
-	var dragstart = 0;
-	var dragging = false;
-	$('body').on('mousedown', '#control-slider', function(e) {
-		var bias = ($lastOffset-e.pageX);
-		dragstart = Date.now();
-		dragging = true;
+	var slider = (function () {
+		// draggable slider
 
-		var $t = $(this);
-		$(this).addClass('draggable').parents().on('mousemove', function(e) {
+		var $slider = $("#control-slider");
+		var $mapclip = $("#map-clip");
+		var $mapinner = $("#map-clip-inner");
+		var sliderOffset = 0.5;
+
+		// mouse and touch events for dragging
+		var dragging = false;
+		var dragOffset = 0;
+		$('#control-slider').on('mousedown touchstart', function (e) {
+			e.preventDefault();
+			dragging = true;
+			var pointer = (e.type === 'touchmove') ? e.originalEvent.touches[0] : e;
+			dragOffset = $slider.offset().left - pointer.pageX + 20;
+		})
+		$(document).on('mousemove touchmove', function (e) {
 			if (!dragging) return;
-			var offset = (e.pageX);
-			var biasedoffset = Math.min(Math.max(0, offset+bias), $container.width());
-			$lastOffset = biasedoffset;
-			$offset = biasedoffset/$container.width();
-			$slider.css({left: biasedoffset+"px"});
-			$mapclip.css({left: biasedoffset+"px"});
-			$mapinner.css({left: (biasedoffset*-1)+"px"});
-			$('.draggable').parents().on('mouseup', function() {
-				$t.removeClass('draggable');
-				$t.unbind("mousemove");
-				$t.parents().unbind("mousemove");
+			e.preventDefault();
+			
+			var pointer = (e.type === 'touchmove') ? e.originalEvent.touches[0] : e;
+			var x = pointer.pageX + dragOffset;
+			x = Math.min(Math.max(0, x), $container.width());
+
+			setSliderPosition(x);
+		})
+		$(document).on('mouseup touchend', function (e) {
+			if (dragging) dragging = false;
+		})
+
+		// events for window resize
+		$(window).resize(function(){
+			setSliderPosition($container.width()*sliderOffset);
+			$container.toggleClass('small', $container.width() < 800);
+		});
+		$(window).trigger('resize');
+		
+		// functions
+		function slideTo(v, fn){
+			$({v: sliderOffset}).animate({v: v}, {
+				duration: 500,
+				step: function(value){
+					setSliderPosition($container.width()*value);
+				},
+				complete: fn
 			});
-		});
-		e.preventDefault();
-	}).on('mouseup', function() {
-		dragging = false;
-		$('.draggable').removeClass('draggable');
-	});
-	
-	$('body').on("click", function(){
-		dragging = false;
-	});
-
-	$('#control-slider').click(function(evt){
-		evt.preventDefault();
-		if ((Date.now()-dragstart) > 500) return; // this is a drag
-		// this is confusing either way
-		if (evt.offsetX >= 0 && evt.offsetX <= 40) return slideTo(0.5);
-		if ($offset === 1) return slideTo(0);
-		if ($offset === 0) return slideTo(1);
-		if (evt.offsetX < 0) return slideTo(1);
-		if (evt.offsetX > 40) return slideTo(0);
-	});
-
-	$(window).resize(function(){
-		var offset = ($container.width()*$offset);
-		$lastOffset = offset;
-		$slider.css({left: offset+"px"});
-		$mapclip.css({left: offset+"px"});
-		$mapinner.css({left: (offset*-1)+"px"});
-		if ($container.width() < 800) {
-			$container.addClass("small");
-		} else {
-			$container.removeClass("small");
 		}
-	});
-	$(window).trigger("resize");
+
+		function setSliderPosition(x) {
+			sliderOffset = x/$container.width();
+			$slider.css(  {left:  x});
+			$mapclip.css( {left:  x});
+			$mapinner.css({left: -x});
+		}
+
+		return {
+			slideTo: slideTo
+		}
+	})();
 	
-	function slideTo(v, fn){
-		$({v: $offset}).animate({v: v}, {
-			duration: 500,
-			step: function(value){
-				var offset = ($container.width()*value);
-				$lastOffset = offset;
-				$offset = value;
-				$slider.css({left: offset+"px"});
-				$mapclip.css({left: offset+"px"});
-				$mapinner.css({left: (offset*-1)+"px"});
-			},
-			complete: fn
-		});
-	};
-	
-	function jumpTo(v, fn){
-		var offset = ($container.width()*v);
-		$lastOffset = offset;
-		$offset = v;
-		$slider.css({left: offset+"px"});
-		$mapclip.css({left: offset+"px"});
-		$mapinner.css({left: (offset*-1)+"px"});
-		if (typeof fn === "function") fn();
-	};
 	
 	$("#goto-2015").click(function(evt){
 		evt.preventDefault();
-		slideTo(0);
+		slider.slideTo(0);
 	});
 	
 	$("#goto-1928").click(function(evt){
 		evt.preventDefault();
-		slideTo(1);
+		slider.slideTo(1);
 	});
 	
 	/* content */
@@ -230,9 +202,9 @@ $("document").ready(function(){
 		});
 		
 		map_base.setView(new L.latLng(52.5162632,13.3777046), 16);
-		slideTo(0.3, function(){
-			slideTo(0.7, function(){
-				slideTo(0.5);
+		slider.slideTo(0.3, function(){
+			slider.slideTo(0.7, function(){
+				slider.slideTo(0.5);
 			});
 		})
 		
@@ -251,7 +223,7 @@ $("document").ready(function(){
 		offsetCenter(story[0].coords, story[0].zoom);
 
 		// set slider to 1928
-		slideTo(1);
+		slider.slideTo(1);
 		
 		// show content
 		$('#intro').fadeOut('fast', function(){
@@ -270,7 +242,7 @@ $("document").ready(function(){
 			// show explore
 			$container.removeClass("show-content").addClass("show-explore");
 			$container.attr("data-element", "explore");
-			slideTo(0.5);
+			slider.slideTo(0.5);
 			return;
 		}
 		
@@ -286,7 +258,7 @@ $("document").ready(function(){
 		$("#content-1928 .content-text")[0].scrollTop = 0;
 				
 		// show 1928 map
-		slideTo(1, function(){
+		slider.slideTo(1, function(){
 
 			// set 2015 text
 			$("#content-2015 h2").text(story[index].content[1].headline);
@@ -309,7 +281,7 @@ $("document").ready(function(){
 			map_base.setView(new L.latLng(52.49,13.372), 12);
 
 			// set slider to middle
-			slideTo(0.5);
+			slider.slideTo(0.5);
 
 			// show content
 			$container.removeClass("show-content").addClass("show-intro");
@@ -332,7 +304,7 @@ $("document").ready(function(){
 		$("#content-2015 .content-text")[0].scrollTop = 0;
 		
 		// show 2015 map
-		slideTo(0, function(){
+		slider.slideTo(0, function(){
 
 			// set 1928 text
 			$("#content-1928 h2").text(story[index].content[0].headline);
