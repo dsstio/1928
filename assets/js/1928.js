@@ -15,12 +15,14 @@ $("document").ready(function(){
 		zoomControl: false,
 		maxBounds: bounds,
 		minZoom: 12,
-		maxZoom: 18
+		maxZoom: 18,
+		zoom: 13,
+		center: L.latLng(52.49,13.372)
 	};
 
 	// create maps
-	var map_base = L.map('map-base', map_opts).setView([52.49,13.372], 12);
-	var map_overlay = L.map('map-overlay', map_opts).setView([52.49,13.372], 12);
+	var map_base = L.map('map-base', map_opts);
+	var map_overlay = L.map('map-overlay', map_opts);
 
 	// add zoom control to basemap
 	new L.Control.Zoom({ position: 'topright' }).addTo(map_base);
