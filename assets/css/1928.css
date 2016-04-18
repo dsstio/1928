@@ -157,7 +157,14 @@ body {
 
 			.content {
 
-			}
+			}	
+				.col3 {
+					width: 33%;
+					float: left;
+				}
+				.col3left   { text-align: left; }
+				.col3center { text-align: center; }
+				.col3right  { text-align: right; }
 
 				.small .content {
 					top: auto;
@@ -181,7 +188,7 @@ body {
 					}
 				
 
-				.content p {
+				.content p, .content .nav {
 					color: #fff;
 					margin: 20px 0 0;
 					padding: 0;
@@ -191,50 +198,59 @@ body {
 					text-shadow: 0 0 10px rgba(0,0,0,0.5);
 				}
 			
-					.small .content p {
+					.small .content p, .small .content .nav {
 						font-size: 1em;
 					}
+
+					.content p a {
+						color: #c00;
+					}
 			
-					.content p.nav {
-						display: block;
+					.content .nav {
+						display: inline-block;
 						position: absolute;
 						bottom: 0px;
 						width: 100%;
 					}
 				
-						.small .content p.nav {
+						.small .content .nav {
 							position: static;
 							margin-top: 20px;
 						}
 
-					.content p a {
-						color: #c00;
-					}
-
-					.content p a.goto {
+					.content .nav .goto {
 						display: inline-block;
 						border-radius: 20px;
-						padding: 5px 15px 2px 15px;
-						background-color: #c00;
-						color: #fff;
+						padding: 5px 15px 2px;
 						text-decoration: none;
 						-webkit-transition: background-color, box-shadow 200ms ease-out;
-						-moz-transition: background-color, box-shadow 200ms ease-out;
-						-o-transition: background-color, box-shadow 200ms ease-out;
-						transition: background-color, box-shadow 200ms ease-out;
+						   -moz-transition: background-color, box-shadow 200ms ease-out;
+						     -o-transition: background-color, box-shadow 200ms ease-out;
+						        transition: background-color, box-shadow 200ms ease-out;
 					}
 					
-						.content p a.goto i {
+						.content .nav .goto i {
 							font-size: .9em;
 							vertical-align: -9%;
 						}
-					
-						.content p a.goto-right {
-							float: right;
+
+						.content .nav .goto-red {
+							background-color: #c00;
+							color: #fff;
+						}
+						.content .nav .goto-grey {
+							background-color: #555;
+							color: #ccc;
 						}
 
-						.content p a.goto:hover {
+						.content .nav .goto-red:hover {
 							background-color: #d00;
+							box-shadow: 0 0 20px -10px rgba(0,0,0,0.5);
+						}
+
+						.content .nav .goto-grey:hover {
+							background-color: #666;
+							color: #fff;
 							box-shadow: 0 0 20px -10px rgba(0,0,0,0.5);
 						}
 					

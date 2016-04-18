@@ -319,4 +319,10 @@ $("document").ready(function(){
 		});
 	});
 
+	$("#goto-exit").click(function(evt) {
+		$container.removeClass("show-content").addClass("show-explore");
+		$container.attr("data-element", "explore");
+		slider.slideTo(0.5);
+	});
+
 });
