@@ -1,7 +1,8 @@
-$("document").ready(function(){
+$('document').ready(function() {
+	var animationDuration = 500;
 
 	// cache some dom elemenst
-	var $container = $("#container");
+	var $container = $('#container');
 
 	// var borderWidth = 0;
 
@@ -17,7 +18,7 @@ $("document").ready(function(){
 		maxZoom: 18,
 		zoom: 13,
 		center: L.latLng(52.516, 13.383)
-	};
+	}
 
 	// create maps
 	var map_base = L.map('map-base', map_opts);
@@ -53,10 +54,10 @@ $("document").ready(function(){
 
 	function location_encode(p,z){
 		return [
-			leftpad(Math.round((p.lat%1)*10000).toString(36),3,"_"),
-			leftpad(Math.round((p.lng%1)*10000).toString(36),3,"_"),
+			leftpad(Math.round((p.lat%1)*10000).toString(36),3,'_'),
+			leftpad(Math.round((p.lng%1)*10000).toString(36),3,'_'),
 			z.toString(36)
-		].join("");
+		].join('');
 	};
 	
 	function location_decode(str){
@@ -68,7 +69,7 @@ $("document").ready(function(){
 		};
 	};
 
-	var locationhash = "";
+	var locationhash = '';
 
 	// synchronize maps
 	map_base.on('move', function (evnt) {
@@ -79,12 +80,185 @@ $("document").ready(function(){
 		locationhash = location_encode(center, zoom)
 	});
 	
-	var slider = (function () {
+	var slider = new Slider();
+	
+	/* content */
+	var stories = [];
+	var currentStoryIndex = 0;
+	$.getJSON('assets/data/data.json', function(data) {
+		stories = data;
+		
+		// prepare content
+		setContent($('#content-1928'), stories[0].content[0]);
+		setContent($('#content-2015'), stories[0].content[1]);
+
+		$container.addClass('ready');
+
+		// add map markers
+		data.forEach(function (story, index) {
+			var iconInfo = L.divIcon({html:'<i class="icon-info"></i>', className:'marker-info marker'+index});
+			
+			story.marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_base);
+			story.marker2 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_overlay);
+
+			$(story.marker1._icon).css({width:'', height:'', margin:''});
+			$(story.marker2._icon).css({width:'', height:'', margin:''});
+			
+			story.marker1.on('click', markerClick);
+			story.marker1.on('mouseover', function () {
+				$(story.marker1._icon).addClass('hover');
+				$(story.marker2._icon).addClass('hover');
+			})
+			story.marker1.on('mouseout', function () {
+				$(story.marker1._icon).removeClass('hover');
+				$(story.marker2._icon).removeClass('hover');
+			})
+			
+			function markerClick() {
+				setContent($('#content-1928'), story.content[0]);
+				setContent($('#content-2015'), story.content[1]);
+				$container.addClass('show-content').addClass('small');
+			}
+		})
+	});
+	
+	function zoomToStory(story) {
+		var zoom = story.zoom;
+		if ($container.hasClass('small')) zoom--;
+
+		var point = map_base.project(new L.latLng(story.coords[0], story.coords[1]).clone(), zoom);
+		if ($container.hasClass('small')) {
+			point.y += ($container.height()/4);
+		} else {
+			point.x -= ($container.width()/4);
+		}
+		point = map_base.unproject(point, zoom);
+		map_base.setView(point, zoom);
+	};
+
+	/* explore */
+	$('#button-explore').click(function(evt){
+		evt.preventDefault();
+		gotoExplore();
+	});
+
+	$('.goto-explore').click(function(evt){
+		evt.preventDefault();
+		gotoExplore();
+	});
+		
+	/* storyline */
+	$('#button-start').click(function(evt) {
+		evt.preventDefault();
+		if (stories.length === 0) return;
+		gotoStory(0);
+	});
+	
+	$('#goto-2015').click(function(evt) {
+		evt.preventDefault();
+		slider.slideTo(0);
+	});
+	
+	$('#goto-1928').click(function(evt) {
+		evt.preventDefault();
+		slider.slideTo(1);
+	});
+	
+	$('#goto-next').click(function(evt) {
+		evt.preventDefault();
+		var index = (currentStoryIndex || 0)+1;
+		if (index >= stories.length) return gotoExplore();
+		gotoStory(index);
+	});
+
+	$('#goto-back').click(function(evt){
+		evt.preventDefault();
+		var index = (currentStoryIndex || 0)-1;
+		if (index < 0) return gotoIntro();
+		gotoStory(index);
+	});
+
+	function gotoIntro() {
+		slider.slideTo(0.5);
+		setVisibility('show-intro');
+	}
+
+	function gotoExplore() {
+		slider.slideTo(0.5);
+		setVisibility('show-explore');
+	}
+
+	function gotoStory(index, jumpTo2015) {
+		currentStoryIndex = index;
+
+		if (jumpTo2015) {
+			setContent($('#content-2015'), stories[index].content[1]);
+		} else {
+			setContent($('#content-1928'), stories[index].content[0]);
+		}
+
+		// set slider to 1928
+		slider.slideTo(jumpTo2015 ? 0 : 1, function () {
+			if (jumpTo2015) {
+				setContent($('#content-1928'), stories[index].content[0]);
+			} else {
+				setContent($('#content-2015'), stories[index].content[1]);
+			}
+		});
+
+		var instant = setVisibility('show-content');
+		if (instant) {
+			zoomToStory(stories[index]);
+		} else {
+			setTimeout(function () {
+				zoomToStory(stories[index]);
+			}, animationDuration);
+		}
+	}
+
+	function setVisibility(newClassName) {
+		if ($container.hasClass(newClassName)) return true;
+
+		[
+			{className:'show-explore', selector:false},
+			{className:'show-intro',   selector:'#intro'},
+			{className:'show-content', selector:'.content'}
+		].forEach(function (entry) {
+			if (entry.className === newClassName) {
+				if ($container.hasClass(entry.className)) return;
+				
+				$container.addClass(entry.className);
+				$(entry.selector).hide();
+				setTimeout(
+					function () { $(entry.selector).fadeIn(animationDuration) },
+					animationDuration
+				)
+			} else {
+				if (!$container.hasClass(entry.className)) return;
+
+				$(entry.selector).fadeOut(
+					animationDuration,
+					function () { $container.removeClass(entry.className) }
+				);
+			}
+		});
+	}
+
+	function setContent($el, content) {
+		$el.find('h2').text(content.headline);
+		$el.find('.content-text').empty();
+		content.text.forEach(function(text){
+			$el.find('.content-text').append($('<p>').html(text));
+		});
+		$el.find('.content-text')[0].scrollTop = 0;
+	}
+	
+	function Slider() {
 		// draggable slider
 
-		var $slider = $("#control-slider");
-		var $mapclip = $("#map-clip");
-		var $mapinner = $("#map-clip-inner");
+		var $slider = $('#control-slider');
+		var $mapclip = $('#map-clip');
+		var $mapinner = $('#map-clip-inner');
 		var sliderOffset = 0.5;
 
 		// mouse and touch events for dragging
@@ -120,7 +294,7 @@ $("document").ready(function(){
 		// functions
 		function slideTo(v, fn){
 			$({v: sliderOffset}).animate({v: v}, {
-				duration: 500,
+				duration: animationDuration,
 				step: function(value){
 					setSliderPosition($container.width()*value);
 				},
@@ -138,174 +312,5 @@ $("document").ready(function(){
 		return {
 			slideTo: slideTo
 		}
-	})();
-	
-	
-	$("#goto-2015").click(function(evt){
-		evt.preventDefault();
-		slider.slideTo(0);
-	});
-	
-	$("#goto-1928").click(function(evt){
-		evt.preventDefault();
-		slider.slideTo(1);
-	});
-	
-	/* content */
-	var stories = [];
-	$.getJSON('assets/data/data.json', function(data) {
-		stories = data;
-		
-		// prepare content
-		setContent($('#content-1928'), stories[0].content[0]);
-		setContent($('#content-2015'), stories[0].content[1]);
-
-		$container.addClass('ready');
-
-		data.forEach(function (story, index) {
-			var iconInfo = L.divIcon({html:'<i class="icon-info"></i>', className:'marker-info marker'+index});
-			
-			story.marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_base);
-			story.marker2 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_overlay);
-
-			$(story.marker1._icon).css({width:'', height:'', margin:''});
-			$(story.marker2._icon).css({width:'', height:'', margin:''});
-			
-			story.marker1.on('click', markerClick);
-			story.marker1.on('mouseover', function () {
-				$(story.marker1._icon).addClass('hover');
-				$(story.marker2._icon).addClass('hover');
-			})
-			story.marker1.on('mouseout', function () {
-				$(story.marker1._icon).removeClass('hover');
-				$(story.marker2._icon).removeClass('hover');
-			})
-			
-			function markerClick() {
-				setContent($('#content-1928'), story.content[0]);
-				setContent($('#content-2015'), story.content[1]);
-				$container.addClass('show-content').addClass('small');
-			}
-		})
-	});
-	
-	function zoomToRight(story) {
-		var zoom = story.zoom;
-		if ($container.hasClass('small')) zoom--;
-
-		var point = map_base.project(new L.latLng(story.coords[0], story.coords[1]).clone(), zoom);
-		if ($container.hasClass('small')) {
-			point.y += ($container.height()/4);
-		} else {
-			point.x -= ($container.width()/4);
-		}
-		point = map_base.unproject(point, zoom);
-		map_base.setView(point, zoom);
-	};
-
-	/* explore */
-	$("#button-explore").click(function(evt){
-		evt.preventDefault();
-
-		// show content
-		$('#intro').fadeOut('fast', function(){
-			$container.removeClass("show-intro").addClass("show-explore").removeClass("show-content");
-			gotoExplore();
-		});
-	});
-		
-	/* storyline */
-	$("#button-start").click(function(evt){
-		evt.preventDefault();
-
-		// is stories loaded?
-		if (stories.length === 0) return;
-
-		// go to center of first element
-		zoomToRight(stories[0]);
-
-		// set slider to 1928
-		slider.slideTo(1);
-		
-		// show content
-		$('#intro').fadeOut('fast', function(){
-			$container.removeClass("show-intro").addClass("show-content");
-		});
-		
-		// set index
-		$container.attr("data-element", "0");
-		
-	});
-	
-	$("#goto-next").click(function(evt){
-		var index = parseInt($container.attr("data-element"),10)+1;
-		if (isNaN(index)) return;
-		if (index >= stories.length) {
-			// show explore
-			gotoExplore();
-			return;
-		}
-		
-		// position map
-		zoomToRight(stories[index]);
-		
-		// set 1928 text
-		setContent($('#content-1928'), stories[index].content[0]);
-				
-		// show 1928 map
-		slider.slideTo(1, function() {
-			setContent($('#content-2015'), stories[index].content[1]);
-			$container.attr("data-element", index);
-		});
-		
-	});
-
-	$("#goto-back").click(function(evt){
-		var index = parseInt($container.attr("data-element"),10)-1;
-		if (isNaN(index)) return;
-		if (index < 0) {
-			map_base.setView(new L.latLng(52.49,13.372), 12);
-
-			// set slider to middle
-			slider.slideTo(0.5);
-
-			// show content
-			$container.removeClass("show-content").addClass("show-intro");
-			$('#intro').fadeIn('fast');
-
-			// set index to intro
-			$container.attr("data-element", "intro");
-			return;
-		}
-		
-		// position map
-		zoomToRight(stories[index]);
-		
-		// set 2015 text
-		setContent($('#content-2015'), stories[index].content[1]);
-		
-		// show 2015 map
-		slider.slideTo(0, function() {
-			setContent($('#content-1928'), stories[index].content[0]);
-			$container.attr("data-element", index);
-		});
-	});
-
-	$('#goto-exp1, #goto-exp2').click(gotoExplore);
-
-	function gotoExplore() {
-		$container.removeClass('show-content').addClass('show-explore');
-		$container.attr('data-element', 'explore');
-		slider.slideTo(0.5);
 	}
-
-	function setContent($el, content) {
-		$el.find('h2').text(content.headline);
-		$el.find('.content-text').empty();
-		content.text.forEach(function(text){
-			$el.find('.content-text').append($('<p>').html(text));
-		});
-		$el.find('.content-text')[0].scrollTop = 0;
-	}
-
 });
