@@ -325,6 +325,7 @@ body {
 			z-index: 3;
 			overflow: hidden !important;
 			border-left: 1px solid #c00;
+			pointer-events: none;
 		}
 			#map-clip .leaflet-control {
 				pointer-events: none;
@@ -347,7 +348,6 @@ body {
 				right: 0;
 				bottom: 0;
 				z-index: 5;
-				pointer-events: none;
 			}
 			
 		.leaflet-control-container .leaflet-top.leaflet-right {

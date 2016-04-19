@@ -97,10 +97,10 @@ $('document').ready(function() {
 		// add map markers
 		data.forEach(function (story, index) {
 			var iconInfo = L.divIcon({
-				iconSize:[32,32],
+				iconSize:  [32,32],
 				iconAnchor:[16,16],
-				html:'<div class="marker-info"><i class="icon-info"></i></div>',
-				className:'marker-wrapper'
+				html:      '<div class="marker-info"><i class="icon-info"></i></div>',
+				className: 'marker-wrapper'
 			});
 			
 			story.marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_base);
