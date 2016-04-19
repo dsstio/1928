@@ -27,16 +27,18 @@ $("document").ready(function(){
 	new L.Control.Zoom({ position: 'topright' }).addTo(map_base);
 	new L.Control.Zoom({ position: 'topright' }).addTo(map_overlay);
 
-	L.tileLayer('https://maps.dsst.io/berlin_dop20_1928/{z}/{x}/{y}.jpg', {
+	L.tileLayer('https://{s}.maps.dsst.io/berlin-1928/{z}/{x}/{y}.jpg', {
 		minZoom: 5,
 		maxZoom: 18,
 		errorTileUrl: errorTile,
+		subdomains: "abc"
 	}).addTo(map_base);
 	
-	L.tileLayer('https://maps.dsst.io/berlin_dop20_2015/{z}/{x}/{y}.jpg', {
+	L.tileLayer('https://{s}.maps.dsst.io/berlin-2015/{z}/{x}/{y}.jpg', {
 		minZoom: 5,
 		maxZoom: 18,
 		errorTileUrl: errorTile,
+		subdomains: "abc"
 	}).addTo(map_overlay);
 
 	
