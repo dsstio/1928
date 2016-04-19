@@ -7,20 +7,21 @@ $("document").ready(function(){
 
 	var errorTile = 'data:image/gif;base64,R0lGODlhAAEAAYAAAAAAAP///yH5BAAAAAAALAAAAAAAAQABAAL/jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8aNXxw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOn0KNarUqVSrWr2KNavWrVy7ev0KNqzYsWTLmj2LNq3atWzbHisAADs=';
 
-	var bounds = L.latLngBounds(L.latLng(52.33812, 13.0884),L.latLng(52.675499, 13.76134));
-
 	var map_opts = {
 		attributionControl: false,
 		zoomAnimation: false,
 		zoomControl: false,
-		maxBounds: bounds,
+		bounceAtZoomLimits: false,
+		maxBounds: L.latLngBounds(L.latLng(52.396,13.116), L.latLng(52.639,13.720)),
 		minZoom: 12,
-		maxZoom: 18
+		maxZoom: 18,
+		zoom: 13,
+		center: L.latLng(52.516, 13.383)
 	};
 
 	// create maps
-	var map_base = L.map('map-base', map_opts).setView([52.49,13.372], 12);
-	var map_overlay = L.map('map-overlay', map_opts).setView([52.49,13.372], 12);
+	var map_base = L.map('map-base', map_opts);
+	var map_overlay = L.map('map-overlay', map_opts);
 
 	// add zoom control to basemap
 	new L.Control.Zoom({ position: 'topright' }).addTo(map_base);
@@ -75,147 +76,129 @@ $("document").ready(function(){
 		// set hash for sharing
 		locationhash = location_encode(center, zoom)
 	});
-
-	map_overlay.on('move', function (evnt) {
-		map_base.setView(map_overlay.getCenter(), map_overlay.getZoom(), {animate: false});
-	});
-
-	function debug(){
-		if ($("#debug").length === 0) return;
-		var zoom = map_base.getZoom();
-		var center = map_base.getCenter();
-		var point = map_base.project(center);
-		point.x += ($container.width()/4);
-		var offset = map_base.unproject(point);
-		$('#debug').html('"coords": ['+offset.lat.toFixed(4)+', '+offset.lng.toFixed(4)+'],<br>"zoom:": '+zoom+',\n');
-	};
-		
-	// draggable shifter
-	var $slider = $("#control-slider");
-	var $mapclip = $("#map-clip");
-	var $mapinner = $("#map-clip-inner");
-	var $offset = 0.5;
-	var $lastOffset = ($container.width()/2);
 	
-	var dragstart = 0;
-	var dragging = false;
-	$('body').on('mousedown', '#control-slider', function(e) {
-		var bias = ($lastOffset-e.pageX);
-		dragstart = Date.now();
-		dragging = true;
+	var slider = (function () {
+		// draggable slider
 
-		var $t = $(this);
-		$(this).addClass('draggable').parents().on('mousemove', function(e) {
+		var $slider = $("#control-slider");
+		var $mapclip = $("#map-clip");
+		var $mapinner = $("#map-clip-inner");
+		var sliderOffset = 0.5;
+
+		// mouse and touch events for dragging
+		var dragging = false;
+		var dragOffset = 0;
+		$('#control-slider').on('mousedown touchstart', function (e) {
+			e.preventDefault();
+			dragging = true;
+			var pointer = (e.type === 'touchstart') ? e.originalEvent.touches[0] : e;
+			dragOffset = $slider.offset().left - pointer.pageX + 20;
+		})
+		$(document).on('mousemove touchmove', function (e) {
 			if (!dragging) return;
-			var offset = (e.pageX);
-			var biasedoffset = Math.min(Math.max(0, offset+bias), $container.width());
-			$lastOffset = biasedoffset;
-			$offset = biasedoffset/$container.width();
-			$slider.css({left: biasedoffset+"px"});
-			$mapclip.css({left: biasedoffset+"px"});
-			$mapinner.css({left: (biasedoffset*-1)+"px"});
-			$('.draggable').parents().on('mouseup', function() {
-				$t.removeClass('draggable');
-				$t.unbind("mousemove");
-				$t.parents().unbind("mousemove");
+			e.preventDefault();
+			
+			var pointer = (e.type === 'touchmove') ? e.originalEvent.touches[0] : e;
+			var x = pointer.pageX + dragOffset;
+			x = Math.min(Math.max(0, x), $container.width());
+
+			setSliderPosition(x);
+		})
+		$(document).on('mouseup touchend', function (e) {
+			if (dragging) dragging = false;
+		})
+
+		// events for window resize
+		$(window).resize(function(){
+			setSliderPosition($container.width()*sliderOffset);
+			$container.toggleClass('small', $container.width() < 800);
+		});
+		$(window).trigger('resize');
+		
+		// functions
+		function slideTo(v, fn){
+			$({v: sliderOffset}).animate({v: v}, {
+				duration: 500,
+				step: function(value){
+					setSliderPosition($container.width()*value);
+				},
+				complete: fn
 			});
-		});
-		e.preventDefault();
-	}).on('mouseup', function() {
-		dragging = false;
-		$('.draggable').removeClass('draggable');
-	});
-	
-	$('body').on("click", function(){
-		dragging = false;
-	});
-
-	$('#control-slider').click(function(evt){
-		evt.preventDefault();
-		if ((Date.now()-dragstart) > 500) return; // this is a drag
-		// this is confusing either way
-		if (evt.offsetX >= 0 && evt.offsetX <= 40) return slideTo(0.5);
-		if ($offset === 1) return slideTo(0);
-		if ($offset === 0) return slideTo(1);
-		if (evt.offsetX < 0) return slideTo(1);
-		if (evt.offsetX > 40) return slideTo(0);
-	});
-
-	$(window).resize(function(){
-		var offset = ($container.width()*$offset);
-		$lastOffset = offset;
-		$slider.css({left: offset+"px"});
-		$mapclip.css({left: offset+"px"});
-		$mapinner.css({left: (offset*-1)+"px"});
-		if ($container.width() < 800) {
-			$container.addClass("small");
-		} else {
-			$container.removeClass("small");
 		}
-	});
-	$(window).trigger("resize");
+
+		function setSliderPosition(x) {
+			sliderOffset = x/$container.width();
+			$slider.css(  {left:  x  });
+			$mapclip.css( {left:  x  });
+			$mapinner.css({left: -x-1});
+		}
+
+		return {
+			slideTo: slideTo
+		}
+	})();
 	
-	function slideTo(v, fn){
-		$({v: $offset}).animate({v: v}, {
-			duration: 500,
-			step: function(value){
-				var offset = ($container.width()*value);
-				$lastOffset = offset;
-				$offset = value;
-				$slider.css({left: offset+"px"});
-				$mapclip.css({left: offset+"px"});
-				$mapinner.css({left: (offset*-1)+"px"});
-			},
-			complete: fn
-		});
-	};
-	
-	function jumpTo(v, fn){
-		var offset = ($container.width()*v);
-		$lastOffset = offset;
-		$offset = v;
-		$slider.css({left: offset+"px"});
-		$mapclip.css({left: offset+"px"});
-		$mapinner.css({left: (offset*-1)+"px"});
-		if (typeof fn === "function") fn();
-	};
 	
 	$("#goto-2015").click(function(evt){
 		evt.preventDefault();
-		slideTo(0);
+		slider.slideTo(0);
 	});
 	
 	$("#goto-1928").click(function(evt){
 		evt.preventDefault();
-		slideTo(1);
+		slider.slideTo(1);
 	});
 	
 	/* content */
-	var story = [];
-	$.getJSON("assets/data/data.json", function(data){
-		story = data;
+	var stories = [];
+	$.getJSON('assets/data/data.json', function(data) {
+		stories = data;
 		
 		// prepare content
-		$("#content-1928 h2").text(story[0].content[0].headline);
-		$("#content-2015 h2").text(story[0].content[1].headline);
-		$("#content-1928 .content-text").html("");
-		$("#content-2015 .content-text").html("");
-		story[0].content[0].text.forEach(function(text){
-			$("#content-1928 .content-text").append($('<p>').html(text));
-		});
-		story[0].content[1].text.forEach(function(text){
-			$("#content-2015 .content-text").append($('<p>').html(text));
-		});
+		setContent($('#content-1928'), stories[0].content[0]);
+		setContent($('#content-2015'), stories[0].content[1]);
 
-		$container.addClass("ready");
+		$container.addClass('ready');
+
+		data.forEach(function (story, index) {
+			var iconInfo = L.divIcon({html:'<i class="icon-info"></i>', className:'marker-info marker'+index});
+			
+			story.marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_base);
+			story.marker2 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_overlay);
+
+			$(story.marker1._icon).css({width:'', height:'', margin:''});
+			$(story.marker2._icon).css({width:'', height:'', margin:''});
+			
+			story.marker1.on('click', markerClick);
+			story.marker1.on('mouseover', function () {
+				$(story.marker1._icon).addClass('hover');
+				$(story.marker2._icon).addClass('hover');
+			})
+			story.marker1.on('mouseout', function () {
+				$(story.marker1._icon).removeClass('hover');
+				$(story.marker2._icon).removeClass('hover');
+			})
+			
+			function markerClick() {
+				setContent($('#content-1928'), story.content[0]);
+				setContent($('#content-2015'), story.content[1]);
+				$container.addClass('show-content').addClass('small');
+			}
+		})
 	});
 	
-	function offsetCenter(p, z){
-		if ($container.hasClass("small")) return map_base.setView(p, z-1);
-		var point = map_base.project(new L.latLng(p[0], p[1]).clone(), z);
-		point.x -= ($container.width()/4);
-		point = map_base.unproject(point, z);
-		map_base.setView(point, z);
+	function zoomToRight(story) {
+		var zoom = story.zoom;
+		if ($container.hasClass('small')) zoom--;
+
+		var point = map_base.project(new L.latLng(story.coords[0], story.coords[1]).clone(), zoom);
+		if ($container.hasClass('small')) {
+			point.y += ($container.height()/4);
+		} else {
+			point.x -= ($container.width()/4);
+		}
+		point = map_base.unproject(point, zoom);
+		map_base.setView(point, zoom);
 	};
 
 	/* explore */
@@ -225,31 +208,22 @@ $("document").ready(function(){
 		// show content
 		$('#intro').fadeOut('fast', function(){
 			$container.removeClass("show-intro").addClass("show-explore").removeClass("show-content");
+			gotoExplore();
 		});
-		
-		map_base.setView(new L.latLng(52.5162632,13.3777046), 16);
-		slideTo(0.3, function(){
-			slideTo(0.7, function(){
-				slideTo(0.5);
-			});
-		})
-		
-		// set mode
-		$container.attr("data-element", "explore");
 	});
 		
 	/* storyline */
 	$("#button-start").click(function(evt){
 		evt.preventDefault();
 
-		// is story loaded?
-		if (story.length === 0) return;
+		// is stories loaded?
+		if (stories.length === 0) return;
 
 		// go to center of first element
-		offsetCenter(story[0].coords, story[0].zoom);
+		zoomToRight(stories[0]);
 
 		// set slider to 1928
-		slideTo(1);
+		slider.slideTo(1);
 		
 		// show content
 		$('#intro').fadeOut('fast', function(){
@@ -264,38 +238,22 @@ $("document").ready(function(){
 	$("#goto-next").click(function(evt){
 		var index = parseInt($container.attr("data-element"),10)+1;
 		if (isNaN(index)) return;
-		if (index >= story.length) {
+		if (index >= stories.length) {
 			// show explore
-			$container.removeClass("show-content").addClass("show-explore");
-			$container.attr("data-element", "explore");
-			slideTo(0.5);
+			gotoExplore();
 			return;
 		}
 		
 		// position map
-		offsetCenter(story[index].coords, story[index].zoom);
+		zoomToRight(stories[index]);
 		
 		// set 1928 text
-		$("#content-1928 h2").text(story[index].content[0].headline);
-		$("#content-1928 .content-text").html("");
-		story[index].content[0].text.forEach(function(text){
-			$("#content-1928 .content-text").append($('<p>').html(text));
-		});
-		$("#content-1928 .content-text")[0].scrollTop = 0;
+		setContent($('#content-1928'), stories[index].content[0]);
 				
 		// show 1928 map
-		slideTo(1, function(){
-
-			// set 2015 text
-			$("#content-2015 h2").text(story[index].content[1].headline);
-			$("#content-2015 .content-text").html("");
-			story[index].content[1].text.forEach(function(text){
-				$("#content-2015 .content-text").append($('<p>').html(text));
-			});
-			$("#content-2015 .content-text")[0].scrollTop = 0;
-			
+		slider.slideTo(1, function() {
+			setContent($('#content-2015'), stories[index].content[1]);
 			$container.attr("data-element", index);
-			
 		});
 		
 	});
@@ -307,7 +265,7 @@ $("document").ready(function(){
 			map_base.setView(new L.latLng(52.49,13.372), 12);
 
 			// set slider to middle
-			slideTo(0.5);
+			slider.slideTo(0.5);
 
 			// show content
 			$container.removeClass("show-content").addClass("show-intro");
@@ -319,30 +277,33 @@ $("document").ready(function(){
 		}
 		
 		// position map
-		offsetCenter(story[index].coords, story[index].zoom);
+		zoomToRight(stories[index]);
 		
 		// set 2015 text
-		$("#content-2015 h2").text(story[index].content[1].headline);
-		$("#content-2015 .content-text").html("");
-		story[index].content[1].text.forEach(function(text){
-			$("#content-2015 .content-text").append($('<p>').html(text));
-		});
-		$("#content-2015 .content-text")[0].scrollTop = 0;
+		setContent($('#content-2015'), stories[index].content[1]);
 		
 		// show 2015 map
-		slideTo(0, function(){
-
-			// set 1928 text
-			$("#content-1928 h2").text(story[index].content[0].headline);
-			$("#content-1928 .content-text").html("");
-			story[index].content[0].text.forEach(function(text){
-				$("#content-1928 .content-text").append($('<p>').html(text));
-			});
-			$("#content-1928 .content-text")[0].scrollTop = 0;
-			
+		slider.slideTo(0, function() {
+			setContent($('#content-1928'), stories[index].content[0]);
 			$container.attr("data-element", index);
-			
 		});
 	});
+
+	$('#goto-exp1, #goto-exp2').click(gotoExplore);
+
+	function gotoExplore() {
+		$container.removeClass('show-content').addClass('show-explore');
+		$container.attr('data-element', 'explore');
+		slider.slideTo(0.5);
+	}
+
+	function setContent($el, content) {
+		$el.find('h2').text(content.headline);
+		$el.find('.content-text').empty();
+		content.text.forEach(function(text){
+			$el.find('.content-text').append($('<p>').html(text));
+		});
+		$el.find('.content-text')[0].scrollTop = 0;
+	}
 
 });

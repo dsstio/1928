@@ -1,12 +1,29 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Berlin 1928 und 2015</title>
+	<title>Berlin 1928 und heute</title>
 	<meta charset="utf-8" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<link rel="shortcut icon" href="https://data.tagesspiegel.de/favicon/favicon.ico" type="image/x-icon" />
+	<link rel="apple-touch-icon" sizes="57x57" href="https://data.tagesspiegel.de/favicon/favicon-57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="https://data.tagesspiegel.de/favicon/favicon-60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="https://data.tagesspiegel.de/favicon/favicon-72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="https://data.tagesspiegel.de/favicon/favicon-76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="https://data.tagesspiegel.de/favicon/favicon-114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="https://data.tagesspiegel.de/favicon/favicon-120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="https://data.tagesspiegel.de/favicon/favicon-144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="https://data.tagesspiegel.de/favicon/favicon-152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="https://data.tagesspiegel.de/favicon/favicon-180.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="https://data.tagesspiegel.de/favicon/favicon-192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://data.tagesspiegel.de/favicon/favicon-32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="https://data.tagesspiegel.de/favicon/favicon-96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://data.tagesspiegel.de/favicon/favicon-16.png">
+	<meta name="msapplication-TileImage" content="https://data.tagesspiegel.de/favicon/favicon-144.png">
+	<link rel="manifest" href="https://data.tagesspiegel.de/favicon/manifest.json">
+
+	<link href="https://data.tagesspiegel.de/fonts/source-sans-pro/standard.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="assets/fonts/icomoon/icomoon.css" />
 	<link rel="stylesheet" href="assets/css/leaflet.css" />
 	<link rel="stylesheet" href="assets/css/1928.css" />
@@ -19,9 +36,9 @@
 	<div id="container" class="show-intro" data-element="intro">
 		<div id="intro">
 			<h1>Berlin</h1>
-			<p>1928 und 2015</p>
+			<p>1928 und heute</p>
 			<a href="javascript:;" id="button-explore"><i class="icon-search"></i> Selbst erkunden</a>
-			<a href="javascript:;" id="button-start">Tour starten <i class="icon-right"></i></a>
+			<a href="javascript:;" id="button-start">Tour starten <i class="icon-arrow-right2"></i></a>
 		</div>
 		<div id="controls">
 			<a href="javascript:;" class="fullscreen" title="Vollbild"><i class="icon-enlarge"></i></a>
@@ -35,48 +52,38 @@
 		</div>
 		<div id="map-base"></div>
 		<div class="content" id="content-1928">
-			<h2>Blub</h2>
-			<div class="content-text">
-				<p>
-					Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis. 
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.
-				</p>
+			<div class="content-wrapper">
+				<h2></h2>
+				<div class="content-text"></div>
+				<div class="nav">
+					<div class="col3 col3left"><a   href="javascript:;" id="goto-back" class="goto goto-red"><i class="icon-arrow-left2"></i> Zurück</a></div>
+					<div class="col3 col3center"><a href="javascript:;" id="goto-exp1" class="goto goto-grey">Beenden</a></div>
+					<div class="col3 col3right"><a  href="javascript:;" id="goto-2015" class="goto goto-red">Weiter <i class="icon-arrow-right2"></i></a></div>
+				</div>
 			</div>
-			<p class="nav">
-				<a href="javascript:;" id="goto-back" class="goto goto-left"><i class="icon-left"></i> Zurück</a>
-				<a href="javascript:;" id="goto-2015" class="goto goto-right">2015 <i class="icon-right"></i></a>
-			</p>
 		</div>
 		<div id="map-clip">
 			<div id="map-clip-inner">
 				<div id="map-overlay"></div>
 				<div class="content" id="content-2015">
-					<h2>Blafasel</h2>
-					<div class="content-text">
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris ex, sodales a risus nec, pretium gravida lacus. Etiam cursus ligula eu purus malesuada, quis luctus ligula volutpat.
-						</p>
-						<p>
-							Duis egestas lectus nisi, non pulvinar eros sodales id. Etiam viverra mauris nec tristique maximus. Donec sed sollicitudin neque. Aenean cursus augue consequat, varius eros eget, commodo sapien. Ut vel mi quis eros tempus rutrum non et turpis. 
-						</p>
+					<div class="content-wrapper">
+						<h2></h2>
+						<div class="content-text"></div>
+						<div class="nav">
+							<div class="col3 col3left"><a   href="javascript:;" id="goto-1928" class="goto goto-red"><i class="icon-arrow-left2"></i> Zurück</a></div>
+							<div class="col3 col3center"><a href="javascript:;" id="goto-exp2" class="goto goto-grey">Beenden</a></div>
+							<div class="col3 col3right"><a  href="javascript:;" id="goto-next" class="goto goto-red">Weiter <i class="icon-arrow-right2"></i></a></div>
+						</div>
 					</div>
-					<p class="nav">
-						<a href="javascript:;" id="goto-1928" class="goto goto-left"><i class="icon-left"></i> 1928</a>
-						<a href="javascript:;" id="goto-next" class="goto goto-right">Weiter <i class="icon-right"></i></a>
-					</p>
 				</div>
 			</div>
 		</div>
-		<div id="control-slider">&lt;&gt;</div>
+		<div id="control-slider"><i class="icon-arrow-left2"></i><i class="icon-arrow-right2"></i></div>
 		<div id="credit">
-			<a href="http://fbinter.stadt-berlin.de/fb/berlin/service.jsp?id=k_luftbild1928@senstadt&amp;type=WMS" id="source">Quelle: Geoportal Berlin / Luftbilder 1928, 2015</a>
+			<a href="http://fbinter.stadt-berlin.de/fb/berlin/service.jsp?id=k_luftbild1928@senstadt&amp;type=WMS" id="source">Karte: Geoportal Berlin / Luftbilder 1928, 2015</a>
 			<a href="http://www.tagesspiegel.de/" id="tsp">Der Tagesspiegel</a>
 			<a href="https://datasciencestories.org/" id="dsst">Data Science &amp; Stories</a>
 		</div>
-		<!-- div id="debug"></div -->
 	</div>
 </body>
 </html>
-

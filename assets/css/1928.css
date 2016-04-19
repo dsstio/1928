@@ -2,7 +2,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	font-family: "Helvetica Neue", "Helvetica", sans-serif;
+	font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Arial, sans-serif;
 }
 
 	#container {
@@ -69,7 +69,7 @@ body {
 			bottom: 0;
 			z-index: 20;
 			text-align: center;
-			padding: 15% 0 0;
+			padding: 20vh 0 0;
 			-webkit-touch-callout: none;
 			-webkit-user-select: none;
 			-khtml-user-select: none;
@@ -83,7 +83,7 @@ body {
 				font-size: 20vh;
 				font-weight: 500;
 				color: #fff;
-				text-shadow: 0 0 30px rgba(0,0,0,0.6);
+				text-shadow: 0 0 40px #000;
 				text-transform: uppercase;
 				margin: 0;
 				padding: 0;
@@ -91,10 +91,10 @@ body {
 			}
 
 			#intro p {
-				font-size: 10vh;
+				font-size: 8.5vh;
 				font-weight: 500;
 				color: #eee;
-				text-shadow: 0 0 30px rgba(0,0,0,0.6);
+				text-shadow: 0 0 40px #000;
 				text-transform: uppercase;
 				margin: 0;
 				padding: 0;
@@ -109,7 +109,8 @@ body {
 			.ready #button-start {
 				display: inline-block;
 				border-radius: 1em;
-				padding: .3em .8em;
+				font-size: 3.5vh;
+				padding: .3em .8em 0.2em .8em;
 				background-color: #c00;
 				color: #fff;
 				text-decoration: none;
@@ -117,7 +118,6 @@ body {
 				-moz-transition: background-color, box-shadow 200ms ease-out;
 				-o-transition: background-color, box-shadow 200ms ease-out;
 				transition: background-color, box-shadow 200ms ease-out;
-				font-size: 4vh;
 				font-weight: 300;
 				margin-top: .7em;
 				margin-left: .5em;
@@ -134,6 +134,7 @@ body {
 				#button-explore i,
 				#button-start i {
 					font-size: .85em;
+					vertical-align: -9%;
 				}
 				
 				@media (max-width: 500px) { 
@@ -147,16 +148,15 @@ body {
 				}
 
 		.content {
-			display: block;
+			display: none;
 			opacity: 0;
 			position: absolute;
 			left: 0;
 			top: 0;
 			bottom: 0;
-			padding: 60px 5% 5%;
-			width: 40%;
+			width: 50%;
 			min-width: 300px;
-			background-color: rgba(0,0,0,0.5);
+			background-color: rgba(0,0,0,0.67);
 			overflow-x: hidden;
 			overflow-y: auto;
 			z-index: 1;
@@ -174,28 +174,132 @@ body {
 				-o-transition: opacity 300ms ease;
 				transition: opacity 300ms ease;
 			}
-			
-			.show-explore .content {
-				display: none;
+
+			.content-wrapper {
+				position: relative;
+				margin:  8vh auto 0 auto;
+				height: 84vh;
+				width: 90%;
+				max-width: 600px;
+				max-height: 780px;
 			}
 
-			.small .content {
-				top: auto;
-				width: 100%;
-				padding: 10px 0px 70px;
-				background-color: rgba(0,0,0,0.5);
-			}
-			
-				.small .content h2 {
-					margin: 10px 20px;
+				.small .content-wrapper {
+					margin: 0px;
+					width: auto;
+					height: auto;
+					max-width: none;
+					max-height: none;
+					padding: 20px 20px 40px;
+				}
+
+			.content {
+
+			}	
+				.col3 {
+					width: 33%;
+					float: left;
+				}
+				.col3left   { text-align: left; }
+				.col3center { text-align: center; }
+				.col3right  { text-align: right; }
+
+				.small .content {
+					top: auto;
+					width: 100%;
+					min-height: 300px;
+				}
+
+				.content h2 {
+					color: #fff;
+					margin: 0;
 					padding: 0;
+					line-height: 1.2em;
+					font-weight: 300;
+					font-size: 2.5em;
+					text-shadow: 0 0 10px rgba(0,0,0,0.5);
 				}
 				
+					.small .content h2 {
+						font-size: 1.6em;
+						margin: 0px 0px 10px;
+						padding: 0;
+					}
+				
+
+				.content p, .content .nav {
+					color: #fff;
+					margin: 20px 0 0;
+					padding: 0;
+					line-height: 1.4em;
+					font-weight: 300;
+					font-size: 1.5em;
+					text-shadow: 0 0 10px rgba(0,0,0,0.5);
+				}
+			
+					.small .content p, .small .content .nav {
+						font-size: 1em;
+					}
+
+					.content p a {
+						color: #c00;
+					}
+			
+					.content .nav {
+						display: inline-block;
+						position: absolute;
+						bottom: 0px;
+						width: 100%;
+					}
+						.show-explore .content .nav {
+							display: none;
+						}
+				
+						.small .content .nav {
+							position: static;
+							margin-top: 20px;
+						}
+
+					.content .nav .goto {
+						display: inline-block;
+						border-radius: 20px;
+						padding: 5px 15px 2px;
+						text-decoration: none;
+						-webkit-transition: background-color, box-shadow 200ms ease-out;
+						   -moz-transition: background-color, box-shadow 200ms ease-out;
+						     -o-transition: background-color, box-shadow 200ms ease-out;
+						        transition: background-color, box-shadow 200ms ease-out;
+					}
+					
+						.content .nav .goto i {
+							font-size: .9em;
+							vertical-align: -9%;
+						}
+
+						.content .nav .goto-red {
+							background-color: #c00;
+							color: #fff;
+						}
+						.content .nav .goto-grey {
+							background-color: #555;
+							color: #ccc;
+						}
+
+						.content .nav .goto-red:hover {
+							background-color: #d00;
+							box-shadow: 0 0 20px -10px rgba(0,0,0,0.5);
+						}
+
+						.content .nav .goto-grey:hover {
+							background-color: #666;
+							color: #fff;
+							box-shadow: 0 0 20px -10px rgba(0,0,0,0.5);
+						}
+					
 				.small .content .content-text {
 					display: block;
 					position: relative;
 					margin: 0;
-					padding: 0px 20px;
 					overflow-x: hidden;
 					overflow-y: auto;
 					max-height: 150px;
@@ -206,75 +310,6 @@ body {
 						padding: 0;
 						font-size: .85em;
 					}
-			
-				.small .content p.nav {
-					display: block;
-					position: absolute;
-					left: 10px;
-					right: 10px;
-					bottom: 15px;
-				}
-
-			.content h2 {
-				color: #fff;
-				margin: 0;
-				padding: 0;
-				line-height: 1.2em;
-				font-weight: 300;
-				font-size: 2.5em;
-				text-shadow: 0 0 10px rgba(0,0,0,0.5);
-			}
-			
-				.small .content h2 {
-					font-size: 1.6em;
-				}
-				
-
-			.content p {
-				color: #fff;
-				margin: 20px 0 0;
-				padding: 0;
-				line-height: 1.4em;
-				font-weight: 300;
-				font-size: 1.5em;
-				text-shadow: 0 0 10px rgba(0,0,0,0.5);
-			}
-			
-				.small .content p {
-					font-size: 1em;
-				}
-				
-			
-			.content p a {
-				color: #c00;
-			}
-
-			.content p a.goto {
-				display: inline-block;
-				border-radius: 20px;
-				padding: 5px 15px;
-				background-color: #c00;
-				color: #fff;
-				text-decoration: none;
-				-webkit-transition: background-color, box-shadow 200ms ease-out;
-				-moz-transition: background-color, box-shadow 200ms ease-out;
-				-o-transition: background-color, box-shadow 200ms ease-out;
-				transition: background-color, box-shadow 200ms ease-out;
-				margin-bottom: 15px;
-			}
-			
-				.content p a.goto i {
-					font-size: .9em;
-				}
-			
-				.content p a.goto-right {
-					float: right;
-				}
-
-				.content p a.goto:hover {
-					background-color: #d00;
-					box-shadow: 0 0 20px -10px rgba(0,0,0,0.5);
-				}
 
 		#content-1928 {
 			z-index: 2;
@@ -303,9 +338,12 @@ body {
 			bottom: 0;
 			z-index: 3;
 			overflow: hidden !important;
-			background-color: rgba(255,255,255,0.5);
 			border-left: 1px solid #c00;
+			pointer-events: none;
 		}
+			#map-clip .leaflet-control {
+				pointer-events: none;
+			}
 		
 			#map-clip-inner {
 				display: block;
@@ -324,12 +362,47 @@ body {
 				right: 0;
 				bottom: 0;
 				z-index: 5;
-				/* pointer-events: none; */
 			}
 			
 		.leaflet-control-container .leaflet-top.leaflet-right {
 			top: 70px;
 		}
+
+		.marker-info {
+			display: none;
+			color: rgba(255,255,255,0.0);
+			background-color: rgba(204,0,0,1.0);
+			border-radius: 16px;
+			box-shadow: 0px 0px 1px rgba(0,0,0,1);
+			text-align: center;
+			width: 8px;
+			height: 8px;
+			margin-left: -4px;
+			margin-top: -4px;
+			font-size: 6px;
+			line-height: 9px;
+
+			-webkit-appearance: none;
+			-webkit-transition: all 200ms ease-out;
+			   -moz-transition: all 200ms ease-out;
+			     -o-transition: all 200ms ease-out;
+			        transition: all 200ms ease-out;
+		}
+
+			.show-explore .marker-info {
+				display: block;
+			}
+			.marker-info.hover {
+				background-color: rgba(204,0,0,1);
+				color: rgba(255,255,255,1);
+				box-shadow: 0px 0px 8px rgba(0,0,0,1);
+				width: 32px;
+				height: 32px;
+				margin-left: -16px;
+				margin-top: -16px;
+				font-size: 23px;
+				line-height: 36px;
+			}
 			
 		#control-slider {
 			display: block;
@@ -342,63 +415,54 @@ body {
 			background-color: #c00;
 			border-radius: 100%;
 			text-align: center;
-			line-height: 35px;
+			line-height: 44px;
+			font-size: 1em;
 			z-index: 10;
-			letter-spacing: .2em;
-			text-indent: .2em;
-			font-weight: 700;
+			font-weight: bold;
 			color: #fff;
 			cursor: ew-resize;
-			-webkit-touch-callout: none;
 			-webkit-user-select: none;
 			-khtml-user-select: none;
 			-moz-user-select: none;
 			-ms-user-select: none;
 			user-select: none;
 			box-shadow: 0px 0px 20px rgba(0,0,0,1);
+			text-shadow: 0px 0px 3px rgba(0,0,0,0.33);
 		}
 
-			#control-slider::before {
-				display: block;
-				position: absolute;
-				content: "1928";
-				padding-left: 10px;
-				padding-right: 20px;
-				text-align: right;
-				left: -70px;
-				top: 8px;
-				z-index: -1;
-				color: #fff;
-				font-size: 1.1em;
-				text-shadow: 0 0 10px rgba(0,0,0,1);
-				height: 24px;
-				line-height: 22px;
-				background-color: #c00;
-				border-top-left-radius: 7px;
-				border-bottom-left-radius: 7px;
-				cursor: pointer;
+			#control-slider i {
+				margin: 0px -0.2em;
 			}
 
-			#control-slider::after {
+			#control-slider::before, #control-slider::after {
 				display: block;
 				position: absolute;
-				content: "2015";
-				padding-left: 20px;
-				padding-right: 10px;
-				text-align: left;
-				left: 20px;
+				padding: 1px 10px 0px 10px;
 				top: 8px;
 				z-index: -1;
 				color: #fff;
-				font-size: 1.1em;
-				text-shadow: 0 0 10px rgba(0,0,0,1);
-				height: 24px;
+				font-size: 1em;
+				font-weight: bold;
+				height: 23px;
 				line-height: 22px;
 				background-color: #c00;
-				border-top-right-radius: 7px;
-				border-bottom-right-radius: 7px;
-				cursor: pointer;
+				letter-spacing: 0.1em;
+				border-radius: 7px;
 			}
+
+				#control-slider::before {
+					content: "1928";
+					text-align: right;
+					padding-right: 40px;
+					right: 0px;
+				}
+
+				#control-slider::after {
+					content: "2015";
+					text-align: left;
+					padding-left: 40px;
+					left: 0px;
+				}
 		
 		#credit {
 			display: block;
@@ -454,7 +518,7 @@ body {
 				text-shadow: 0 0 3px #000, 0 0 5px #000, 0 0 10px #000;
 				padding: 4px 0;
 				text-align: right;
-				font-weight: 300;
+				font-weight: 400;
 				-webkit-touch-callout: auto;
 				-webkit-user-select: auto;
 				-khtml-user-select: auto;
@@ -487,15 +551,4 @@ body {
 				text-transform: uppercase;
 				text-shadow: 0 0 3px #000, 0 0 5px #000, 0 0 10px #000;
 			}
-			
-		#debug {
-			display: block;
-			position: absolute;
-			z-index: 1000;
-			left: 0;
-			bottom: 0;
-			padding: 1em;
-			background-color: #f00;
-			color: #fff;
-		}
 
