@@ -14,17 +14,21 @@ body {
 		bottom: 0;
 	}
 		
-		.show-intro #controls {
-			display: none;
-		}
-		
 		#controls {
 			display: block;
 			position: absolute;
 			right: 10px;
 			top: 150px;
 			width: 26px;
-			z-index: 10;
+			z-index: 1000;
+		}
+		
+		.show-intro #controls {
+			display: none;
+		}
+		
+		.show-content #controls {
+			display: none;
 		}
 		
 			#controls a {
