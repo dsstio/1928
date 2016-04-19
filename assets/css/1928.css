@@ -354,41 +354,45 @@ body {
 			top: 70px;
 		}
 
-		.marker-info {
+		.marker-wrapper {
 			display: none;
-			color: rgba(255,255,255,0.0);
-			background-color: rgba(204,0,0,1.0);
-			border-radius: 16px;
-			box-shadow: 0px 0px 1px rgba(0,0,0,1);
-			text-align: center;
-			width: 8px;
-			height: 8px;
-			margin-left: -4px;
-			margin-top: -4px;
-			font-size: 6px;
-			line-height: 9px;
-
-			-webkit-appearance: none;
-			-webkit-transition: all 200ms ease-out;
-			   -moz-transition: all 200ms ease-out;
-			     -o-transition: all 200ms ease-out;
-			        transition: all 200ms ease-out;
 		}
 
-			.show-explore .marker-info {
+			.show-explore .marker-wrapper {
 				display: block;
 			}
-			.marker-info.hover {
-				background-color: rgba(204,0,0,1);
-				color: rgba(255,255,255,1);
-				box-shadow: 0px 0px 8px rgba(0,0,0,1);
-				width: 32px;
-				height: 32px;
-				margin-left: -16px;
-				margin-top: -16px;
-				font-size: 23px;
-				line-height: 36px;
+
+			.marker-info {
+				color: rgba(255,255,255,0.0);
+				background-color: rgba(204,0,0,1.0);
+				border-radius: 16px;
+				box-shadow: 0px 0px 1px rgba(0,0,0,1);
+				text-align: center;
+				width: 8px;
+				height: 8px;
+				margin-left: 12px;
+				margin-top: 12px;
+				font-size: 6px;
+				line-height: 9px;
+
+				-webkit-appearance: none;
+				-webkit-transition: all 200ms ease-out;
+				   -moz-transition: all 200ms ease-out;
+				     -o-transition: all 200ms ease-out;
+				        transition: all 200ms ease-out;
 			}
+
+				.marker-wrapper.hover .marker-info {
+					background-color: rgba(204,0,0,1);
+					color: rgba(255,255,255,1);
+					box-shadow: 0px 0px 8px rgba(0,0,0,1);
+					width: 32px;
+					height: 32px;
+					margin-left: 0px;
+					margin-top: 0px;
+					font-size: 23px;
+					line-height: 36px;
+				}
 			
 		#control-slider {
 			display: block;

@@ -96,13 +96,15 @@ $('document').ready(function() {
 
 		// add map markers
 		data.forEach(function (story, index) {
-			var iconInfo = L.divIcon({html:'<i class="icon-info"></i>', className:'marker-info marker'+index});
+			var iconInfo = L.divIcon({
+				iconSize:[32,32],
+				iconAnchor:[16,16],
+				html:'<div class="marker-info"><i class="icon-info"></i></div>',
+				className:'marker-wrapper'
+			});
 			
 			story.marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_base);
 			story.marker2 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_overlay);
-
-			$(story.marker1._icon).css({width:'', height:'', margin:''});
-			$(story.marker2._icon).css({width:'', height:'', margin:''});
 			
 			story.marker1.on('click', markerClick);
 			story.marker1.on('mouseover', function () {
