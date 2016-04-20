@@ -4,73 +4,14 @@ $('document').ready(function() {
 	// cache some dom elemenst
 	var $container = $('#container');
 
-	// var borderWidth = 0;
-
-	var errorTile = 'data:image/gif;base64,R0lGODlhAAEAAYAAAAAAAP///yH5BAAAAAAALAAAAAAAAQABAAL/jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8aNXxw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOn0KNarUqVSrWr2KNavWrVy7ev0KNqzYsWTLmj2LNq3atWzbHisAADs=';
-
-	var map_opts = {
-		attributionControl: false,
-		zoomAnimation: true,
-		zoomControl: false,
-		bounceAtZoomLimits: false,
-		maxBounds: L.latLngBounds(L.latLng(52.396,13.116), L.latLng(52.639,13.720)),
-		minZoom: 12,
-		maxZoom: 18,
-		zoom: 13,
-		center: L.latLng(52.516, 13.383)
-	}
-
-	// create maps
-	var map1928 = L.map('map-base', map_opts);
-	var map2015 = L.map('map-overlay', map_opts);
-
-	L.tileLayer('https://{s}.maps.dsst.io/berlin-1928/{z}/{x}/{y}.jpg', {
-		minZoom: 5,
-		maxZoom: 18,
-		errorTileUrl: errorTile,
-		subdomains: "abc"
-	}).addTo(map1928);
-	
-	L.tileLayer('https://{s}.maps.dsst.io/berlin-2015/{z}/{x}/{y}.jpg', {
-		minZoom: 5,
-		maxZoom: 18,
-		errorTileUrl: errorTile,
-		subdomains: "abc"
-	}).addTo(map2015);
-
-	
-	function leftpad (str, len, ch) {
-		str = String(str);
-		var i = -1;
-		if (!ch && ch !== 0) ch = ' ';
-		len = len - str.length;
-		while (++i < len) str = ch + str;
-		return str;
-	}
-
-	function location_encode(p,z){
-		return [
-			leftpad(Math.round((p.lat%1)*10000).toString(36),3,'_'),
-			leftpad(Math.round((p.lng%1)*10000).toString(36),3,'_'),
-			z.toString(36)
-		].join('');
-	};
-	
-	function location_decode(str){
-		if (!/^[a-z0-9_]{7}$/.test(str)) return false;
-		return {
-			lat: (13+(parseInt(str.substr(0,3).replace(/_/g,''),36)/10000)),
-			lng: (52+(parseInt(str.substr(3,3).replace(/_/g,''),36)/10000)),
-			z: parseInt(str.substr(6,1),36)
-		};
-	};
-
 	var locationhash = '';
-
-	// synchronize maps
-	syncMaps(map1928, map2015);
 	
 	var slider = new Slider();
+
+	// init and synchronize maps
+	var map1928, map2015;
+	initMaps();
+	syncMaps(map1928, map2015);
 	
 	/* content */
 	var stories = [];
@@ -93,18 +34,18 @@ $('document').ready(function() {
 				className: 'marker-wrapper'
 			});
 			
-			story.marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map1928);
-			story.marker2 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map2015);
+			var marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map1928);
+			var marker2 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map2015);
 			
-			story.marker1.on('mouseover', function () {
-				$(story.marker1._icon).addClass('hover');
-				$(story.marker2._icon).addClass('hover');
+			marker1.on('mouseover', function () {
+				$(marker1._icon).addClass('hover');
+				$(marker2._icon).addClass('hover');
 			})
-			story.marker1.on('mouseout', function () {
-				$(story.marker1._icon).removeClass('hover');
-				$(story.marker2._icon).removeClass('hover');
+			marker1.on('mouseout', function () {
+				$(marker1._icon).removeClass('hover');
+				$(marker2._icon).removeClass('hover');
 			})
-			story.marker1.on('click', function markerClick() {
+			marker1.on('click', function markerClick() {
 				var x = map1928.latLngToContainerPoint(story.coords).x;
 				gotoStory(index, slider.isInRightMap(x), true);
 			});
@@ -251,6 +192,32 @@ $('document').ready(function() {
 		$el.find('.content-text')[0].scrollTop = 0;
 	}
 	
+	function leftpad (str, len, ch) {
+		str = String(str);
+		var i = -1;
+		if (!ch && ch !== 0) ch = ' ';
+		len = len - str.length;
+		while (++i < len) str = ch + str;
+		return str;
+	}
+
+	function location_encode(p,z){
+		return [
+			leftpad(Math.round((p.lat%1)*10000).toString(36),3,'_'),
+			leftpad(Math.round((p.lng%1)*10000).toString(36),3,'_'),
+			z.toString(36)
+		].join('');
+	};
+	
+	function location_decode(str){
+		if (!/^[a-z0-9_]{7}$/.test(str)) return false;
+		return {
+			lat: (13+(parseInt(str.substr(0,3).replace(/_/g,''),36)/10000)),
+			lng: (52+(parseInt(str.substr(3,3).replace(/_/g,''),36)/10000)),
+			z: parseInt(str.substr(6,1),36)
+		};
+	};
+	
 	function Slider() {
 		// draggable slider
 
@@ -315,6 +282,40 @@ $('document').ready(function() {
 		}
 	}
 
+	function initMaps() {
+		var errorTile = 'data:image/gif;base64,R0lGODlhAAEAAYAAAAAAAP///yH5BAAAAAAALAAAAAAAAQABAAL/jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Lb7DY/L5/S6/Y7P6/f8vv8PGCg4SFhoeIiYqLjI2Oj4CBkpOUlZaXmJmam5ydnp+QkaKjpKWmp6ipqqusra6voKGys7S1tre4ubq7vL2+v7CxwsPExcbHyMnKy8zNzs/AwdLT1NXW19jZ2tvc3d7f0NHi4+Tl5ufo6err7O3u7+Dh8vP09fb3+Pn6+/z9/v/w8woMCBBAsaPIgwocKFDBs6fAgxosSJFCtavIgxo8aNXxw7evwIMqTIkSRLmjyJMqXKlSxbunwJM6bMmTRr2ryJM6fOnTx7+vwJNKjQoUSLGj2KNKnSpUybOn0KNarUqVSrWr2KNavWrVy7ev0KNqzYsWTLmj2LNq3atWzbHisAADs=';
+
+		var map_opts = {
+			attributionControl: false,
+			zoomAnimation: true,
+			zoomControl: false,
+			bounceAtZoomLimits: false,
+			maxBounds: L.latLngBounds(L.latLng(52.396,13.116), L.latLng(52.639,13.720)),
+			minZoom: 12,
+			maxZoom: 18,
+			zoom: 13,
+			center: L.latLng(52.516, 13.383)
+		}
+
+		// create maps
+		map1928 = L.map('map-base', map_opts);
+		map2015 = L.map('map-overlay', map_opts);
+
+		L.tileLayer('https://{s}.maps.dsst.io/berlin-1928/{z}/{x}/{y}.jpg', {
+			minZoom: 5,
+			maxZoom: 18,
+			errorTileUrl: errorTile,
+			subdomains: "abc"
+		}).addTo(map1928);
+		
+		L.tileLayer('https://{s}.maps.dsst.io/berlin-2015/{z}/{x}/{y}.jpg', {
+			minZoom: 5,
+			maxZoom: 18,
+			errorTileUrl: errorTile,
+			subdomains: "abc"
+		}).addTo(map2015);
+	}
+
 	function syncMaps(map1, map2) {
 		'use strict';
 
@@ -337,7 +338,11 @@ $('document').ready(function() {
 			_tryAnimatedZoom: function (center, zoom, options) {
 				map2._tryAnimatedZoom(center, zoom, options);
 				return L.Map.prototype._tryAnimatedZoom.call(map1, center, zoom, options);
-			}
+			}/*,
+			_resetView: function (center, zoom) {
+				map2._resetView(center, zoom);
+				return L.Map.prototype._resetView.call(map1, center, zoom);
+			}*/
 		})
 		
 		L.extend(map2, {
