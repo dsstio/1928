@@ -10,7 +10,7 @@ $('document').ready(function() {
 
 	var map_opts = {
 		attributionControl: false,
-		zoomAnimation: false,
+		zoomAnimation: true,
 		zoomControl: false,
 		bounceAtZoomLimits: false,
 		maxBounds: L.latLngBounds(L.latLng(52.396,13.116), L.latLng(52.639,13.720)),
@@ -21,22 +21,22 @@ $('document').ready(function() {
 	}
 
 	// create maps
-	var map_base = L.map('map-base', map_opts);
-	var map_overlay = L.map('map-overlay', map_opts);
+	var map1928 = L.map('map-base', map_opts);
+	var map2015 = L.map('map-overlay', map_opts);
 
 	L.tileLayer('https://{s}.maps.dsst.io/berlin-1928/{z}/{x}/{y}.jpg', {
 		minZoom: 5,
 		maxZoom: 18,
 		errorTileUrl: errorTile,
 		subdomains: "abc"
-	}).addTo(map_base);
+	}).addTo(map1928);
 	
 	L.tileLayer('https://{s}.maps.dsst.io/berlin-2015/{z}/{x}/{y}.jpg', {
 		minZoom: 5,
 		maxZoom: 18,
 		errorTileUrl: errorTile,
 		subdomains: "abc"
-	}).addTo(map_overlay);
+	}).addTo(map2015);
 
 	
 	function leftpad (str, len, ch) {
@@ -68,13 +68,7 @@ $('document').ready(function() {
 	var locationhash = '';
 
 	// synchronize maps
-	map_base.on('move', function (evnt) {
-		var center = map_base.getCenter();
-		var zoom = map_base.getZoom();
-		map_overlay.setView(map_base.getCenter(), map_base.getZoom(), {animate: false});
-		// set hash for sharing
-		locationhash = location_encode(center, zoom)
-	});
+	syncMaps(map1928, map2015);
 	
 	var slider = new Slider();
 	
@@ -99,8 +93,8 @@ $('document').ready(function() {
 				className: 'marker-wrapper'
 			});
 			
-			story.marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_base);
-			story.marker2 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_overlay);
+			story.marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map1928);
+			story.marker2 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map2015);
 			
 			story.marker1.on('mouseover', function () {
 				$(story.marker1._icon).addClass('hover');
@@ -111,7 +105,7 @@ $('document').ready(function() {
 				$(story.marker2._icon).removeClass('hover');
 			})
 			story.marker1.on('click', function markerClick() {
-				var x = map_base.latLngToContainerPoint(story.coords).x;
+				var x = map1928.latLngToContainerPoint(story.coords).x;
 				gotoStory(index, slider.isInRightMap(x), true);
 			});
 		})
@@ -121,26 +115,26 @@ $('document').ready(function() {
 		var zoom = story.zoom;
 		if ($container.hasClass('small')) zoom--;
 
-		var point = map_base.project(new L.latLng(story.coords[0], story.coords[1]).clone(), zoom);
+		var point = map1928.project(new L.latLng(story.coords[0], story.coords[1]).clone(), zoom);
 		if ($container.hasClass('small')) {
 			point.y += ($container.height()/4);
 		} else {
 			point.x -= ($container.width()/4);
 		}
-		point = map_base.unproject(point, zoom);
-		map_base.setView(point, zoom, {animate:animate});
+		point = map1928.unproject(point, zoom);
+		map1928.setView(point, zoom, {animate:animate});
 	};
 
 
 	/* controls for the map */
 	$('#zoomin').click(function(evt){
 		evt.preventDefault();
-		map_base.zoomIn();
+		map1928.zoomIn();
 	});
 
 	$('#zoomout').click(function(evt){
 		evt.preventDefault();
-		map_base.zoomOut();
+		map1928.zoomOut();
 	});
 
 	/* explore */
@@ -320,4 +314,37 @@ $('document').ready(function() {
 			}
 		}
 	}
+
+	function syncMaps(map1, map2) {
+		'use strict';
+
+		var drag1 = map1.dragging._draggable;
+		var drag2 = map2.dragging._draggable;
+
+		 L.extend(map1, {
+			panBy: function (offset, options) {
+				map2.panBy(offset, options);
+				L.Map.prototype.panBy.call(map1, offset, options);
+			},
+			_move: function (center, zoom, data) {
+				map2._move(center, zoom, data);
+				return L.Map.prototype._move.call(map1, center, zoom, data);
+			},
+			_onResize: function (event, sync) {
+				map2._onResize(event, true);
+				return L.Map.prototype._onResize.call(map1, event);
+			}
+		})
+		
+		L.extend(map2, {
+			_getMapPanePos: function () { return map1._getMapPanePos() }
+		});
+
+		drag1._updatePosition = function () {
+			L.Draggable.prototype._updatePosition.call(drag1);
+			L.DomUtil.setPosition(drag2._element, drag1._newPos);
+			map2.fire('moveend');
+		};
+	}
 });
+
