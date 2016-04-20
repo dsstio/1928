@@ -333,11 +333,17 @@ $('document').ready(function() {
 			_onResize: function (event, sync) {
 				map2._onResize(event, true);
 				return L.Map.prototype._onResize.call(map1, event);
+			},
+			_tryAnimatedZoom: function (center, zoom, options) {
+				map2._tryAnimatedZoom(center, zoom, options);
+				return L.Map.prototype._tryAnimatedZoom.call(map1, center, zoom, options);
 			}
 		})
 		
 		L.extend(map2, {
-			_getMapPanePos: function () { return map1._getMapPanePos() }
+			_getMapPanePos: function () {
+				return map1._getMapPanePos()
+			}
 		});
 
 		drag1._updatePosition = function () {
