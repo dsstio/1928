@@ -83,26 +83,24 @@ body {
 			cursor: default;
 		}
 		
-			#intro h1 {
-				font-size: 20vh;
+			#intro h1, #intro p {
 				font-weight: 500;
-				color: #fff;
-				text-shadow: 0 0 40px #000;
 				text-transform: uppercase;
 				margin: 0;
 				padding: 0;
 				line-height: 1em;
 			}
 
+			#intro h1 {
+				font-size: 20vh;
+				text-shadow: 0 0 4vh #000;
+				color: #fff;
+			}
+
 			#intro p {
 				font-size: 8.5vh;
-				font-weight: 500;
+				text-shadow: 0 0 1.6vh #000;
 				color: #eee;
-				text-shadow: 0 0 40px #000;
-				text-transform: uppercase;
-				margin: 0;
-				padding: 0;
-				line-height: 1em;
 			}
 			
 			#button-start {
