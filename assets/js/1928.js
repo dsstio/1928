@@ -11,8 +11,7 @@ $('document').ready(function() {
 	// init and synchronize maps
 	var map1928, map2015;
 	initMaps();
-	syncMaps(map1928, map2015);
-	
+
 	/* content */
 	var stories = [];
 	var currentStoryIndex = 0;
@@ -314,6 +313,8 @@ $('document').ready(function() {
 			errorTileUrl: errorTile,
 			subdomains: "abc"
 		}).addTo(map2015);
+
+		syncMaps(map1928, map2015);
 	}
 
 	function syncMaps(map1, map2) {
