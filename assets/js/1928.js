@@ -106,7 +106,6 @@ $('document').ready(function() {
 			story.marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_base);
 			story.marker2 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map_overlay);
 			
-			story.marker1.on('click', markerClick);
 			story.marker1.on('mouseover', function () {
 				$(story.marker1._icon).addClass('hover');
 				$(story.marker2._icon).addClass('hover');
@@ -115,12 +114,10 @@ $('document').ready(function() {
 				$(story.marker1._icon).removeClass('hover');
 				$(story.marker2._icon).removeClass('hover');
 			})
-			
-			function markerClick() {
-				setContent($('#content-1928'), story.content[0]);
-				setContent($('#content-2015'), story.content[1]);
-				$container.addClass('show-content').addClass('small');
-			}
+			story.marker1.on('click', function markerClick() {
+				var x = map_base.latLngToContainerPoint(story.coords).x;
+				gotoStory(index, slider.isInRightMap(x));
+			});
 		})
 	});
 	
@@ -238,10 +235,12 @@ $('document').ready(function() {
 			} else {
 				if (!$container.hasClass(entry.className)) return;
 
-				$(entry.selector).fadeOut(
-					animationDuration,
-					function () { $container.removeClass(entry.className) }
-				);
+				var $node = $(entry.selector);
+				if ($node.length == 0) {
+					$container.removeClass(entry.className)
+				} else {
+					$node.fadeOut(animationDuration, function () { $container.removeClass(entry.className) });
+				}
 			}
 		});
 	}
@@ -312,7 +311,10 @@ $('document').ready(function() {
 		}
 
 		return {
-			slideTo: slideTo
+			slideTo: slideTo,
+			isInRightMap: function (x) {
+				return (x < sliderOffset*$container.width()) ? 0 : 1;
+			}
 		}
 	}
 });

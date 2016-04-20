@@ -163,6 +163,7 @@ body {
 			overflow-x: hidden;
 			overflow-y: auto;
 			z-index: 1;
+			pointer-events: auto;
 		}
 
 			.content-wrapper {
@@ -183,9 +184,6 @@ body {
 					padding: 20px 20px 40px;
 				}
 
-			.content {
-
-			}	
 				.col3 {
 					width: 33%;
 					float: left;
@@ -332,7 +330,6 @@ body {
 			pointer-events: none;
 		}
 			#map-clip .leaflet-control {
-				pointer-events: none;
 			}
 		
 			#map-clip-inner {
@@ -359,12 +356,8 @@ body {
 		}
 
 		.marker-wrapper {
-			display: none;
+			display: block;
 		}
-
-			.show-explore .marker-wrapper {
-				display: block;
-			}
 
 			.marker-info {
 				color: rgba(255,255,255,0.0);
