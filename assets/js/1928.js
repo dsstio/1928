@@ -24,10 +24,6 @@ $('document').ready(function() {
 	var map_base = L.map('map-base', map_opts);
 	var map_overlay = L.map('map-overlay', map_opts);
 
-	// add zoom control to basemap
-	new L.Control.Zoom({ position: 'topright' }).addTo(map_base);
-	new L.Control.Zoom({ position: 'topright' }).addTo(map_overlay);
-
 	L.tileLayer('https://{s}.maps.dsst.io/berlin-1928/{z}/{x}/{y}.jpg', {
 		minZoom: 5,
 		maxZoom: 18,
@@ -116,12 +112,12 @@ $('document').ready(function() {
 			})
 			story.marker1.on('click', function markerClick() {
 				var x = map_base.latLngToContainerPoint(story.coords).x;
-				gotoStory(index, slider.isInRightMap(x));
+				gotoStory(index, slider.isInRightMap(x), true);
 			});
 		})
 	});
 	
-	function zoomToStory(story) {
+	function zoomToStory(story, animate) {
 		var zoom = story.zoom;
 		if ($container.hasClass('small')) zoom--;
 
@@ -132,16 +128,23 @@ $('document').ready(function() {
 			point.x -= ($container.width()/4);
 		}
 		point = map_base.unproject(point, zoom);
-		map_base.setView(point, zoom);
+		map_base.setView(point, zoom, {animate:animate});
 	};
 
-	/* explore */
-	$('#button-explore').click(function(evt){
+
+	/* controls for the map */
+	$('#zoomin').click(function(evt){
 		evt.preventDefault();
-		gotoExplore();
+		map_base.zoomIn();
 	});
 
-	$('.goto-explore').click(function(evt){
+	$('#zoomout').click(function(evt){
+		evt.preventDefault();
+		map_base.zoomOut();
+	});
+
+	/* explore */
+	$('#button-explore, .goto-explore').click(function(evt){
 		evt.preventDefault();
 		gotoExplore();
 	});
@@ -187,7 +190,7 @@ $('document').ready(function() {
 		setVisibility('show-explore');
 	}
 
-	function gotoStory(index, jumpTo2015) {
+	function gotoStory(index, jumpTo2015, animate) {
 		currentStoryIndex = index;
 
 		if (jumpTo2015) {
@@ -207,10 +210,10 @@ $('document').ready(function() {
 
 		var instant = setVisibility('show-content');
 		if (instant) {
-			zoomToStory(stories[index]);
+			zoomToStory(stories[index], animate);
 		} else {
 			setTimeout(function () {
-				zoomToStory(stories[index]);
+				zoomToStory(stories[index], animate);
 			}, animationDuration);
 		}
 	}
