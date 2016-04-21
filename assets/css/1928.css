@@ -573,7 +573,15 @@ body {
 					font-size: 23px;
 					line-height: 36px;
 				}
-			
+
+		.my-location-icon {
+			width: 8px;
+			height: 8px;
+			border: 1px solid #fff;
+			background-color: #44f;
+			border-radius: 20px;
+		}
+
 		#control-slider {
 			display: block;
 			position: absolute;

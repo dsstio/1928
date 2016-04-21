@@ -390,6 +390,12 @@ $('document').ready(function() {
 		$container.addClass('has-geolocation');
 		var markers = [];
 
+		var myLocationIcon = L.divIcon({
+			iconSize: [10,10],
+			iconAnchor: [5,5],
+			className: 'my-location-icon'
+		});
+
 		$('.geolocate').on('click', function(evt) {
 			evt.preventDefault();
 
@@ -400,11 +406,22 @@ $('document').ready(function() {
 				var point = L.latLng(position.coords.latitude, position.coords.longitude);
 				map1928.setView(point, 17, {animate:true});
 				$('.geolocate').removeClass('spin');
-				
+
 				markers = [
-					L.circle(point, Math.min(100, position.coords.accuracy), { stroke: true, color: "#00f", weight: 10, opacity: 0.3, fill: false, interactive: false }).addTo(map1928),
-					L.circle(point, Math.min(100, position.coords.accuracy), { stroke: true, color: "#00f", weight: 10, opacity: 0.3, fill: false, interactive: false }).addTo(map2015)
+					createMarker(map1928),
+					createMarker(map2015)
 				]
+
+				function createMarker(map) {
+					var icon = L.marker(point, { icon: myLocationIcon, clickable: false }).addTo(map);
+					var accu = L.circle(point, Math.min(500, position.coords.accuracy), { stroke: false, fill: true, fillColor: '#77f', fillOpacity: 0.4, clickable: false }).addTo(map);
+					return {
+						remove:function () {
+							icon.remove();
+							accu.remove();
+						}
+					}
+				}
 			});
 		});
 	}
