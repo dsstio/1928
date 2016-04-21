@@ -63,7 +63,7 @@ $('document').ready(function() {
 			});
 		})
 	});
-	
+
 	function zoomToStory(story, animate) {
 		var zoom = story.zoom;
 		if ($container.hasClass('small')) zoom--;
@@ -77,15 +77,14 @@ $('document').ready(function() {
 		point = map1928.unproject(point, zoom);
 		map1928.setView(point, zoom, {animate:animate});
 	};
-
-
+	
 	/* controls for the map */
-	$('#zoomin').click(function(evt){
+	$('.zoom-in','#controls').click(function(evt){
 		evt.preventDefault();
 		map1928.zoomIn();
 	});
 
-	$('#zoomout').click(function(evt){
+	$('.zoom-out','#controls').click(function(evt){
 		evt.preventDefault();
 		map1928.zoomOut();
 	});
