@@ -12,6 +12,11 @@ $('document').ready(function() {
 	var map1928, map2015;
 	initMaps();
 
+	$(window).resize(function() {
+		$container.toggleClass('small', ($container.width() < 720) || ($container.width()*($container.height()-140) < 545000));
+	});
+	$(window).trigger('resize');
+
 	/* content */
 	var stories = [];
 	var currentStoryIndex = 0;
@@ -249,11 +254,7 @@ $('document').ready(function() {
 		})
 
 		// events for window resize
-		$(window).resize(function(){
-			setSliderPosition($container.width()*sliderOffset);
-			$container.toggleClass('small', $container.width() < 800);
-		});
-		$(window).trigger('resize');
+		$(window).resize(function() { setSliderPosition($container.width()*sliderOffset) });
 		
 		// functions
 		function slideTo(v, fn){
