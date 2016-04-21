@@ -505,7 +505,7 @@ body {
 				width: 270px;
 				background: url(../images/tagesspiegelData.png) center center no-repeat;
 				background-size: contain;
-				margin: 0 20px;
+				margin-left: 20px;
 				padding: 0;
 			}
 
@@ -525,7 +525,7 @@ body {
 				.small #credit {
 					text-align: center;
 				}
-				
+
 				.small #tspdata, .small #source {
 					display: inline;
 					float: none;
@@ -535,5 +535,10 @@ body {
 					padding: 3px 0;
 					color: #aaa;
 					background: none;
+					text-shadow: none;
+				}
+
+				.small #tspdata {
+					margin-left: 5px;
 				}
 
