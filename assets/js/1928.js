@@ -1,6 +1,10 @@
 $('document').ready(function() {
 	var animationDuration = 500;
 
+	// texts for social media
+	var share_tweet = ""; // Insert Text for Twitter Sharing here
+	var share_url = function(){ return "https://1928.tagesspiegel.de/" }; // Share URL function.
+
 	// cache some dom elemenst
 	var $container = $('#container');
 
@@ -423,6 +427,24 @@ $('document').ready(function() {
 			// @mk FIXME: maps tend to get out of sync when resize state changes. put code here to trigger resync 
 		});
 	};
+
+	// twitter sharing
+	$(".twitter","#controls").click(function(evt){
+		evt.preventDefault();
+		window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(share_url())+'&text='+encodeURIComponent(share_tweet), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");
+	});
+
+	// facebook sharing
+	$(".facebook","#controls").click(function(evt){
+		evt.preventDefault();
+		window.open('https://www.facebook.com/dialog/share?app_id=966242223397117&display=popup&href='+encodeURIComponent(share_url()), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=yes,toolbar=no");
+	});
+
+	// google+ sharing
+	$(".googleplus","#controls").click(function(evt){
+		evt.preventDefault();
+		window.open('https://plus.google.com/share?url='+encodeURIComponent(share_url()), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");
+	});
 	// geocode
 	$(".geocode","#controls").click(function(evt){
 		evt.preventDefault();
