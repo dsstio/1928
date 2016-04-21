@@ -387,23 +387,24 @@ $('document').ready(function() {
 	// helpers
 	// enable geolocation
 	if (navigator.geolocation) {
-		$container.addClass("has-geolocation");
-		var $marker = null;
-		$(".geolocate","#controls").on("click", function(evt){
+		$container.addClass('has-geolocation');
+		var markers = [];
+
+		$('.geolocate').on('click', function(evt) {
 			evt.preventDefault();
-			if ($marker) $marker.remove(null);
-			$(".geolocate","#controls").addClass("spin");
-			navigator.geolocation.getCurrentPosition(function(position){
 
-				// set map to marker position
-				zoomToStory({ coords: [position.coords.latitude, position.coords.longitude], zoom: 17 }, true);
+			markers.forEach(function (marker) { marker.remove() });
 
-				// stop spinning
-				$(".geolocate","#controls").removeClass("spin").blur();
-
-				// @mk FIXME: make marker work on both maps
-				$marker = L.circle(L.latLng(position.coords.latitude, position.coords.longitude), Math.min(100, position.coords.accuracy), { stroke: true, color: "#c00", weight: 10, opacity: 0.3, fill: false, interactive: false }).addTo(map2015);
+			$('.geolocate').addClass('spin');
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var point = L.latLng(position.coords.latitude, position.coords.longitude);
+				map1928.setView(point, 17, {animate:true});
+				$('.geolocate').removeClass('spin');
 				
+				markers = [
+					L.circle(point, Math.min(100, position.coords.accuracy), { stroke: true, color: "#00f", weight: 10, opacity: 0.3, fill: false, interactive: false }).addTo(map1928),
+					L.circle(point, Math.min(100, position.coords.accuracy), { stroke: true, color: "#00f", weight: 10, opacity: 0.3, fill: false, interactive: false }).addTo(map2015)
+				]
 			});
 		});
 	}
