@@ -164,6 +164,13 @@ body {
 			pointer-events: auto;
 		}
 
+			.small .content {
+				top: auto;
+				bottom: 0px;
+				width: 100%;
+				height: 320px;
+			}
+
 			.content-wrapper {
 				position: relative;
 				margin:  8vh auto 0 auto;
@@ -174,9 +181,10 @@ body {
 			}
 
 				.small .content-wrapper {
+					box-sizing: border-box;
 					margin: 0px;
-					width: auto;
-					height: auto;
+					width: 100%;
+					height: 100%;
 					max-width: none;
 					max-height: none;
 					padding: 20px 20px 40px;
@@ -189,12 +197,6 @@ body {
 				.col3left   { text-align: left; }
 				.col3center { text-align: center; }
 				.col3right  { text-align: right; }
-
-				.small .content {
-					top: auto;
-					width: 100%;
-					min-height: 300px;
-				}
 
 				.content h2 {
 					color: #fff;
@@ -232,18 +234,17 @@ body {
 					}
 			
 					.content .nav {
-						display: inline-block;
+						display: block;
 						position: absolute;
-						bottom: 0px;
-						width: 100%;
+						bottom: 40px;
+						left: 20px;
+						right: 20px;
 					}
 						.show-explore .content .nav {
 							display: none;
 						}
 				
 						.small .content .nav {
-							position: static;
-							margin-top: 20px;
 						}
 
 					.content .nav .goto {
@@ -288,7 +289,6 @@ body {
 					margin: 0;
 					overflow-x: hidden;
 					overflow-y: auto;
-					max-height: 150px;
 				}
 
 					.small .content .content-text p {
