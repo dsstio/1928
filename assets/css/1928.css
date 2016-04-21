@@ -138,6 +138,13 @@ body {
 				text-align: center;
 			}
 			
+				.has-touch #controls a.switch-tour,
+				.has-touch #controls a.switch-explore,
+				.has-touch #controls a.fullscreen,
+				.has-touch #controls a.geolocate {
+					display: none;
+				}
+			
 				.has-touch.show-explore #controls a.switch-tour,
 				.has-touch.show-content #controls a.switch-explore,
 				.has-touch.has-fullscreen #controls a.fullscreen,
