@@ -138,6 +138,8 @@ body {
 				text-align: center;
 			}
 			
+				.has-touch.show-explore #controls a.switch-tour,
+				.has-touch.show-content #controls a.switch-explore,
 				.has-touch.has-fullscreen #controls a.fullscreen,
 				.has-touch.has-geolocation #controls a.geolocate,
 				.has-touch #controls a {
@@ -156,8 +158,6 @@ body {
 					border-left: 1px solid #ccc;
 				}
 				
-				.has-touch.show-explore #controls a.switch-tour,
-				.has-touch.show-content #controls a.switch-explore,
 				.has-touch.has-geolocation #controls .controls-group.controls-group-capable,
 				.has-touch.has-fullscreen #controls .controls-group.controls-group-capable,
 				.has-touch #controls .controls-group {
