@@ -448,6 +448,19 @@ $('document').ready(function() {
 		window.open('https://plus.google.com/share?url='+encodeURIComponent(share_url()), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");
 	});
 
+
+	// switch to tour mode
+	$(".switch-tour","#controls").click(function(evt){
+		evt.preventDefault();
+		gotoStory(currentStoryIndex||0);
+	});
+
+	// switch to explore mode
+	$(".switch-explore","#controls").click(function(evt){
+		evt.preventDefault();
+		gotoExplore();
+	});
+
 	// link
 	/* FIXME: add markup for link share thing 
 	$(".share","#controls").click(function(evt){
