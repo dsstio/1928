@@ -445,6 +445,45 @@ $('document').ready(function() {
 		evt.preventDefault();
 		window.open('https://plus.google.com/share?url='+encodeURIComponent(share_url()), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");
 	});
+
+	// link
+	/* FIXME: add markup for link share thing 
+	$(".share","#controls").click(function(evt){
+		evt.preventDefault();
+		// set url
+		$("#share-link").val(($('#share-location:checked').length > 0) ? base_url+'#'+locationhash : base_url)
+
+		$("#share-link")[0].selectionStart = 0;
+		$("#share-link")[0].selectionEnd = $("#share-link").val().length;
+		$("#share-link").focus();
+
+		$('#share').fadeIn('fast');
+	});
+
+	$('#share-location').change(function(evt){
+		$("#share-link").val(($('#share-location:checked').length > 0) ? base_url+'#'+locationhash : base_url)
+		$("#share-link")[0].selectionStart = 0;
+		$("#share-link")[0].selectionEnd = $("#share-link").val().length;
+		$("#share-link").focus();
+		if ($('#share-location:checked').length > 0) {
+			$('#share').addClass("with-location");
+		} else {
+			$('#share').removeClass("with-location");
+		}
+	});
+
+	$('#share-link').on("click keyup", function(evt){
+		$("#share-link")[0].selectionStart = 0;
+		$("#share-link")[0].selectionEnd = $("#share-link").val().length;
+	});
+
+	$('.share-hide','#share').click(function(evt){
+		evt.preventDefault();
+		$('#share').fadeOut('fast');
+	});
+	*/
+	
+
 	// geocode
 	$(".geocode","#controls").click(function(evt){
 		evt.preventDefault();
