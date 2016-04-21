@@ -370,5 +370,75 @@ $('document').ready(function() {
 			map2.fire('moveend');
 		};
 	}
+	
+	// helpers
+	// enable geolocation
+	if (navigator.geolocation) {
+		$container.addClass("has-geolocation");
+		var $marker = null;
+		$(".geolocate","#controls").on("click", function(evt){
+			evt.preventDefault();
+			if ($marker) $marker.remove(null);
+			$(".geolocate","#controls").addClass("spin");
+			navigator.geolocation.getCurrentPosition(function(position){
+
+				// set map to marker position
+				zoomToStory({ coords: [position.coords.latitude, position.coords.longitude], zoom: 17 }, true);
+
+				// stop spinning
+				$(".geolocate","#controls").removeClass("spin").blur();
+
+				// @mk FIXME: make marker work on both maps
+				$marker = L.circle(L.latLng(position.coords.latitude, position.coords.longitude), Math.min(100, position.coords.accuracy), { stroke: true, color: "#c00", weight: 10, opacity: 0.3, fill: false, interactive: false }).addTo(map2015);
+				
+			});
+		});
+	}
+
+	// handle fullscreen
+	if (document.fullScreenEnabled || document.mozFullScreenEnabled || document.webkitFullScreenEnabled || document.msFullscreenEnabled || document.documentElement.webkitRequestFullscreen) {
+		$container.addClass("has-fullscreen");
+		$(".fullscreen","#controls").on("click", function(evt){
+			evt.preventDefault();
+			 if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+				$('.fullscreen i','#controls').attr("class", "icon-shrink");
+				if (document.documentElement.requestFullscreen) return document.documentElement.requestFullscreen();
+				if (document.documentElement.msRequestFullscreen) return document.documentElement.msRequestFullscreen();
+				if (document.documentElement.mozRequestFullScreen) return document.documentElement.mozRequestFullScreen();
+				if (document.documentElement.webkitRequestFullscreen) return document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+			} else {
+				$('.fullscreen i','#controls').attr("class", "icon-enlarge");
+				if (document.exitFullscreen) return document.exitFullscreen();
+				if (document.msExitFullscreen) return document.msExitFullscreen();
+				if (document.mozCancelFullScreen) return document.mozCancelFullScreen();
+				if (document.webkitExitFullscreen) return document.webkitExitFullscreen();
+			}
+		});
+		
+		// catch full screen state change, reset mode on exit by escape
+		$(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange", function(){
+			if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) $('.fullscreen i','#controls').attr("class", "icon-enlarge");
+			// fullscreen state change triggers resize and map sync
+			$(window).trigger('resize');
+			// @mk FIXME: maps tend to get out of sync when resize state changes. put code here to trigger resync 
+		});
+	};
+	// geocode
+	$(".geocode","#controls").click(function(evt){
+		evt.preventDefault();
+		if ($container.hasClass("show-search")){
+			$("#search").fadeOut("fast", function(){
+				$container.removeClass("show-search");
+				$("#search-result").html("");
+				$("#search-query").val("");
+			});
+		} else {
+			$("#search").fadeIn("fast", function(){
+				$container.addClass("show-search");
+				$("#search-query").focus();
+			});
+		}
+	});
+
 });
 
