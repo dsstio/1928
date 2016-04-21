@@ -321,39 +321,42 @@ $('document').ready(function() {
 	function syncMaps(map1, map2) {
 		'use strict';
 
+		var debug = false;//Date.now();
+
 		var drag1 = map1.dragging._draggable;
 		var drag2 = map2.dragging._draggable;
 
-		 L.extend(map1, {
+		L.extend(map1, {
 			panBy: function (offset, options) {
+				if (debug) console.log('panBy');
 				map2.panBy(offset, options);
 				L.Map.prototype.panBy.call(map1, offset, options);
 			},
 			_move: function (center, zoom, data) {
+				if (debug) console.log('_move', Date.now()-debug);
 				map2._move(center, zoom, data);
 				return L.Map.prototype._move.call(map1, center, zoom, data);
 			},
 			_onResize: function (event, sync) {
+				if (debug) console.log('_onResize');
 				map2._onResize(event, true);
 				return L.Map.prototype._onResize.call(map1, event);
 			},
 			_tryAnimatedZoom: function (center, zoom, options) {
-				map2._tryAnimatedZoom(center, zoom, options);
-				return L.Map.prototype._tryAnimatedZoom.call(map1, center, zoom, options);
-			}/*,
-			_resetView: function (center, zoom) {
-				map2._resetView(center, zoom);
-				return L.Map.prototype._resetView.call(map1, center, zoom);
-			}*/
-		})
-		
-		L.extend(map2, {
-			_getMapPanePos: function () {
-				return map1._getMapPanePos()
+				if (debug) console.log('_tryAnimatedZoom', Date.now()-debug, center, zoom, options);
+				var result = L.Map.prototype._tryAnimatedZoom.call(map1, center, zoom, options);
+				return result;
 			}
+		})
+
+		map1.on('zoomanim', function (e) {
+			if (debug) console.log('zoomanim1', Date.now()-debug);
+			map2._animateZoom(e.center, e.zoom, true, e.noUpdate);
 		});
 
 		drag1._updatePosition = function () {
+			if (debug) console.log('_updatePosition', Date.now()-debug);
+
 			L.Draggable.prototype._updatePosition.call(drag1);
 			L.DomUtil.setPosition(drag2._element, drag1._newPos);
 			map2.fire('moveend');
