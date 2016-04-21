@@ -25,6 +25,12 @@ $('document').ready(function() {
 		$container.addClass("has-touch");
 	}
 
+	// detect small viewports class on window resize
+	$(window).resize(function() {
+		$container.toggleClass('small', ($container.width() < 720) || ($container.width()*($container.height()-140) < 545000));
+	});
+	$(window).trigger('resize');
+
 	// init and synchronize maps
 	var map1928, map2015;
 	initMaps();
@@ -265,11 +271,7 @@ $('document').ready(function() {
 		})
 
 		// events for window resize
-		$(window).resize(function(){
-			setSliderPosition($container.width()*sliderOffset);
-			$container.toggleClass('small', $container.width() < 800);
-		});
-		$(window).trigger('resize');
+		$(window).resize(function() { setSliderPosition($container.width()*sliderOffset) });
 		
 		// functions
 		function slideTo(v, fn){

@@ -304,6 +304,13 @@ body {
 			pointer-events: auto;
 		}
 
+			.small .content {
+				top: auto;
+				bottom: 0px;
+				width: 100%;
+				height: 320px;
+			}
+
 			.content-wrapper {
 				position: relative;
 				margin:  8vh auto 0 auto;
@@ -314,9 +321,10 @@ body {
 			}
 
 				.small .content-wrapper {
+					box-sizing: border-box;
 					margin: 0px;
-					width: auto;
-					height: auto;
+					width: 100%;
+					height: 100%;
 					max-width: none;
 					max-height: none;
 					padding: 20px 20px 40px;
@@ -328,12 +336,6 @@ body {
 				}
 				.col2left   { text-align: left; }
 				.col2right  { text-align: right; }
-
-				.small .content {
-					top: auto;
-					width: 100%;
-					min-height: 300px;
-				}
 
 				.content h2 {
 					color: #fff;
@@ -371,18 +373,17 @@ body {
 					}
 			
 					.content .nav {
-						display: inline-block;
+						display: block;
 						position: absolute;
-						bottom: 0px;
-						width: 100%;
+						bottom: 40px;
+						left: 20px;
+						right: 20px;
 					}
 						.show-explore .content .nav {
 							display: none;
 						}
 				
 						.small .content .nav {
-							position: static;
-							margin-top: 20px;
 						}
 
 					.content .nav .goto {
@@ -458,7 +459,6 @@ body {
 					margin: 0;
 					overflow-x: hidden;
 					overflow-y: auto;
-					max-height: 150px;
 				}
 
 					.small .content .content-text p {
@@ -645,10 +645,6 @@ body {
 				margin: 0;
 				left: 0;
 			}
-		
-			.small #credit * {
-				display: none;
-			}
 			
 			#credit a {
 				display: inline-block;
@@ -666,6 +662,26 @@ body {
 				margin: 0 20px;
 				padding: 0;
 			}
+		
+			#tspdata, #source {
+				-webkit-touch-callout: auto;
+				-webkit-user-select: auto;
+				-khtml-user-select: auto;
+				-moz-user-select: auto;
+				-ms-user-select: auto;
+				user-select: auto;
+				pointer-events: auto;
+			}
+		
+			#tspdata {
+				color: transparent;
+				height: 48px;
+				width: 270px;
+				background: url(../images/tagesspiegelData.png) center center no-repeat;
+				background-size: contain;
+				margin-left: 20px;
+				padding: 0;
+			}
 
 			#source {
 				width: 140px;
@@ -678,36 +694,25 @@ body {
 				padding: 4px 0;
 				text-align: right;
 				font-weight: 400;
-				-webkit-touch-callout: auto;
-				-webkit-user-select: auto;
-				-khtml-user-select: auto;
-				-moz-user-select: auto;
-				-ms-user-select: auto;
-				user-select: auto;
-				pointer-events: auto;
 			}
-			
-				.small #source {
-					display: block !important;
-					text-align: center !important;
+				
+				.small #credit {
+					text-align: center;
+				}
+
+				.small #tspdata, .small #source {
+					display: inline;
+					float: none;
 					width: 100%;
 					font-size: .7em;
 					height: auto;
 					padding: 3px 0;
 					color: #aaa;
-					
+					background: none;
+					text-shadow: none;
 				}
-					
-			#dsst {
-				width: 100px;
-				height: 32px;
-				padding: 4px 0px 4px 50px;
-				background: url(../images/dsst.png) left center no-repeat;
-				background-size: 40px;
-				color: #fff;
-				font-size: .8em;
-				line-height: 16px;
-				text-transform: uppercase;
-				text-shadow: 0 0 3px #000, 0 0 5px #000, 0 0 10px #000;
-			}
+
+				.small #tspdata {
+					margin-left: 5px;
+				}
 
