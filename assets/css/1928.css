@@ -101,6 +101,10 @@ body {
 					100% { transform: rotate(359deg) translate(-1px, 3px); }
 				}
 
+				.show-content.show-explore #controls a.switch-tour {
+					display: none;
+				}
+
 				.show-explore #controls a.switch-tour,
 				.show-content #controls a.switch-explore {
 					display: block;
@@ -138,6 +142,7 @@ body {
 				text-align: center;
 			}
 			
+				.has-touch.show-content.show-explore #controls a.switch-tour,
 				.has-touch #controls a.switch-tour,
 				.has-touch #controls a.switch-explore,
 				.has-touch #controls a.fullscreen,
