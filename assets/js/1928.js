@@ -388,6 +388,7 @@ $('document').ready(function() {
 	// enable geolocation
 	if (navigator.geolocation) {
 		$container.addClass('has-geolocation');
+		var geolocationWatcher = false;
 		var markers = [];
 
 		var myLocationIcon = L.divIcon({
@@ -399,30 +400,52 @@ $('document').ready(function() {
 		$('.geolocate').on('click', function(evt) {
 			evt.preventDefault();
 
-			markers.forEach(function (marker) { marker.remove() });
+			if (geolocationWatcher) {
+				$('.geolocate').removeClass('active');
+				navigator.geolocation.clearWatch(geolocationWatcher);
+				geolocationWatcher = false;
+				markers = markers.filter(function (marker) { marker.remove(); return false; });
+			} else {
+				markers = markers.filter(function (marker) { marker.remove(); return false; });
 
-			$('.geolocate').addClass('spin');
-			navigator.geolocation.getCurrentPosition(function(position) {
-				var point = L.latLng(position.coords.latitude, position.coords.longitude);
-				map1928.setView(point, 17, {animate:true});
-				$('.geolocate').removeClass('spin');
+				$('.geolocate').addClass('spin');
+				$('.geolocate').addClass('active');
 
-				markers = [
-					createMarker(map1928),
-					createMarker(map2015)
-				]
+				var firstLocation = true;
 
-				function createMarker(map) {
-					var icon = L.marker(point, { icon: myLocationIcon, clickable: false }).addTo(map);
-					var accu = L.circle(point, Math.min(500, position.coords.accuracy), { stroke: false, fill: true, fillColor: '#77f', fillOpacity: 0.4, clickable: false }).addTo(map);
-					return {
-						remove:function () {
-							icon.remove();
-							accu.remove();
+				geolocationWatcher = navigator.geolocation.watchPosition(function (position) {
+					var point = L.latLng(position.coords.latitude, position.coords.longitude);
+					var radius = Math.min(500, position.coords.accuracy);
+
+					if (firstLocation) {
+						map1928.setView(point, 17, {animate:true});
+						$('.geolocate').removeClass('spin');
+
+						markers = [
+							createMarker(map1928),
+							createMarker(map2015)
+						]
+						firstLocation = false;
+					} else {
+						markers.forEach(function (marker) { marker.move(point, radius) });
+					}
+
+					function createMarker(map) {
+						var icon = L.marker(point, { icon: myLocationIcon, clickable: false }).addTo(map);
+						var accu = L.circle(point, radius, { stroke: false, fill: true, fillColor: '#77f', fillOpacity: 0.4, clickable: false }).addTo(map);
+						return {
+							move:function (point, radius) {
+								icon.setLatLng(point);
+								accu.setLatLng(point).setRadius(radius);
+							},
+							remove:function () {
+								icon.remove();
+								accu.remove();
+							}
 						}
 					}
-				}
-			});
+				});
+			}
 		});
 	}
 
