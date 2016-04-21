@@ -57,15 +57,6 @@ body {
 				border-radius: 2px;
 				box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
 			}
-			
-			#controls .controls-group.controls-group-capable {
-				display: none;
-			}
-
-			.has-geolocation #controls .controls-group.controls-group-capable,
-			.has-fullscreen #controls .controls-group.controls-group-capable {
-				display: block;
-			}
 
 			#controls a+a {
 				border-top: 1px solid #ccc;
@@ -169,9 +160,7 @@ body {
 				.has-touch #controls a+a {
 					border-left: 1px solid #ccc;
 				}
-				
-				.has-touch.has-geolocation #controls .controls-group.controls-group-capable,
-				.has-touch.has-fullscreen #controls .controls-group.controls-group-capable,
+
 				.has-touch #controls .controls-group {
 					display: inline-block;
 					margin-bottom: 0;
@@ -429,14 +418,21 @@ body {
 						line-height: 1em;
 						right: 0;
 						top: 0;
-						background-color: #fff;
-						color: #c00;
+						background-color: #aaa;
+						color: #000;
 						border-radius: 100%;
 						text-decoration: none;
 						margin: 0;
-						padding: .6em .5em .4em;
-						padding: .5em;
+						padding: .55em .5em .45em;
+						-webkit-transition: background-color 200ms ease-out;
+						   -moz-transition: background-color 200ms ease-out;
+						     -o-transition: background-color 200ms ease-out;
+						        transition: background-color 200ms ease-out;
 					}
+						.content .goto-explore:hover {
+							background-color: #ddd;
+						}
+
 						.small .content .goto-explore {
 							top: 15px;
 							right: 20px;
@@ -518,8 +514,6 @@ body {
 			border-left: 1px solid #c00;
 			pointer-events: none;
 		}
-			#map-clip .leaflet-control {
-			}
 		
 			#map-clip-inner {
 				display: block;
