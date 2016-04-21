@@ -462,5 +462,16 @@ $('document').ready(function() {
 		}
 	});
 
+	// async execution of stupid ivw zaehlpixel on production site
+	if (location.href.indexOf("1928.tagesspiegel.de") >= 0) $.getScript("https://script.ioam.de/iam.js", function(){
+		var iomit = 0;
+		var iomcheck = setInterval(function(){
+			if (++iomit > 10) return clearInterval(iomcheck);
+			if (!window.hasOwnProperty("iom")) return;
+			window.iom.c({ "st":"tagspieg", "cp":"ts-1928", "sv":"ke" },1);
+			return clearInterval(iomcheck);
+		},1000);
+	});
+	
 });
 
