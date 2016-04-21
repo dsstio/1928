@@ -8,6 +8,14 @@ $('document').ready(function() {
 	
 	var slider = new Slider();
 
+	// detect if we are inside a frame
+	if (window.self !== window.top) {
+		$container.addClass("in-frame").addClass("show-content");
+	} else {
+		// always show intro
+		$container.addClass("show-intro");
+	}
+	
 	// init and synchronize maps
 	var map1928, map2015;
 	initMaps();
