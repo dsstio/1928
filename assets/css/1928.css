@@ -492,6 +492,16 @@ body {
 				margin: 0 20px;
 				padding: 0;
 			}
+		
+			#tspdata {
+				color: transparent;
+				height: 48px;
+				width: 270px;
+				background: url(../images/tagesspiegelData.png) center center no-repeat;
+				background-size: contain;
+				margin: 0 20px;
+				padding: 0;
+			}
 
 			#source {
 				width: 140px;
