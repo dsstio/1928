@@ -363,6 +363,10 @@ $('document').ready(function() {
 				if (debug) console.log('_tryAnimatedZoom', Date.now()-debug, center, zoom, options);
 				var result = L.Map.prototype._tryAnimatedZoom.call(map1, center, zoom, options);
 				return result;
+			},
+			_resetView: function (center, zoom) {
+				map2._resetView(center, zoom);
+				return L.Map.prototype._resetView.call(map1, center, zoom);
 			}
 		})
 
