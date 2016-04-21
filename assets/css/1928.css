@@ -322,13 +322,12 @@ body {
 					padding: 20px 20px 40px;
 				}
 
-				.col3 {
-					width: 33%;
+				.col2 {
+					width: 50%;
 					float: left;
 				}
-				.col3left   { text-align: left; }
-				.col3center { text-align: center; }
-				.col3right  { text-align: right; }
+				.col2left   { text-align: left; }
+				.col2right  { text-align: right; }
 
 				.small .content {
 					top: auto;
@@ -397,6 +396,37 @@ body {
 						        transition: background-color, box-shadow 200ms ease-out;
 					}
 					
+					.content .goto-explore {
+						position: absolute;
+						display: block;
+						position: absolute;
+						width: 1em;
+						height: 1em;
+						text-align: center;
+						font-size: 1.2em;
+						line-height: 1em;
+						right: 0;
+						top: 0;
+						background-color: #fff;
+						color: #c00;
+						border-radius: 100%;
+						text-decoration: none;
+						margin: 0;
+						padding: .6em .5em .4em;
+						padding: .5em;
+					}
+						.small .content .goto-explore {
+							top: 15px;
+							right: 20px;
+							font-size: .9em;
+						}
+						
+					
+						.content .goto-explore i {
+							font-size: .9em;
+						}
+
+
 						.content .nav .goto i {
 							font-size: .9em;
 							vertical-align: -9%;
