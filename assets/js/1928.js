@@ -16,6 +16,11 @@ $('document').ready(function() {
 		$container.addClass("show-intro");
 	}
 	
+	// detect touch like leaflet
+	if (!window.L_NO_TOUCH && ((window.PointerEvent || (!window.PointerEvent && window.MSPointerEvent)) || 'ontouchstart' in window || (window.DocumentTouch && document instanceof window.DocumentTouch))) {
+		$container.addClass("has-touch");
+	}
+
 	// init and synchronize maps
 	var map1928, map2015;
 	initMaps();
