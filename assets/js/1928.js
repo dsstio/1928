@@ -8,14 +8,14 @@ $('document').ready(function() {
 	
 	var slider = new Slider();
 
-	// init and synchronize maps
-	var map1928, map2015;
-	initMaps();
-
 	$(window).resize(function() {
 		$container.toggleClass('small', ($container.width() < 720) || ($container.width()*($container.height()-140) < 545000));
 	});
 	$(window).trigger('resize');
+
+	// init and synchronize maps
+	var map1928, map2015;
+	initMaps();
 
 	/* content */
 	var stories = [];
