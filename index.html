@@ -29,7 +29,7 @@
 	<link rel="stylesheet" href="assets/css/1928.css" />
 </head>
 <body>
-	<div id="container" class="show-intro">
+	<div id="container">
 		<div id="intro">
 			<h1>Berlin</h1>
 			<p>1928 und heute</p>
@@ -37,16 +37,24 @@
 			<a href="javascript:;" id="button-start">Tour starten <i class="icon-right"></i></a>
 		</div>
 		<div id="controls">
-			<a href="javascript:;" id="zoomin" title="Reinzoomen"><i class="icon-plus"></i></a>
-			<a href="javascript:;" id="zoomout" title="Rauszoomen"><i class="icon-minus"></i></a>
-			<br>
-			<a href="javascript:;" class="geolocate" title="Lokalisieren"><i class="icon-geolocation"></i></a>
-			<a href="javascript:;" class="fullscreen" title="Vollbild"><i class="icon-enlarge"></i></a>
-			<br>
-			<a href="javascript:;" class="twitter popup" title="Auf Twitter teilen"><i class="icon-twitter"></i></a>
-			<a href="javascript:;" class="facebook popup" title="Auf Facebook teilen"><i class="icon-facebook"></i></a>
-			<a href="javascript:;" class="googleplus popup" title="Auf Google+ teilen"><i class="icon-google-plus"></i></a>
-			<a href="javascript:;" class="github" title="Auf Google+ teilen"><i class="icon-github"></i></a>
+			<span class="controls-group">
+				<a href="javascript:;" class="zoom-in" title="Hereinzoomen"><span class="text-icon">+</span></a>
+				<a href="javascript:;" class="zoom-out" title="Herauszoomen"><span class="text-icon">–</span></a>
+			</span>
+			<span class="controls-group controls-group-capable">
+				<a href="javascript:;" class="fullscreen" title="Vollbild"><i class="icon-enlarge"></i></a>
+				<a href="javascript:;" class="geolocate" title="Lokalisieren"><span><i class="icon-geolocation"></i></span></a>
+			</span>
+			<span class="controls-group">
+				<a href="javascript:;" class="switch-tour" title="Tour"><i class="icon-tour"></i></a>
+				<a href="javascript:;" class="switch-explore" title="Erkunden"><i class="icon-explore"></i></a>
+			</span>
+			<span class="controls-group">
+				<a href="javascript:;" class="share" title="Link Teilen"><i class="icon-share"></i></a>
+				<a href="javascript:;" class="twitter popup" title="Auf Twitter teilen"><i class="icon-twitter"></i></a>
+				<a href="javascript:;" class="facebook popup" title="Auf Facebook teilen"><i class="icon-facebook"></i></a>
+				<a href="javascript:;" class="googleplus popup" title="Auf Google+ teilen"><i class="icon-google-plus"></i></a>
+			</span>
 		</div>
 		<div id="map-base"></div>
 		<div class="content" id="content-1928">
@@ -54,10 +62,10 @@
 				<h2></h2>
 				<div class="content-text"></div>
 				<div class="nav">
-					<div class="col3 col3left"><a   href="javascript:;" id="goto-back" class="goto goto-red"><i class="icon-left"></i> Zurück</a></div>
-					<div class="col3 col3center"><a href="javascript:;" class="goto goto-grey goto-explore">zur Karte</a></div>
-					<div class="col3 col3right"><a  href="javascript:;" id="goto-2015" class="goto goto-red">2015 <i class="icon-right"></i></a></div>
+					<div class="col2 col2left"><a   href="javascript:;" id="goto-back" class="goto goto-red"><i class="icon-left"></i> Zurück</a></div>
+					<div class="col2 col2right"><a  href="javascript:;" id="goto-2015" class="goto goto-red">2015 <i class="icon-right"></i></a></div>
 				</div>
+				<a href="javascript:;" class="goto goto-explore" title="Selbst erkunden"><i class="icon-map"></i></a>
 			</div>
 		</div>
 		<div id="map-clip">
@@ -68,22 +76,23 @@
 						<h2></h2>
 						<div class="content-text"></div>
 						<div class="nav">
-							<div class="col3 col3left"><a   href="javascript:;" id="goto-1928" class="goto goto-red"><i class="icon-left"></i> 1928</a></div>
-							<div class="col3 col3center"><a href="javascript:;" class="goto goto-grey goto-explore">zur Karte</a></div>
-							<div class="col3 col3right"><a  href="javascript:;" id="goto-next" class="goto goto-red">Weiter <i class="icon-right"></i></a></div>
+							<div class="col2 col2left"><a   href="javascript:;" id="goto-1928" class="goto goto-red"><i class="icon-left"></i> 1928</a></div>
+							<div class="col2 col2right"><a  href="javascript:;" id="goto-next" class="goto goto-red">Weiter <i class="icon-right"></i></a></div>
 						</div>
+						<a href="javascript:;" class="goto goto-explore" title="Selbst erkunden"><i class="icon-map"></i></a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div id="control-slider"><i class="icon-left"></i><i class="icon-right"></i></div>
 		<div id="credit">
-			<a href="http://fbinter.stadt-berlin.de/fb/berlin/service.jsp?id=k_luftbild1928@senstadt&amp;type=WMS" target="_blank" id="source">Geoportal Berlin - Luftbilder 1928/2015</a>
-			<a href="http://www.tagesspiegel.de/" target="_blank" id="tspdata">Umsetzung: Tagesspiegel Data</a>
+			<a href="http://fbinter.stadt-berlin.de/fb/berlin/service.jsp?id=k_luftbild1928@senstadt&amp;type=WMS" id="source">Karte: Geoportal Berlin / Luftbilder 1928, 2015</a>
+			<a href="http://www.tagesspiegel.de/" id="tsp">Der Tagesspiegel</a>
+			<a href="https://datasciencestories.org/" id="dsst">Data Science &amp; Stories</a>
 		</div>
 	</div>
-	<script src="assets/js/jquery.min.js" defer></script>
-	<script src="assets/js/leaflet.js" defer></script>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/leaflet.js"></script>
 	<script src="assets/js/1928.js" defer></script>
 </body>
 </html>

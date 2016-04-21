@@ -1,6 +1,10 @@
 $('document').ready(function() {
 	var animationDuration = 500;
 
+	// texts for social media
+	var share_tweet = ""; // Insert Text for Twitter Sharing here
+	var share_url = function(){ return "https://1928.tagesspiegel.de/" }; // Share URL function.
+
 	// cache some dom elemenst
 	var $container = $('#container');
 
@@ -8,6 +12,20 @@ $('document').ready(function() {
 	
 	var slider = new Slider();
 
+	// detect if we are inside a frame
+	if (window.self !== window.top) {
+		$container.addClass("in-frame").addClass("show-content");
+	} else {
+		// always show intro
+		$container.addClass("show-intro");
+	}
+	
+	// detect touch like leaflet
+	if (!window.L_NO_TOUCH && ((window.PointerEvent || (!window.PointerEvent && window.MSPointerEvent)) || 'ontouchstart' in window || (window.DocumentTouch && document instanceof window.DocumentTouch))) {
+		$container.addClass("has-touch");
+	}
+
+	// detect small viewports class on window resize
 	$(window).resize(function() {
 		$container.toggleClass('small', ($container.width() < 720) || ($container.width()*($container.height()-140) < 545000));
 	});
@@ -55,7 +73,7 @@ $('document').ready(function() {
 			});
 		})
 	});
-	
+
 	function zoomToStory(story, animate) {
 		var zoom = story.zoom;
 		if ($container.hasClass('small')) zoom--;
@@ -69,15 +87,14 @@ $('document').ready(function() {
 		point = map1928.unproject(point, zoom);
 		map1928.setView(point, zoom, {animate:animate});
 	};
-
-
+	
 	/* controls for the map */
-	$('#zoomin').click(function(evt){
+	$('.zoom-in','#controls').click(function(evt){
 		evt.preventDefault();
 		map1928.zoomIn();
 	});
 
-	$('#zoomout').click(function(evt){
+	$('.zoom-out','#controls').click(function(evt){
 		evt.preventDefault();
 		map1928.zoomOut();
 	});
@@ -362,5 +379,156 @@ $('document').ready(function() {
 			map2.fire('moveend');
 		};
 	}
+	
+	// helpers
+	// enable geolocation
+	if (navigator.geolocation) {
+		$container.addClass("has-geolocation");
+		var $marker = null;
+		$(".geolocate","#controls").on("click", function(evt){
+			evt.preventDefault();
+			if ($marker) $marker.remove(null);
+			$(".geolocate","#controls").addClass("spin");
+			navigator.geolocation.getCurrentPosition(function(position){
+
+				// set map to marker position
+				zoomToStory({ coords: [position.coords.latitude, position.coords.longitude], zoom: 17 }, true);
+
+				// stop spinning
+				$(".geolocate","#controls").removeClass("spin").blur();
+
+				// @mk FIXME: make marker work on both maps
+				$marker = L.circle(L.latLng(position.coords.latitude, position.coords.longitude), Math.min(100, position.coords.accuracy), { stroke: true, color: "#c00", weight: 10, opacity: 0.3, fill: false, interactive: false }).addTo(map2015);
+				
+			});
+		});
+	}
+
+	// handle fullscreen
+	if (document.fullScreenEnabled || document.mozFullScreenEnabled || document.webkitFullScreenEnabled || document.msFullscreenEnabled || document.documentElement.webkitRequestFullscreen) {
+		$container.addClass("has-fullscreen");
+		$(".fullscreen","#controls").on("click", function(evt){
+			evt.preventDefault();
+			 if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+				$('.fullscreen i','#controls').attr("class", "icon-shrink");
+				if (document.documentElement.requestFullscreen) return document.documentElement.requestFullscreen();
+				if (document.documentElement.msRequestFullscreen) return document.documentElement.msRequestFullscreen();
+				if (document.documentElement.mozRequestFullScreen) return document.documentElement.mozRequestFullScreen();
+				if (document.documentElement.webkitRequestFullscreen) return document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+			} else {
+				$('.fullscreen i','#controls').attr("class", "icon-enlarge");
+				if (document.exitFullscreen) return document.exitFullscreen();
+				if (document.msExitFullscreen) return document.msExitFullscreen();
+				if (document.mozCancelFullScreen) return document.mozCancelFullScreen();
+				if (document.webkitExitFullscreen) return document.webkitExitFullscreen();
+			}
+		});
+		
+		// catch full screen state change, reset mode on exit by escape
+		$(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange", function(){
+			if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) $('.fullscreen i','#controls').attr("class", "icon-enlarge");
+			// fullscreen state change triggers resize and map sync
+			$(window).trigger('resize');
+			// @mk FIXME: maps tend to get out of sync when resize state changes. put code here to trigger resync 
+		});
+	};
+
+	// twitter sharing
+	$(".twitter","#controls").click(function(evt){
+		evt.preventDefault();
+		window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(share_url())+'&text='+encodeURIComponent(share_tweet), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");
+	});
+
+	// facebook sharing
+	$(".facebook","#controls").click(function(evt){
+		evt.preventDefault();
+		window.open('https://www.facebook.com/dialog/share?app_id=966242223397117&display=popup&href='+encodeURIComponent(share_url()), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=yes,toolbar=no");
+	});
+
+	// google+ sharing
+	$(".googleplus","#controls").click(function(evt){
+		evt.preventDefault();
+		window.open('https://plus.google.com/share?url='+encodeURIComponent(share_url()), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");
+	});
+
+
+	// switch to tour mode
+	$(".switch-tour","#controls").click(function(evt){
+		evt.preventDefault();
+		gotoStory(currentStoryIndex||0);
+	});
+
+	// switch to explore mode
+	$(".switch-explore","#controls").click(function(evt){
+		evt.preventDefault();
+		gotoExplore();
+	});
+
+	// link
+	/* FIXME: add markup for link share thing 
+	$(".share","#controls").click(function(evt){
+		evt.preventDefault();
+		// set url
+		$("#share-link").val(($('#share-location:checked').length > 0) ? base_url+'#'+locationhash : base_url)
+
+		$("#share-link")[0].selectionStart = 0;
+		$("#share-link")[0].selectionEnd = $("#share-link").val().length;
+		$("#share-link").focus();
+
+		$('#share').fadeIn('fast');
+	});
+
+	$('#share-location').change(function(evt){
+		$("#share-link").val(($('#share-location:checked').length > 0) ? base_url+'#'+locationhash : base_url)
+		$("#share-link")[0].selectionStart = 0;
+		$("#share-link")[0].selectionEnd = $("#share-link").val().length;
+		$("#share-link").focus();
+		if ($('#share-location:checked').length > 0) {
+			$('#share').addClass("with-location");
+		} else {
+			$('#share').removeClass("with-location");
+		}
+	});
+
+	$('#share-link').on("click keyup", function(evt){
+		$("#share-link")[0].selectionStart = 0;
+		$("#share-link")[0].selectionEnd = $("#share-link").val().length;
+	});
+
+	$('.share-hide','#share').click(function(evt){
+		evt.preventDefault();
+		$('#share').fadeOut('fast');
+	});
+	*/
+	
+
+	// geocode
+	$(".geocode","#controls").click(function(evt){
+		evt.preventDefault();
+		if ($container.hasClass("show-search")){
+			$("#search").fadeOut("fast", function(){
+				$container.removeClass("show-search");
+				$("#search-result").html("");
+				$("#search-query").val("");
+			});
+		} else {
+			$("#search").fadeIn("fast", function(){
+				$container.addClass("show-search");
+				$("#search-query").focus();
+			});
+		}
+	});
+
+	// async execution of stupid ivw zaehlpixel on production site
+	if (location.href.indexOf("1928.tagesspiegel.de") >= 0) $.getScript("https://script.ioam.de/iam.js", function(){
+		var iomit = 0;
+		var iomcheck = setInterval(function(){
+			if (++iomit > 10) return clearInterval(iomcheck);
+			if (!window.hasOwnProperty("iom")) return;
+			window.iom.c({ "st":"tagspieg", "cp":"ts-1928", "sv":"ke" },1);
+			return clearInterval(iomcheck);
+		},1000);
+	});
+	
 });
 
