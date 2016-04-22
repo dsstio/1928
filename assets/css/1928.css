@@ -507,6 +507,10 @@ body {
 				bottom: 0;
 				z-index: 5;
 			}
+
+				#map-overlay * {
+					pointer-events: none;
+				}
 			
 		.leaflet-control-container .leaflet-top.leaflet-right {
 			top: 70px;
