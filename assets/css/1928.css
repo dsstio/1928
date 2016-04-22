@@ -84,13 +84,13 @@ body {
 				}
 
 				#controls a.geolocate.active {
-					color: #77f; 
+					color: #57f; 
 					        animation: blink 1s ease-in-out 0s infinite alternate;
 				}
 
 				@keyframes blink {
-					  0% { text-shadow: 0px 0px 2px rgba(119,119,255,0.0); }
-					100% { text-shadow: 0px 0px 2px rgba(119,119,255,1.0); }
+					  0% { text-shadow: 0px 0px 2px rgba(85,119,255,0.0); }
+					100% { text-shadow: 0px 0px 2px rgba(85,119,255,1.0); }
 				}
 				
 				#controls a.spin span {
@@ -183,7 +183,7 @@ body {
 					/*overflow: hidden;*/
 					box-shadow: 0 0 0 4px rgba(0,0,0,0.3);
 				}
-				
+
 		#intro {
 			display: none;
 		}
@@ -549,10 +549,10 @@ body {
 				}
 
 		.my-location-icon {
-			width: 8px;
-			height: 8px;
-			border: 1px solid #fff;
-			background-color: #44f;
+			width: 6px;
+			height: 6px;
+			border: 2px solid #fff;
+			background-color: #34f;
 			border-radius: 20px;
 		}
 

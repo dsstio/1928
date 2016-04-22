@@ -437,7 +437,7 @@ $('document').ready(function() {
 
 					function createMarker(map) {
 						var icon = L.marker(point, { icon: myLocationIcon, clickable: false }).addTo(map);
-						var accu = L.circle(point, radius, { stroke: false, fill: true, fillColor: '#77f', fillOpacity: 0.4, clickable: false }).addTo(map);
+						var accu = L.circle(point, radius, { stroke: false, fill: true, fillColor: '#57f', fillOpacity: 0.4, clickable: false }).addTo(map);
 						return {
 							move:function (point, radius) {
 								icon.setLatLng(point);
