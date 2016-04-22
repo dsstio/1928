@@ -14,7 +14,12 @@ $('document').ready(function() {
 
 	// detect if we are inside a frame
 	if (window.self !== window.top) {
-		$container.addClass("in-frame").addClass("show-content");
+		$container.addClass("in-frame");
+		if (window.location.hash === "#show-intro") {
+			$container.addClass("show-intro");
+		} else {
+			$container.addClass("show-content");
+		}
 	} else {
 		// always show intro
 		$container.addClass("show-intro");
