@@ -54,6 +54,9 @@ $('document').ready(function() {
 
 		// add map markers
 		data.forEach(function (story, index) {
+			story.bounds = L.latLngBounds(story.bounds);
+			story.point = story.bounds.getCenter();
+
 			var iconInfo = L.divIcon({
 				iconSize:  [32,32],
 				iconAnchor:[16,16],
@@ -61,8 +64,8 @@ $('document').ready(function() {
 				className: 'marker-wrapper'
 			});
 			
-			var marker1 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map1928);
-			var marker2 = L.marker(story.coords, {keyboard:false, icon:iconInfo}).addTo(map2015);
+			var marker1 = L.marker(story.point.clone(), {keyboard:false, icon:iconInfo}).addTo(map1928);
+			var marker2 = L.marker(story.point.clone(), {keyboard:false, icon:iconInfo}).addTo(map2015);
 			
 			marker1.on('mouseover', function () {
 				$(marker1._icon).addClass('hover');
@@ -73,24 +76,53 @@ $('document').ready(function() {
 				$(marker2._icon).removeClass('hover');
 			})
 			marker1.on('click', function markerClick() {
-				var x = map1928.latLngToContainerPoint(story.coords).x;
+				var x = map1928.latLngToContainerPoint(story.point.clone()).x;
 				gotoStory(index, slider.isInRightMap(x), true);
 			});
 		})
 	});
 
 	function zoomToStory(story, animate) {
-		var zoom = story.zoom;
-		if ($container.hasClass('small')) zoom--;
+		var zoom = getBoundsZoom(story.bounds);
 
-		var point = map1928.project(new L.latLng(story.coords[0], story.coords[1]).clone(), zoom);
+		var point = map1928.project(story.point.clone(), zoom);
 		if ($container.hasClass('small')) {
 			point.y += ($container.height()/4);
 		} else {
 			point.x -= ($container.width()/4);
 		}
 		point = map1928.unproject(point, zoom);
+
 		map1928.setView(point, zoom, {animate:animate});
+
+		function getBoundsZoom (bounds, padding) {
+			var zoom = map1928.getMinZoom(),
+			    maxZoom = map1928.getMaxZoom(),
+			    size = map1928.getSize(),
+
+			    nw = bounds.getNorthWest(),
+			    se = bounds.getSouthEast(),
+
+			    zoomNotFound = true,
+			    boundsSize;
+
+			if ($container.hasClass('small')) {
+				size.y /= 2;
+			} else {
+				size.x /= 2;
+			}
+
+			padding = L.point(padding || [0, 0]);
+
+			do {
+				zoom++;
+				boundsSize = map1928.project(se, zoom).subtract(map1928.project(nw, zoom)).add(padding).floor();
+				zoomNotFound = size.contains(boundsSize);
+
+			} while (zoomNotFound && zoom <= maxZoom);
+
+			return zoom - 1;
+		}
 	};
 	
 	/* controls for the map */
