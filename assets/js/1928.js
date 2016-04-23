@@ -183,7 +183,7 @@ $('document').ready(function() {
 		if ($container.hasClass(newClassName)) return true;
 
 		[
-			{className:'show-explore', selector:false},
+			{className:'show-explore', selector:'#controls'},
 			{className:'show-intro',   selector:'#intro'},
 			{className:'show-content', selector:'.content'}
 		].forEach(function (entry) {

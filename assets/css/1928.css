@@ -14,7 +14,7 @@ body {
 		bottom: 0;
 	}
 		
-		.show-intro #controls {
+		.show-intro #controls, .show-content #controls {
 			display: none;
 		}
 		
@@ -77,7 +77,6 @@ body {
 				}
 
 				#controls a.switch-tour,
-				#controls a.switch-explore,
 				#controls a.fullscreen,
 				#controls a.geolocate {
 					display: none;
@@ -105,15 +104,6 @@ body {
 				@keyframes spin {
 					  0% { transform: rotate(  0deg); }
 					100% { transform: rotate(359deg); }
-				}
-
-				.show-content.show-explore #controls a.switch-tour {
-					display: none;
-				}
-
-				.show-explore #controls a.switch-tour,
-				.show-content #controls a.switch-explore {
-					display: block;
 				}
 				
 				.has-fullscreen #controls a.fullscreen,
@@ -148,16 +138,13 @@ body {
 				text-align: center;
 			}
 			
-				.has-touch.show-content.show-explore #controls a.switch-tour,
 				.has-touch #controls a.switch-tour,
-				.has-touch #controls a.switch-explore,
 				.has-touch #controls a.fullscreen,
 				.has-touch #controls a.geolocate {
 					display: none;
 				}
 			
 				.has-touch.show-explore #controls a.switch-tour,
-				.has-touch.show-content #controls a.switch-explore,
 				.has-touch.has-fullscreen #controls a.fullscreen,
 				.has-touch.has-geolocation #controls a.geolocate,
 				.has-touch #controls a {
@@ -318,7 +305,7 @@ body {
 					width: 50%;
 					float: left;
 				}
-				.col2left   { text-align: left; }
+				.col2left   { text-align: left;  }
 				.col2right  { text-align: right; }
 
 				.content h2 {
