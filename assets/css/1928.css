@@ -186,11 +186,11 @@ body {
 			text-align: center;
 			padding: 20vh 0 0;
 			-webkit-touch-callout: none;
-			-webkit-user-select: none;
-			-khtml-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
+			  -webkit-user-select: none;
+			   -khtml-user-select: none;
+			     -moz-user-select: none;
+			      -ms-user-select: none;
+			          user-select: none;
 			cursor: default;
 		}
 		
@@ -564,11 +564,11 @@ body {
 			font-weight: bold;
 			color: #fff;
 			cursor: ew-resize;
-			-webkit-user-select: none;
-			-khtml-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
+			  -webkit-user-select: none;
+			   -khtml-user-select: none;
+			     -moz-user-select: none;
+			      -ms-user-select: none;
+			          user-select: none;
 			box-shadow: 0px 0px 20px rgba(0,0,0,1);
 			text-shadow: 0px 0px 3px rgba(0,0,0,0.33);
 		}
@@ -616,49 +616,47 @@ body {
 			position: absolute;
 			right: 0;
 			bottom: 0;
-			z-index: 3;
-			padding: 10px;
+			z-index: 30;
+			padding: 0 10px 5px 0;
 			-webkit-touch-callout: none;
-			-webkit-user-select: none;
-			-khtml-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
+			  -webkit-user-select: none;
+			   -khtml-user-select: none;
+			     -moz-user-select: none;
+			      -ms-user-select: none;
+			          user-select: none;
 			pointer-events: none;
 		}
-
-			.small #credit {
-				background-color: rgba(0,0,0,0.8);
-				padding: 0;
-				margin: 0;
-				left: 0;
-			}
 			
 			#credit a {
 				display: inline-block;
 				float: left;
 				position: relative;
 				text-decoration: none;
-			}
-		
-			#tsp {
-				color: transparent;
-				height: 40px;
-				width: 180px;
-				background: url(../images/tagesspiegel.svg) center center no-repeat;
-				background-size: contain;
-				margin: 0 20px;
-				padding: 0;
-			}
-		
-			#tspdata, #source {
 				-webkit-touch-callout: auto;
-				-webkit-user-select: auto;
-				-khtml-user-select: auto;
-				-moz-user-select: auto;
-				-ms-user-select: auto;
-				user-select: auto;
+				  -webkit-user-select: auto;
+				   -khtml-user-select: auto;
+				     -moz-user-select: auto;
+				      -ms-user-select: auto;
+				          user-select: auto;
 				pointer-events: auto;
+			}
+
+			#source, #author {
+				width: 280px;
+				height: 16px;
+				color: #fff;
+				font-size: .8em;
+				line-height: 16px;
+				text-shadow: 0 0 3px #000, 0 0 5px #000, 0 0 10px #000;
+				padding: 0px 0 0 0;
+				text-align: right;
+				font-weight: 400;
+				margin-top: 6px;
+			}
+
+			#author {
+				margin-left: -280px;
+				margin-top: 28px;
 			}
 		
 			#tspdata {
@@ -667,40 +665,35 @@ body {
 				width: 270px;
 				background: url(../images/tagesspiegelData.png) center center no-repeat;
 				background-size: contain;
-				margin-left: 20px;
+				margin-left: 10px;
 				padding: 0;
-			}
-
-			#source {
-				width: 140px;
-				height: 32px;
-				padding: 0;
-				color: #fff;
-				font-size: .8em;
-				line-height: 16px;
-				text-shadow: 0 0 3px #000, 0 0 5px #000, 0 0 10px #000;
-				padding: 4px 0;
-				text-align: right;
-				font-weight: 400;
 			}
 				
-				.small #credit {
-					text-align: center;
-				}
+			.small #credit {
+				line-height: 0.9em;
+				padding: 2px 0 5px;
+				background-color: rgba(0,0,0,0.8);
+				margin: 0;
+				left: 0;
+				text-align: center;
+			}
 
-				.small #tspdata, .small #source {
+				.small #credit a {
 					display: inline;
 					float: none;
-					width: 100%;
-					font-size: .7em;
+					width: auto;
 					height: auto;
-					padding: 3px 0;
+					font-size: .7em;
 					color: #aaa;
 					background: none;
 					text-shadow: none;
+					margin: 0px 8px 0px 0px;
+					padding: 0px;
+					line-height: 0.9em;
+					white-space: nowrap;
 				}
 
-				.small #tspdata {
-					margin-left: 5px;
+				.small #credit span {
+					color: #666;
 				}
 
