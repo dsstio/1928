@@ -327,14 +327,16 @@ $('document').ready(function() {
 			minZoom: 5,
 			maxZoom: 18,
 			errorTileUrl: errorTile,
-			subdomains: "abc"
+			subdomains: "abc",
+			detectRetina: true
 		}).addTo(map1928);
 		
 		L.tileLayer('https://{s}.maps.dsst.io/berlin-2015/{z}/{x}/{y}.jpg', {
 			minZoom: 5,
 			maxZoom: 18,
 			errorTileUrl: errorTile,
-			subdomains: "abc"
+			subdomains: "abc",
+			detectRetina: true
 		}).addTo(map2015);
 
 		syncMaps(map1928, map2015);
