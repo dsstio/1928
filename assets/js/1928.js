@@ -290,6 +290,7 @@ $('document').ready(function() {
 		}
 
 		function setSliderPosition(x) {
+			x = Math.round(x);
 			sliderOffset = x/$container.width();
 			$slider.css(  {left:  x  });
 			$mapclip.css( {left:  x  });
