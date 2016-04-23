@@ -78,7 +78,6 @@ body {
 					font-size: 0.8em;
 				}
 
-				#controls a.switch-tour,
 				#controls a.fullscreen,
 				#controls a.geolocate {
 					display: none;
@@ -140,13 +139,11 @@ body {
 				text-align: center;
 			}
 			
-				.has-touch #controls a.switch-tour,
 				.has-touch #controls a.fullscreen,
 				.has-touch #controls a.geolocate {
 					display: none;
 				}
 			
-				.has-touch.show-explore #controls a.switch-tour,
 				.has-touch.has-fullscreen #controls a.fullscreen,
 				.has-touch.has-geolocation #controls a.geolocate,
 				.has-touch #controls a {
