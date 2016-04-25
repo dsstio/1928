@@ -8,7 +8,8 @@ $('document').ready(function() {
 	// cache some dom elemenst
 	var $container = $('#container');
 
-	var locationhash = '';
+	// if location is given, set location
+	var initial_position = (/^[a-z0-9_]{7}$/.test(location.hash.slice(1))) ? location_decode(location.hash.slice(1)) : false;
 	
 	var slider = new Slider();
 
@@ -17,13 +18,21 @@ $('document').ready(function() {
 		$container.addClass("in-frame");
 		if (window.location.hash === "#show-intro") {
 			$container.addClass("show-intro");
+		} else if (initial_position !== false){
+			$container.addClass("show-explore");
 		} else {
 			$container.addClass("show-content");
 		}
 	} else {
-		// always show intro
-		$container.addClass("show-intro");
+		if (initial_position !== false) {
+			$container.addClass("show-explore");
+		} else {
+			$container.addClass("show-intro");
+		}
 	}
+
+	// clear location hash
+	if (location.hash !== "") location.hash = "";
 	
 	// detect touch like leaflet
 	if (!window.L_NO_TOUCH && ((window.PointerEvent || (!window.PointerEvent && window.MSPointerEvent)) || 'ontouchstart' in window || (window.DocumentTouch && document instanceof window.DocumentTouch))) {
@@ -351,6 +360,11 @@ $('document').ready(function() {
 			zoom: 13,
 			center: L.latLng(52.516, 13.383)
 		}
+
+		if (initial_position) {
+			map_opts.zoom = initial_position.z;
+			map_opts.center = L.latLng(initial_position.lat, initial_position.lng);
+		};
 
 		// create maps
 		map1928 = L.map('map-base', map_opts);
