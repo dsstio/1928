@@ -518,6 +518,36 @@ $('document').ready(function() {
 		});
 	};
 
+	// link sharing
+	$(".share","#controls").click(function(evt){
+		evt.preventDefault();
+		var current_location = location_encode(map2015.getCenter(), map2015.getZoom());
+		$("#share-link").val("https://1928.tagesspiegel.de/"+((current_location !== "") ? "#"+current_location:""));
+		$("#share-link")[0].selectionStart = 0;
+		$("#share-link")[0].selectionEnd = $("#share-link").val().length;
+		$("#share-link").focus();
+
+		$container.addClass("show-share");
+		$('#share').fadeIn('fast', function(){
+			$("#share-link")[0].selectionStart = 0;
+			$("#share-link")[0].selectionEnd = $("#share-link").val().length;
+			$("#share-link").focus();
+		});
+	});
+	
+	$('#share-link').on("click keyup", function(evt){
+		$("#share-link")[0].selectionStart = 0;
+		$("#share-link")[0].selectionEnd = $("#share-link").val().length;
+	});
+	
+	$('.share-hide','#share').click(function(evt){
+		evt.preventDefault();
+		$('#share').fadeOut('fast', function(){
+			$container.removeClass("show-share");
+		});
+	});
+
+
 	// twitter sharing
 	$(".twitter","#controls").click(function(evt){
 		evt.preventDefault();
