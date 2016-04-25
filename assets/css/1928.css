@@ -716,7 +716,7 @@ body {
 			bottom: 0;
 			z-index: 10;
 		}
-
+		
 			#share-content {
 				display: block;
 				position: relative;
@@ -731,6 +731,16 @@ body {
 				z-index: 2;
 				padding: 20px;
 			}
+			
+				.has-touch #share-content {
+					margin: 0;
+					position: absolute;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					padding: 10px;
+					border-radius: 0;
+				}
 			
 				#share-content h2 {
 					margin: 0 0 .5em;
