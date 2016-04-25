@@ -2,7 +2,7 @@ $('document').ready(function() {
 	var animationDuration = 500;
 
 	// texts for social media
-	var share_tweet = "Berlin 1928 und Heute."; // @mk Insert Text for Twitter Sharing here
+	var share_tweet = "Zwei Ansichten einer Stadt: Berlin im Jahr 1928 und heute. #Berlin1928";
 	var share_url = function(){ return "https://1928.tagesspiegel.de/" }; // Share URL function. (in case you want to add geodata)
 
 	// cache some dom elemenst
