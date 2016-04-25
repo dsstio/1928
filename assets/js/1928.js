@@ -537,9 +537,9 @@ $('document').ready(function() {
 		evt.preventDefault();
 		var current_location = location_encode(map2015.getCenter(), map2015.getZoom());
 		$("#share-link").val("https://1928.tagesspiegel.de/"+((current_location !== "") ? "#"+current_location:""));
-		$("#share-link")[0].selectionStart = 0;
-		$("#share-link")[0].selectionEnd = $("#share-link").val().length;
-		$("#share-link").focus();
+
+		// because of chrome
+		if (!$container.hasClass("has-touch")) $("#share-content").css({top: Math.floor($(window).innerHeight()/2)});
 
 		$container.addClass("show-share");
 		$('#share').fadeIn('fast', function(){
