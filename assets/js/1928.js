@@ -270,8 +270,8 @@ $('document').ready(function() {
 	function location_decode(str){
 		if (!/^[a-z0-9_]{7}$/.test(str)) return false;
 		return {
-			lat: (13+(parseInt(str.substr(0,3).replace(/_/g,''),36)/10000)),
-			lng: (52+(parseInt(str.substr(3,3).replace(/_/g,''),36)/10000)),
+			lat: (52+(parseInt(str.substr(0,3).replace(/_/g,''),36)/10000)),
+			lng: (13+(parseInt(str.substr(3,3).replace(/_/g,''),36)/10000)),
 			z: parseInt(str.substr(6,1),36)
 		};
 	};
