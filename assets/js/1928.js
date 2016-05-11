@@ -32,7 +32,13 @@ $('document').ready(function() {
 	}
 
 	// clear location hash
-	if (location.hash !== "") location.hash = "";
+	if (location.hash !== "") {
+		try {
+			history.replaceState(null, locationhash, '');
+		} catch (e) {
+			location.hash = "";
+		}
+	}
 	
 	// detect touch like leaflet
 	if (!window.L_NO_TOUCH && ((window.PointerEvent || (!window.PointerEvent && window.MSPointerEvent)) || 'ontouchstart' in window || (window.DocumentTouch && document instanceof window.DocumentTouch))) {
