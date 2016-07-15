@@ -362,7 +362,7 @@ $('document').ready(function() {
 			bounceAtZoomLimits: false,
 			maxBounds: L.latLngBounds(L.latLng(52.396,13.116), L.latLng(52.639,13.720)),
 			minZoom: 12,
-			maxZoom: 18,
+			maxZoom: L.Browser.retina ? 17 : 18,
 			zoom: 13,
 			center: L.latLng(52.516, 13.383)
 		}
